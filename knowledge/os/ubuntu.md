@@ -1,5 +1,4 @@
 - Static IP
-
 ```bash
 $ sudo nano /etc/netplan/*.yaml
 network:
@@ -23,7 +22,6 @@ $ netstat -rn
 ```
 
 - TimeZone
-
 ```bash
 # 시간대를 서울(KST)로 변경
 $ sudo timedatectl set-timezone Asia/Seoul
