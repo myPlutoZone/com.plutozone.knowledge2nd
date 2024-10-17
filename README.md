@@ -14,7 +14,7 @@
 3. [Language ................................................. 프로그래밍 언어](#language)
 4. [Development ......................................................... 개발](#development)
 5. [Database .................................................... 데이터베이스]
-6. [AI ............................................................. 인공 지능](#ai)
+6. [AI ............................................................. 인공 지능](./knowledge/ai/README.md)
 7. [Management ........................... 시스템과 서비스에 대한 관리 및 정책]
 8. [History ............................................................. 이력](#history)
 9. [Reference ........................................................... 참고](#reference)
@@ -50,14 +50,6 @@
 
 
 ## Development
-
-
-## AI
-- https://chat.openai.com/auth/login
-- https://platform.openai.com/
-- https://bard.google.com/
-- https://learn.microsoft.com/ko-kr/azure/ai-services/openai/chatgpt-quickstart?tabs=command-line%2Cpython&pivots=programming-language-studio
-- https://clova-x.naver.com/
 
 
 ## History
