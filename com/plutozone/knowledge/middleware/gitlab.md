@@ -1,3 +1,9 @@
+- ![Generic badge](https://img.shields.io/badge/IMPORTANT-comment_...-red.svg)
+- ![Generic badge](https://img.shields.io/badge/CONFIRM-comment_...-green.svg)
+- ![Generic badge](https://img.shields.io/badge/REFERENCE-comment_...-blue.svg)
+
+
+# com.plutozone.knowledge.GitLab
 - Installation
 ```bash
 # [옵션] SSH Server 설치
@@ -10,7 +16,10 @@ $ sudo apt -y install gitlab-ce
 # [참고] sudo EXTERNAL_URL="https://gitlab.plutozone.com" apt-get install gitlab-ce 명령을 통하여 URL을 지정하여 설치 가능
 # [참고] SMTP 설정(참고: https://docs.gitlab.com/omnibus/settings/smtp.html)
 # [참고] gitlab-ce를 gitlab-ee(Enterprise Edition)로 변경 가능
+```
 
+- Configuration and Maintenance
+```bash
 # 설정 변경
 $ sudo pico /etc/gitlab/gitlab.rb
 ...
