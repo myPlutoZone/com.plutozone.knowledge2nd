@@ -1,8 +1,3 @@
-- ![Generic badge](https://img.shields.io/badge/IMPORTANT-comment_...-red.svg)
-- ![Generic badge](https://img.shields.io/badge/CONFIRM-comment_...-green.svg)
-- ![Generic badge](https://img.shields.io/badge/REFERENCE-comment_...-blue.svg)
-
-
 # com.plutozone.knowledge.GitLab
 - Installation
 ```bash
