@@ -14,11 +14,11 @@ $ python -m http.server --cgi 8080
 ```
 
 - 알고리즘
-	- 이미지 인식(예: 이미지 패턴화, 동일 이미지 찾기 등)
-		- Average Hash: 이미지를 리사이즈하고 이진화 및 해쉬화
-	- 문장 생성(예: ChatBot 등)
-		- 마르코프 체인(워드 샐러드): 무작위 확률 기반
-		- LSTM(Long Short Term-Memory) 또는 RNN(Recurrent Neural Network): 러닝머신 기반으로 다음에 위치할 문장을 예측
+	- 이미지
+		- Average Hash: 이미지를 리사이즈하고 이진화 및 해쉬화(예: 이미지 패턴화, 동일 이미지 찾기 등)
+	- 텍스트
+		- 마르코프 체인(워드 샐러드): 무작위 확률 기반으로 문장 생성(예: ChatBot 등)
+		- LSTM(Long Short Term-Memory) 또는 RNN(Recurrent Neural Network): 러닝머신 기반으로 다음에 위치할 문장을 예측하여 생성
 
 - Reference
 	- https://chat.openai.com/auth/login
