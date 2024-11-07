@@ -22,17 +22,18 @@
 
 
 ## Memo
-- Maven or Gradle or Ant + GitLab or GitHub + Jenkins + Tomcat
-	- Eclipse Maven Project(Spring Web) at mavenForMoon.zip	
-		- Folder 구조를 Maven 디렉토리 구조로 변경하고 Source(.java), Output(*.class) 등을 설정(참조 Library는 1-3에서 설정)
-		- Java 또는 Dynamic Web Project를 Maven Project로 변경
-		- pom.xml 설정(dependacy 등 포함)
-		- GitLab에 Maven 및 Project 업로드
+- Builder(Ant, Maven, Gradle 등) + CI(GitLab, GitHub 등) + CD(Jenkins 등) + WAS(Tomcat 등)
+	- Common
+		- Eclipse Maven Project(Spring Web at mavenForMoon.zip)
+			- 디렉토리 구조를 Maven 형태로 변경하고 Source(*.java), Output(*.class) 등을 설정(참조 Library는 추후 설정)
+			- Java 또는 Dynamic Web Project를 Maven Project로 변경
+			- pom.xml 설정(dependacy 등 포함)
+			- GitLab에 Maven-Wrapper 및 Project 업로드
 	- Git Client + Shell을 통한 Build and Deploy	
-		Install Git and Clone Repository
-		Build & Deploy by run.sh
+		- Install Git and Clone Repository
+		- Build & Deploy by run.sh
 	- Jenkins을 통한 Build(mvnw.sh 및 pom.xml을 통해 *.war 생성 등) and Deploy	
-		- Jenkins(Build Server)에서 GitLab의 Project 다운로드 후 Build
+		- Jenkins(Build Server)에서 GitLab의 Project 다운로드 후 빌드
 		- Jenkins(Deploy Server)를 통하여 Tomat(Application Server)에 배포
 
 - 개발 표준 가이드
