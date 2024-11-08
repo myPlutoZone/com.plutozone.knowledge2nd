@@ -1,4 +1,6 @@
-# com.plutozone.knowledge.Ubuntu
+# com.plutozone.knowledge.os.Ubuntu
+
+
 - Static IP
 ```bash
 $ sudo nano /etc/netplan/*.yaml

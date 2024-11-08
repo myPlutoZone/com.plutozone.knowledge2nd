@@ -14,7 +14,7 @@
 03. [Language ................................................. 프로그래밍 언어](#language)
 04. [Development ......................................................... 개발](#development)
 05. [Database .................................................... 데이터베이스]
-06. [Middleware ...................................................... 미들웨어](./com/plutozone/knowledge/middleware/gitlab.md)
+06. [Middleware ...................................................... 미들웨어](#middleware)
 07. [AI ............................................................. 인공 지능](./com/plutozone/knowledge/ai/README.md)
 08. [Management ........................... 시스템과 서비스에 대한 관리 및 정책]
 09. [History ............................................................. 이력](#history)
@@ -70,6 +70,11 @@
 
 
 ## Development
+
+
+## Middleware
+- [GitLab](./com/plutozone/knowledge/middleware/gitlab.md)
+- [Tomcat](./com/plutozone/knowledge/middleware/tomcat.md)
 
 
 ## History

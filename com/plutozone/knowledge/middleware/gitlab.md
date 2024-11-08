@@ -1,4 +1,6 @@
-# com.plutozone.knowledge.GitLab
+# com.plutozone.knowledge.middle.GitLab
+
+
 - Install Git Client
 ```bash
 # Git Client 설치
