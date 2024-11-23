@@ -12,9 +12,9 @@
 - 일반(비용 설정 및 사용량 확인 불가)
 
 ### 서비스
-- Route53(=DNS, 자체 또는 외부 DNS 관리 가능)
-- ACM(Amazon Certificate Manager=HTTPS/SSL 인증서)
-	- com, co.kr 등 상용이 아닌 store, shop 등 개인 도메인에 대한 무료 SSL 인증서 발급 가능
+- Route53(=DNS, 자체 또는 외부 DNS 관리)
+- ACM(Amazon Certificate Manager=HTTPS/SSL 인증서 관리)
+	- 상용(com, co.kr 등)이 아닌 개인(store, shop 등) 도메인에 대한 무료 SSL 인증서 발급 지원
 - IAM(Identity and Access Management=Account)
 - ELB(Elastic Load Balancing=LB)
 - VPC(Virtual Private Cloud=Network, 최대 5개)
@@ -52,30 +52,33 @@
 	- Select Region: ap-northeast-2(아시아 태평양-서울)
 	- Name Tag: PLZ-PRD-VPC(PRD or STG or DEV)
 	- IPv4 CIDR: 10.255.0.0/16(65,563)
+	- 참고적으로 VPN 설정에서 DNS 호스트 이름를 활성화할 것
 2. Make Subnet(=서비스별 네트워크)
-	- Select AZ(Region : 2A and 2C
+	- Select AZ: 2A and 2C(예: 장애 방지를 위해 Free Tier를 지원하는 2개의 Region에 Subnet을 생성)
 	- 2A
-		- `PLZ-PRD-VPC-2A-BASTION`
+		- `PLZ-PRD-VPC-2A-BASTION`는 선택적으로 생성
 		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2A-PUB(10.255.0.0/24)
 		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2A-PRI(10.255.32.0/24)
 	- 2C
 		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2C-PUB(10.255.128.0/24)
 		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2C-PRI(10.255.160.0/24)
-3. Make Routing Table(=AZ간의 통신을 위한 라우팅 테이블)
+3. Make `Routing Table`(=AZ간의 통신을 위한 라우팅 테이블)
 	- Name Tag: PLZ-PRD-RT-PUB
 	- Name Tag: PLZ-PRD-RT-PRI
 	- Select Routing Table at Subnet
-4. Make Internet Gateway for Public Subnet
+4. Make `Internet Gateway for Public Subnet`(=Public Subnet을 위한 인바운드 네트워크)
 	- Name Tag: PLZ-PRD-IGW
-	- Select PLZ-PRD-IGW for Internet Gateway at `PLZ-PRD-VPC` or `PLZ-PRD-RT-PUB`
-5. Make NAT Gateway for Private Subnet
+	- Select PLZ-PRD-IGW for Internet Gateway at PLZ-PRD-VPC
+5. Make `NAT Gateway for Private Subnet`(=Pricate Subnet을 위한 아웃바운드 네트워크, 비용 절감을 위해 2A에만 생성)
 	- Name Tag: PLZ-PRD-NGW-2A(and 2C)
-	- Select Subnet: 2A-PUB(or 2C-PUB)
-	- Make Elastic IP and Binding
+	- Select Subnet: PLZ-PRD-VPC-2A-PUB(and 2C-PUB)
+	- Assign Elastic IP(참고: 최대 5개의 EIP에서 1개 사용됨) and Binding
 	- Select PLZ-PRD-NGW-2A for NAT Gateway at PLZ-PRD-RT-PRI
-6. Make SG(Security Group) and Binding
+6. 라우팅 및 서브넷 설정
+
+7. Make SG(Security Group) and Binding
 	- For Subnet
-		- `PLZ-PRD-SG-2A-BASTION`
+		- `PLZ-PRD-SG-2A-BASTION`는 선택적으로 생성
 		- PLZ-PRD-SG-2A-PUB(SSH?, HTTP?, HTTPS?)
 		- PLZ-PRD-SG-2A-PUB(SSH?, HTTP?, HTTPS?)
 		- PLZ-PRD-SG-2A-PRI(SSH?, HTTP?, HTTPS?)
