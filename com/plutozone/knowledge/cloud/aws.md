@@ -48,15 +48,15 @@
 
 
 ## Step for Create Network and EC2 Instances at VPC
-1. Make VPC(=전체 인프라 네트워크)
+1. Make `VPC`(=전체 인프라 네트워크)
 	- Select Region: ap-northeast-2(아시아 태평양-서울)
 	- Name Tag: PLZ-PRD-VPC(PRD or STG or DEV)
 	- IPv4 CIDR: 10.255.0.0/16(65,563)
 	- 참고적으로 VPN 설정에서 DNS 호스트 이름를 활성화할 것
-2. Make Subnet(=서비스별 네트워크)
+2. Make `Subnet`(=서비스별 네트워크)
 	- Select AZ: 2A and 2C(예: 장애 방지를 위해 Free Tier를 지원하는 2개의 Region에 Subnet을 생성)
 	- 2A
-		- `PLZ-PRD-VPC-2A-BASTION`는 선택적으로 생성
+		- PLZ-PRD-VPC-2A-BASTION는 선택적으로 생성
 		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2A-PUB(10.255.0.0/24)
 		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2A-PRI(10.255.32.0/24)
 	- 2C
@@ -66,32 +66,32 @@
 	- Name Tag: PLZ-PRD-RT-PUB
 	- Name Tag: PLZ-PRD-RT-PRI
 	- Select Routing Table at Subnet
-4. Make `Internet Gateway for Public Subnet`(=Public Subnet을 위한 Outbound 네트워크)
+4. Make `Internet Gateway` for Public Subnet(=Public Subnet을 위한 Outbound 네트워크)
 	- Name Tag: PLZ-PRD-IGW
 	- Select PLZ-PRD-IGW for Internet Gateway at PLZ-PRD-VPC
-5. Make `NAT Gateway for Private Subnet`(=Private Subnet을 위한 Outbound 네트워크, 비용 절감을 위해 2A에만 생성)
+5. Make `NAT Gateway` for Private Subnet(=Private Subnet을 위한 Outbound 네트워크, 비용 절감을 위해 2A에만 생성)
 	- Name Tag: PLZ-PRD-NGW-2A(and 2C)
 	- Select Subnet: PLZ-PRD-VPC-2A-PUB(and 2C-PUB)
 	- Assign Elastic IP(참고: 최대 5개의 EIP에서 1개 사용됨) and Binding
-	- Select PLZ-PRD-NGW-2A for NAT Gateway at PLZ-PRD-RT-PRI
-6. `Setting up Routing and Subnets`(Public/Private Subnet를 위한 Outbound 설정)
-	- Select Rouning Table at VPC and Setting up Routing and Subnets
+6. Setting up Routing and Subnets(Public/Private Subnet를 위한 Outbound 설정 등)
+	- Select `Rouning Table` at VPC and Setting up Routing and Subnets
 		- PLZ-PRD-RT-PUB
 			- Setting PLZ-PRD-IGW for Routing
 			- Setting PLZ-PRD-VPC-2A-PUB, PLZ-PRD-VPC-2C-PUB for Subnets
 		- PLZ-PRD-RT-PRI
 			- Setting PLZ-PRD-NGW-2A for Routing
 			- Setting PLZ-PRD-VPC-2A-PRI, PLZ-PRD-VPC-2C-PRI for Subnets
-7. Make SG(Security Group) and Binding(Inbound 설정)
+7. Make SG(`Security Group`) and Binding(Inbound 설정)
 	- For Subnet
-		- `PLZ-PRD-SG-2A-BASTION`는 선택적으로 생성
+		- PLZ-PRD-SG-2A-BASTION는 선택적으로 생성
 		- PLZ-PRD-SG-2A-PUB(SSH, HTTP, HTTPS)
   		- PLZ-PRD-SG-2C-PUB(SSH, HTTP, HTTPS)
 		- PLZ-PRD-SG-2A-PRI(SSH)
 		- PLZ-PRD-SG-2C-PRI(SSH)
-	- For ELB and Auto Scaling
+	- For ELB and Auto Scaling는 선택적으로 설정
 		- PLZ-PRD-SG-LB(HTTP, HTTPS)
 		- PLZ-PRD-SG-AS(HTTP, HTTPS)
+8. Make EC2
 
 
 ## Step for Auto Scaling
@@ -109,6 +109,8 @@
 
 
 ## 참고 사항
+- [주의] t2.micro는 720시간 동안만 무료로 사용 가능
 - [주의] EIP를 EC2 등에 할당하지 않을 경우 별도 추가 과금 발생
 - [권장] EC2 vs. Container
 - [참고] 새로운 SG(Security Group) 생성 후 Inbound 설정할 경우 Outbound는 Any로 자동 설정됨
+- [참고] Amazon Linux, Ubuntu의 기본 계정은 ec2-user, ubuntu
