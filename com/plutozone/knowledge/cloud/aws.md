@@ -115,6 +115,16 @@
 3. Make Auto Scaling Group(PLZ-PRD-AS)
 
 
+## Step for Remove
+1. Remove EC2
+2. Remove Security Group(Delete Configuration, First!)
+3. Remove Target Group and Load Balance
+4. Remove Routing Table(Delete Configuration, First!)
+5. Remove Internet and NAT Gateway
+6. Remove Subnet
+7. Remove VPC
+
+
 ## 기타
 - [주의] **t2.micro는 720시간 동안만 무료로 사용 가능**
 - [주의] **EIP(Elastic IP)를 EC2 등에 할당하지 않을 경우 별도 추가 과금 발생**
