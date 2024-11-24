@@ -1,5 +1,10 @@
 # com.plutozone.knowledge.os.Ubuntu
 
+- Change to ROOT
+```bash
+$ sudo -i
+# 
+```
 
 - Static IP
 ```bash
