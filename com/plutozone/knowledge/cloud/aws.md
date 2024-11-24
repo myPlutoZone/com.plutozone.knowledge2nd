@@ -83,17 +83,13 @@
  	- Select PLZ-PRD-RT-PUB and Setting PLZ-PRD-IGW at `Routing`(Insert Outbound for 0.0.0.0)
 	- Select PLZ-PRD-RT-PRI and Setting PLZ-PRD-NGW-2A at `Routing`(Insert Outbound for 0.0.0.0)
 7. Make SG(`Security Group`) and Binding(Inbound 설정) at VPC or EC2
-	- For Subnet
-		- PLZ-PRD-SG-2A-BST(SSH)
-		- PLZ-PRD-SG-2C-BST(SSH)
-   		- PLZ-PRD-SG-2A-PUB(SSH, HTTP, HTTPS)
-  		- PLZ-PRD-SG-2C-PUB(SSH, HTTP, HTTPS)
-		- PLZ-PRD-SG-2A-PRI(SSH)
-		- PLZ-PRD-SG-2C-PRI(SSH)
-	- For ELB and Auto Scaling는 선택적으로 설정
-		- PLZ-PRD-SG-LB(HTTP, HTTPS)
-		- PLZ-PRD-SG-AS(HTTP, HTTPS)
-8. Make EC2 for WS(예: PLZ-PRD-EC2-2A-PUB-NGINX-001), WAS, DB 등 at EC2
+	- PLZ-PRD-SG-2A-BST(SSH)는 선택적으로 설정
+	- PLZ-PRD-SG-2C-BST(SSH)는 선택적으로 설정
+	- PLZ-PRD-SG-2A-PUB(SSH, HTTP, HTTPS)
+	- PLZ-PRD-SG-2C-PUB(SSH, HTTP, HTTPS)
+	- PLZ-PRD-SG-2A-PRI(SSH 등)는 선택적으로 설정
+	- PLZ-PRD-SG-2C-PRI(SSH 등)는 선택적으로 설정
+8. Make EC2 for WS(예: PLZ-PRD-EC2-2A-PUB-NGINX-001), WAS(예: PLZ-PRD-EC2-2A-PRI-TOMCAT-001), DB 등 at EC2
    	- Configure Hostname
 	- Select Amazon Linux2nd(t2.micro)
 	- Create or Select Key Pair
@@ -102,12 +98,12 @@
   	- Configure Private IP
 9. Make LB at EC2
 	- **Make CLB(Classic LB) for only HTTP**
-		- Make SG(PLZ-PRD-SG-CLB-WS)
+		- Make SG(PLZ-PRD-SG-CLB-WS: HTTP)
 	 	- Select Classic LB(PLZ-PRD-CLB-WS) and Setting up ...
    		- Setting up Instances
 	- **Make ALB(Application LB) for HTTPS**
 		- Make Target Group(PLZ-PRD-ALB-WS-TG) and Setting up Instances
-		- Make SG(PLZ-PRD-SG-ALB-WS)
+		- Make SG(PLZ-PRD-SG-ALB-WS: HTTP, HTTPS)
 	 	- Make Classic(참고: Instance vs. IP/Base on Container) LB(PLZ-PRD-ALB-WS) and Setting up ...
 10. Make A Record for Domain Service at Route53
 	- Setting up ...
@@ -121,10 +117,10 @@
 
 ## 기타
 - [주의] **t2.micro는 720시간 동안만 무료로 사용 가능**
-- [주의] **EIP를 EC2 등에 할당하지 않을 경우 별도 추가 과금 발생**
-- [주의] **삭제는 역순으로**
-- [권장] **EC2 vs. Container**
+- [주의] **EIP(Elastic IP)를 EC2 등에 할당하지 않을 경우 별도 추가 과금 발생**
+- [주의] **생성한 VPCs, EC2s, SCs, LBs 등의 삭제는 역순으로**
 - [권장] **현재 일반적으로 Bastion Server(관제용), NAT Gateway(패치용), EKS Management Server(관리용)만을 Public Zone에 배치**
+- [권장] **ssh -i keyPair.pem id@localhost at Bastion Server**
 - [참고] 새로운 SG(Security Group) 생성 후 Inbound 설정할 경우 Outbound는 Any로 자동 설정됨
 - [참고] Amazon Linux, Ubuntu의 기본 계정은 ec2-user, ubuntu
 - [참고] EC2, NAT Gateway는 화면 상에서 즉시 삭제되지 않고 추후 삭제됨
