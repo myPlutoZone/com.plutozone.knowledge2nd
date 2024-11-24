@@ -18,9 +18,9 @@
 - IAM(Identity and Access Management=Account)
 - ELB(Elastic Load Balancing=LB)
 - VPC(Virtual Private Cloud=Network, 최대 5개)
-	- Inside(=Private) for WAS + Outside(=Public) for WS vs. All Inside(=Private)
+	- **Inside(=Private) for WAS + Outside(=Public) for WS vs. All Inside(=Private)**
 	- CIDR(Classless Inter-Domain Routing) is not modified at AWS
-	- Private IP Band
+	- **Private IP Band**
 		- 10.0.0.0 ~ 10.255.255.255(10.0.0.0/8)
    		- 172.16.0.0 ~ 172.31.255.255(172.16.0.0/12)
 		- 192.168.0.0 ~ 192.168.255.255(192.168.0.0/16)
@@ -56,11 +56,12 @@
 2. Make `Subnet`(=서비스별 네트워크) at VPC
 	- Select AZ: 2A and 2C(예: 장애 방지를 위해 Free Tier를 지원하는 2개의 Region에 Subnet을 생성)
 	- 2A
-		- PLZ-PRD-VPC-2A-BASTION는 선택적으로 생성
-		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2A-PUB(10.0.0.0/24)
+		- **Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2A-BST(10.0.0.0/24) Bastion은 선택적으로 생성(이하 추가 작업 필요)**
+		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2A-PUB(10.0.1.0/24)
 		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2A-PRI(10.0.64.0/24)
 	- 2C
-		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2C-PUB(10.0.128.0/24)
+		- **Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2C-BST(10.0.128.0/24) Bastion은 선택적으로 생성(이하 추가 작업 필요)**
+		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2C-PUB(10.0.129.0/24)
 		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2C-PRI(10.0.192.0/24)
 3. Make `Routing Table`(AZ간의 통신을 위한 라우팅 테이블) at VPC
 	- Name Tag: PLZ-PRD-RT-PUB
@@ -100,9 +101,8 @@
 1. Make VPCs
 	- Make VPC
 	- Make Subnet
- 	- Make Routing Table
-	- Make Internet Gateway and Select Public Subnet
-	- Make NAT Gateway and Select Private Subnet
+ 	- Make Routing Table and Select Public/Private Subnet
+	- Make Internet Gateway and NAT Gateway
  	- Make Security Group
 2. Make EC2s
 3. Make Target Group(PLZ-PRD-LB-TG) for ELB
@@ -114,6 +114,8 @@
 ## 기타
 - [주의] **t2.micro는 720시간 동안만 무료로 사용 가능**
 - [주의] **EIP를 EC2 등에 할당하지 않을 경우 별도 추가 과금 발생**
-- [권장] EC2 vs. Container
+- [권장] **EC2 vs. Container**
+- [권장] **현재 일반적으로 Bastion Server(관제용), NAT Gateway(패치용), EKS Management Server(관리용)만을 Public Zone에 배치**
 - [참고] 새로운 SG(Security Group) 생성 후 Inbound 설정할 경우 Outbound는 Any로 자동 설정됨
 - [참고] Amazon Linux, Ubuntu의 기본 계정은 ec2-user, ubuntu
+- [참고] EC2, NAT Gateway는 화면 상에서 즉시 삭제되지 않고 추후 삭제됨
