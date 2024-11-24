@@ -16,7 +16,7 @@
 - ACM(Amazon Certificate Manager=HTTPS/SSL 인증서 관리)
 	- 상용(com, co.kr 등)이 아닌 개인(store, shop 등) 도메인에 대한 무료 SSL 인증서 발급 지원
 - IAM(Identity and Access Management=Account)
-- ELB(Elastic Load Balancing=LB)
+- ELB(Elastic Load Balancing=L4)
 - VPC(Virtual Private Cloud=Network, 최대 5개)
 	- **Inside(=Private) for WAS + Outside(=Public) for WS vs. All Inside(=Private)**
 	- CIDR(Classless Inter-Domain Routing) is not modified at AWS
@@ -54,19 +54,22 @@
 	- IPv4 CIDR: 10.0.0.0/16(65,563)
 	- 참고적으로 VPN 설정에서 DNS 호스트 이름를 활성화할 것
 2. Make `Subnet`(=서비스별 네트워크) at VPC
-	- Select AZ: 2A and 2C(예: 장애 방지를 위해 Free Tier를 지원하는 2개의 Region에 Subnet을 생성)
-	- 2A
-		- **Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2A-BST(10.0.0.0/24) Bastion은 선택적으로 생성(이하 추가 작업 필요)**
+ 	- Select AZ: 2A and 2C(예: 장애 방지를 위해 Free Tier를 지원하는 2개의 Region에 Subnet을 생성)
+	- **BST(Bastion)은 선택적으로 생성**
+ 	- 2A
+		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2A-BST(10.0.0.0/24)
 		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2A-PUB(10.0.1.0/24)
 		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2A-PRI(10.0.64.0/24)
 	- 2C
-		- **Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2C-BST(10.0.128.0/24) Bastion은 선택적으로 생성(이하 추가 작업 필요)**
+		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2C-BST(10.0.128.0/24)
 		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2C-PUB(10.0.129.0/24)
 		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2C-PRI(10.0.192.0/24)
 3. Make `Routing Table`(AZ간의 통신을 위한 라우팅 테이블) at VPC
+	- Name Tag: PLZ-PRD-RT-BST
 	- Name Tag: PLZ-PRD-RT-PUB
 	- Name Tag: PLZ-PRD-RT-PRI
-	- Setting Subnet(PLZ-PRD-VPC-2A-PUB, PLZ-PRD-VPC-2C-PUB) for PLZ-PRD-RT-PUB at `Subnet Connection`
+	- Setting Subnet(PLZ-PRD-VPC-2A-BST, PLZ-PRD-VPC-2C-BST) for PLZ-PRD-RT-BST at `Subnet Connection`
+ 	- Setting Subnet(PLZ-PRD-VPC-2A-PUB, PLZ-PRD-VPC-2C-PUB) for PLZ-PRD-RT-PUB at `Subnet Connection`
  	- Setting Subnet(PLZ-PRD-VPC-2A-PRI, PLZ-PRD-VPC-2C-PRI) for PLZ-PRD-RT-PRI at `Subnet Connection`
 4. Make `Internet Gateway` for Public Subnet(=Public Subnet을 위한 Outbound 네트워크) at VPC
 	- Name Tag: PLZ-PRD-IGW
@@ -76,44 +79,50 @@
 	- Select Subnet: PLZ-PRD-VPC-2A-PUB(and 2C-PUB)
 	- Assign Elastic IP(참고: 최대 5개의 EIP에서 1개 사용됨) and Binding
 6. Setting up Routing(Public/Private Subnet를 위한 Outbound 설정 등) at `Rouning Table` at VPC
-	- Select PLZ-PRD-RT-PUB and Setting PLZ-PRD-IGW at `Routing`(Insert Outbound for 0.0.0.0)
+	- Select PLZ-PRD-RT-BST and Setting PLZ-PRD-IGW at `Routing`(Insert Outbound for 0.0.0.0)
+ 	- Select PLZ-PRD-RT-PUB and Setting PLZ-PRD-IGW at `Routing`(Insert Outbound for 0.0.0.0)
 	- Select PLZ-PRD-RT-PRI and Setting PLZ-PRD-NGW-2A at `Routing`(Insert Outbound for 0.0.0.0)
 7. Make SG(`Security Group`) and Binding(Inbound 설정) at VPC or EC2
 	- For Subnet
-		- PLZ-PRD-SG-2A-BASTION는 선택적으로 생성
-		- PLZ-PRD-SG-2A-PUB(SSH, HTTP, HTTPS)
+		- PLZ-PRD-SG-2A-BST(SSH)
+		- PLZ-PRD-SG-2C-BST(SSH)
+   		- PLZ-PRD-SG-2A-PUB(SSH, HTTP, HTTPS)
   		- PLZ-PRD-SG-2C-PUB(SSH, HTTP, HTTPS)
 		- PLZ-PRD-SG-2A-PRI(SSH)
 		- PLZ-PRD-SG-2C-PRI(SSH)
 	- For ELB and Auto Scaling는 선택적으로 설정
 		- PLZ-PRD-SG-LB(HTTP, HTTPS)
 		- PLZ-PRD-SG-AS(HTTP, HTTPS)
-8. Make EC2 for WS, WAS, DB 등 at EC2
+8. Make EC2 for WS(예: PLZ-PRD-EC2-2A-PUB-NGINX-001), WAS, DB 등 at EC2
    	- Configure Hostname
 	- Select Amazon Linux2nd(t2.micro)
 	- Create or Select Key Pair
  	- Select Public IP Enable 
  	- Select Subnet & SG(Security Grooup)
   	- Configure Private IP
+9. Make LB at EC2
+	- **Make CLB(Classic LB) for only HTTP**
+		- Make SG(PLZ-PRD-SG-CLB-WS)
+	 	- Select Classic LB(PLZ-PRD-CLB-WS) and Setting up ...
+   		- Setting up Instances
+	- **Make ALB(Application LB) for HTTPS**
+		- Make Target Group(PLZ-PRD-ALB-WS-TG) and Setting up Instances
+		- Make SG(PLZ-PRD-SG-ALB-WS)
+	 	- Make Classic(참고: Instance vs. IP/Base on Container) LB(PLZ-PRD-ALB-WS) and Setting up ...
+10. Make A Record for Domain Service at Route53
+	- Setting up ...
 
 
 ## Step for Auto Scaling
-1. Make VPCs
-	- Make VPC
-	- Make Subnet
- 	- Make Routing Table and Select Public/Private Subnet
-	- Make Internet Gateway and NAT Gateway
- 	- Make Security Group
-2. Make EC2s
-3. Make Target Group(PLZ-PRD-LB-TG) for ELB
-4. Make ELB(PLZ-PRD-LB)
-5. Make Launch Template(PLZ-PRD-AS-TP) for Auto Scaling
-6. Make Auto Scaling Group(PLZ-PRD-AS)
+1. `Create Network and EC2 Instances`
+2. Make Launch Template(PLZ-PRD-AS-TP) for Auto Scaling
+3. Make Auto Scaling Group(PLZ-PRD-AS)
 
 
 ## 기타
 - [주의] **t2.micro는 720시간 동안만 무료로 사용 가능**
 - [주의] **EIP를 EC2 등에 할당하지 않을 경우 별도 추가 과금 발생**
+- [주의] **삭제는 역순으로**
 - [권장] **EC2 vs. Container**
 - [권장] **현재 일반적으로 Bastion Server(관제용), NAT Gateway(패치용), EKS Management Server(관리용)만을 Public Zone에 배치**
 - [참고] 새로운 SG(Security Group) 생성 후 Inbound 설정할 경우 Outbound는 Any로 자동 설정됨
