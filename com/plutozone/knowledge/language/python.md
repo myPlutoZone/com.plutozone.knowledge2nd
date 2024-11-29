@@ -53,12 +53,92 @@ def fn_pass():
 			- 하나의 함수만 가져오는 것도 가능(함수 사용법은 Case 2.와 같음)
 			- 와일드 임포트는 뜻하지 않게 기존의 변수나 함수를 덮어 쓸 때가 있을 수 있으므로 해당 방법이 바람직
 
+- exception
+```py
+for i in range(10):
+	try:
+		result = 10 / i
+	except ZeroDivisionError:
+		print("Not 0")
+	else:
+		print(result)
+	finally:
+		print("Finally")
+
+def get_binary_number(decimal: int) -> str:
+	assert isinstance(decimal, int) and decimal >= 0, "Input must be a positive integer"
+	return bin(decimal)
+
+print(get_binary_number(10))
+print(get_binary_number("10"))
+print(get_binary_number(-10))
+print(get_binary_number(10))
+```
+
+- files
+```py
+# Read file(반드시 close)
+file = open("yesterday.txt", "r")
+yesterday_lyric = file.readlines()
+print(yesterday_lyric)
+file.close()
+
+# Read file(with 문으로 작성하면 자동 close)
+with open("yesterday.txt", "r") as file:
+	yesterday_lyric = file.readlines()
+	print(yesterday_lyric)
+
+
+# Read CSV file
+import csv
+
+with open("./csv/test.csv", "r") as file:
+	reader = csv.reader(file)
+	for row in reader:
+		print(row)
+
+
+# Create a Dictionary Object(=JSON) for JSON & Pickle file
+data = {
+	"name": "Sungwan Myung"
+	, "age": 20
+	, "city": "Seoul"
+	, "email": ["plutomsw@gmail.com", "plutomsw@naver.com"]
+}
+
+
+# Create & Load a JSON file
+import json
+
+with open("data.json", "w") as file:
+	json.dump(data, file)
+
+with open("data.json", "r") as file:
+	data = json.load(file)
+	print(data)
+	print(type(data))
+
+
+# Create & Load a Pickle file
+import pickle
+
+
+with open("data.pickle", "wb") as file:
+	pickle.dump(data, file)
+
+with open("data.pickle", "rb") as file:
+	data = pickle.load(file)
+	print(data)
+	print(type(data))
+```
+
+
 ## Pandas
 ```py
 ```
 
 ## Example
-- 딕션너리 입력: 이름(key)과 전화번호(value)
+- 딕션너리 데이터 입력(이름:key, 전화번호:value)
 ```py
 contacts = dict()
 
@@ -76,7 +156,7 @@ insertDic()
 print(contacts)
 ```
 
-- 최고 성적자 확인
+- 클래스 기반으로 최고 성적자 확인
 ```py
 class Student:
 	def __init__(self, name, age, score):
