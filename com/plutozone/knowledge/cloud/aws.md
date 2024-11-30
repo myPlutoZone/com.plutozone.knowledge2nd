@@ -56,18 +56,16 @@
 2. Make `Subnet`(=서비스별 네트워크) at VPC
  	- Select AZ: 2A and 2C(예: 장애 방지를 위해 Free Tier를 지원하는 2개의 Region에 Subnet을 생성)
 	- **BST(Bastion)은 선택적으로 생성**
- 	- 2A
-		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2A-BST(10.0.0.0/24)
-		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2A-PUB(10.0.1.0/24)
-		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2A-PRI(10.0.64.0/24)
-	- 2C
-		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2C-BST(10.0.128.0/24)
-		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2C-PUB(10.0.129.0/24)
-		- Name Tag(IPv4 CIDR): PLZ-PRD-VPC-2C-PRI(10.0.192.0/24)
+ 	- Name Tag(IPv4 CIDR) for 2A
+		- PLZ-PRD-VPC-2A-BST(10.0.0.0/24)
+		- PLZ-PRD-VPC-2A-PUB(10.0.1.0/24)
+		- PLZ-PRD-VPC-2A-PRI(10.0.64.0/24)
+	- Name Tag(IPv4 CIDR) for 2C
+		- PLZ-PRD-VPC-2C-BST(10.0.128.0/24)
+		- PLZ-PRD-VPC-2C-PUB(10.0.129.0/24)
+		- PLZ-PRD-VPC-2C-PRI(10.0.192.0/24)
 3. Make `Routing Table`(AZ간의 통신을 위한 라우팅 테이블) at VPC
-	- Name Tag: PLZ-PRD-RT-BST
-	- Name Tag: PLZ-PRD-RT-PUB
-	- Name Tag: PLZ-PRD-RT-PRI
+	- Name Tags: PLZ-PRD-RT-BST, PLZ-PRD-RT-PUB, PLZ-PRD-RT-PRI
 	- Setting Subnet(PLZ-PRD-VPC-2A-BST, PLZ-PRD-VPC-2C-BST) for PLZ-PRD-RT-BST at `Subnet Connection`
  	- Setting Subnet(PLZ-PRD-VPC-2A-PUB, PLZ-PRD-VPC-2C-PUB) for PLZ-PRD-RT-PUB at `Subnet Connection`
  	- Setting Subnet(PLZ-PRD-VPC-2A-PRI, PLZ-PRD-VPC-2C-PRI) for PLZ-PRD-RT-PRI at `Subnet Connection`
