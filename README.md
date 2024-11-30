@@ -42,6 +42,7 @@
 - Slack
 	- Slack + GitLab
 		- Slack
+    			- Add Channel for **GitLab** Repository
 			- Add Apps
 			- Add "Incoming WebHooks"
 			- Select Channel and Copy Webhook URL(예: https://hooks.slack.com/services/...) for GitLab
@@ -49,6 +50,7 @@
 			- Go settins > Integrations > Slack notificatios and Paste Webook URL(예: https://hooks.slack.com/services/...)
 	- Slack + GitHub
 		- Slack
+    			- Add Channel for **GitHub** Repository
 			- Add Apps at Slack
 			- Add "GitHub"
 			- Select Channel and ...
