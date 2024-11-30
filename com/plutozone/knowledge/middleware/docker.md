@@ -102,24 +102,41 @@ $ docker images
 - Pull(:Tag 생략 시 Lastest)
 ```bash
 # [중요] 하나의 공인 IP에 대해 6시간동안 100건으로 제한 vs. 로그인 후에는 150건 at hub.docker.com
-$ docker pull nginx				                                    # at hub.docker.com
-$ docker pull quay.io/uvelyster/nginx				                  # at quay.io/uvelyster/nginx
-$ docker pull plutomsw/cicd_guestbook:20240107064001_24				# at hub.docker.com/plutomsw/cicd_guestbook
+$ docker pull nginx				                                 # at hub.docker.com
+$ docker pull quay.io/uvelyster/nginx				               # at quay.io/uvelyster/nginx
+$ docker pull plutomsw/cicd_guestbook:20240107064001_24    # at hub.docker.com/plutomsw/cicd_guestbook
 ```
 
 - Run
 ```bash
-$ docker run quay.io/uvelyster/nginx				                # forground(stdout + stderr)
-$ docker run -d quay.io/uvelyster/nginx				              # background(stdout is none)
-$ docker run -i quay.io/uvelyster/nginx				              # interactive(stdin + stdout + stderr)
-$ curl 172.17.0.2				                                    # Default(Container 내부에서만 접속 가능)
-$ docker run quay.io/uvelyster/nginx echo helloworld				# Command Parameter
-$ docker run -d --name demoApp quay.io/uvelyster/nginx			# Alias Name
-$ docker ps				
-$ docker ps -a				
-$ docker inspect demoApp				
-$ docker inspect [CONTAINER ID%]				
-$ docker exec -i -t demoApp /bin/bash				                # [중요] 해당 컨테이너에 접근=exec addtional process(i: interactive, t: tty) after run(PID=1) 
-$ exit                                                      # 해당 컨테이너에서 나가기
-$ docker run --rm				                                    # 컨테이너 중지 시 자동 삭제
+$ docker run quay.io/uvelyster/nginx                       # Forground(stdout + stderr) Mode
+$ docker run -d quay.io/uvelyster/nginx                    # Background(stdout is none) Mode
+$ docker run -i quay.io/uvelyster/nginx                    # Interactive(stdin + stdout + stderr) Mode
+$ curl 172.17.0.2                                          # Default(Container 내부에서만 접속 가능)
+$ docker run quay.io/uvelyster/nginx echo helloworld       # Command Parameter
+$ docker run -d --name demoApp quay.io/uvelyster/nginx     # Background Mode + Alias Name
+$ docker run -i -t --name demoApp quay.io/uvelyster/nginx  # Interactive(stdin + stdout + stderr) / TTY Mode(=-it) + Alias Name
+$ docker ps
+$ docker ps -a
+$ docker inspect demoApp
+# docker cp demoApp:/usr/share/nginx/html/index.html .             # 컨테이너 파일을 로컬로 복사
+# docker cp ./index.htl demoApp:/usr/share/nginx/html/index.html   # 로컬 파일을 컨테이너 파일로 복사
+$ docker exec -it demoApp /bin/bash				                         # [중요] 해당 컨테이너에 접근=exec addtional process(i: Interactive, t: TTY) after run(PID=1)
+$ exit                                                             # 해당 컨테이너에서 나가기
+```
+
+- LifeCycle for Container
+```bash
+$ docker create [IMAGE]
+$ docker start [IMAGE]                                                          # create + start = run
+$ docker restart [NAME or CONTAINER ID%]
+$ docker stop [NAME or CONTAINER ID%]                                           # SIGTERM(15)에 해당하는 안전 종료(참고: kill -l)
+$ docker kill [NAME or CONTAINER ID%]                                           # SIGTERM(9)에 해당하는 강제 종료
+$ docker logs -f [CONTAINER ID%]
+$ docker inspect [NAME or CONTAINER ID%]
+# docker inspect -f '{{ .NetworkSettings.IPAddress }}' [NAME or CONTAINER ID%]  # IP 확인
+$ docker rm [CONTAINER ID%]                                                     # 중지되어 있어야 삭제 가능
+$ docker run --rm                                                               # 컨테이너 중지 시 자동 삭제
+$ docker rm -f $(docker container ls -a -q)                                     # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제)
+$ docker rmi [IMAGE]                                                            # 이미지 삭제(해당 컨테이너가 삭제되어야 이미지 삭제 가능)
 ```
