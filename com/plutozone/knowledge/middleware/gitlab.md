@@ -1,4 +1,4 @@
-# com.plutozone.knowledge.middle.GitLab
+# com.plutozone.knowledge.middleware.GitLab
 
 
 - Install Git Client
