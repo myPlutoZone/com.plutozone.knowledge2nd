@@ -119,8 +119,8 @@ $ docker run -i -t --name demoApp quay.io/uvelyster/nginx  # Interactive(stdin +
 $ docker ps
 $ docker ps -a
 $ docker inspect demoApp
-# docker cp demoApp:/usr/share/nginx/html/index.html .             # 컨테이너 파일을 로컬로 복사
-# docker cp ./index.htl demoApp:/usr/share/nginx/html/index.html   # 로컬 파일을 컨테이너 파일로 복사
+$ docker cp demoApp:/usr/share/nginx/html/index.html .             # 컨테이너 파일을 로컬로 복사
+$ docker cp ./index.htl demoApp:/usr/share/nginx/html/index.html   # 로컬 파일을 컨테이너 파일로 복사
 $ docker exec -it demoApp /bin/bash				                         # [중요] 해당 컨테이너에 접근=exec addtional process(i: Interactive, t: TTY) after run(PID=1)
 $ exit                                                             # 해당 컨테이너에서 나가기
 ```
@@ -134,7 +134,7 @@ $ docker stop [NAME or CONTAINER ID%]                                           
 $ docker kill [NAME or CONTAINER ID%]                                           # SIGTERM(9)에 해당하는 강제 종료
 $ docker logs -f [CONTAINER ID%]
 $ docker inspect [NAME or CONTAINER ID%]
-# docker inspect -f '{{ .NetworkSettings.IPAddress }}' [NAME or CONTAINER ID%]  # IP 확인
+$ docker inspect -f '{{ .NetworkSettings.IPAddress }}' [NAME or CONTAINER ID%]  # IP 확인
 $ docker rm [CONTAINER ID%]                                                     # 중지되어 있어야 삭제 가능
 $ docker run --rm                                                               # 컨테이너 중지 시 자동 삭제
 $ docker rm -f $(docker container ls -a -q)                                     # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제)
