@@ -53,7 +53,7 @@
     			- Add a Channel for **GitHub** Repository
 			- Add Apps at Slack
 			- Add "GitHub"
-			- Select a Channel and Write command(/github subscribe [Owner/Repository])
+			- Select a Channel and Write command(/github subscribe [Owner/Repository] or /github unsubscribe [Owner/Repository])
 	
 - Python
 	- 파이썬과 PSF(Python Software Foundation)
