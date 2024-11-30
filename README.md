@@ -50,10 +50,10 @@
 			- Go settins > Integrations > Slack notificatios and Paste Webook URL(예: https://hooks.slack.com/services/...)
 	- Slack + GitHub
 		- Slack
-    			- Add Channel for **GitHub** Repository
+    			- Add a Channel for **GitHub** Repository
 			- Add Apps at Slack
 			- Add "GitHub"
-			- Select Channel and ...
+			- Select a Channel and Write command(/github subscribe [Owner/Repository])
 	
 - Python
 	- 파이썬과 PSF(Python Software Foundation)
