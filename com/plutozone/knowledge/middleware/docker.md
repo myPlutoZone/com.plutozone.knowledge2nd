@@ -133,18 +133,40 @@ $ docker inspect [NAME or CONTAINER ID%]
 $ docker inspect -f '{{ .NetworkSettings.IPAddress }}' [NAME or CONTAINER ID%]  # IP 확인
 $ docker rm [CONTAINER ID%]                                                     # 중지되어 있어야 삭제 가능
 $ docker run --rm                                                               # 실행 후 즉시 삭제
-$ docker rm -f $(docker container ls -a -q)                                     # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제)
+$ docker rm -f $(docker container ls -a -q)                                     # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
 $ docker rmi [IMAGE]                                                            # 이미지 삭제(해당 컨테이너가 삭제되어야 이미지 삭제 가능, -f 시 강제 삭제)
 ```
 
 
 - Network for Container
 ```bash
-$ docker network ls                                # Default Network(Default:bridge=자체, host=호스트, none=없음) for Container
+$ docker network ls                                # Network(Default:bridge=자체, host=호스트, none=없음) for Container
 $ docker pull quay.io/uvelyster/busybox
-# docker tag quay.io/uvelyster/busybox mybusybox   # quay.io/uvelyster/busybox를 mybusybox로 설정(tag)
+$ docker tag quay.io/uvelyster/busybox mybusybox   # quay.io/uvelyster/busybox를 mybusybox로 설정(tag)
 $ docker images
 $ docker run --rm mybusybox ip a                   # 실행 후 즉시 삭제(--rm), 이미지, IP 확인(ip a): 172.17.0.2 from 172.17.0.0 ~ 172.17.255.255
-$ docker run --rm --network host mybusybox ip a    # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:lastest), IP 확인(ip a)
-$ docker run --rm --network none mybusybox ip a    # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:lastest), IP 확인(ip a)
+$ docker run --rm --network host mybusybox ip a    # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:lastest), IP 확인(ip a = ip addr show)
+$ docker run --rm --network none mybusybox ip a    # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:lastest), IP 확인(ip a = ip addr show)
+$ docker network inspect bridge                    # bridge detail
+$ docker tag quay.io/uvelyster/nginx mynginx       # tag 설정
+$ docker images
+$ docker run -d mybusybox sleep 1d                 # sleep 1d로 해당 컨테이너를 실행
+$ docker network inspect bridge                    # bridge detail
+$ docker exec -it [CONTAINER ID%] bash             # bash로 해당 컨테이너로 접근
+$ docker network create demonet --subnet 172.20.0.0/24                  # 사용자 정의 네트워크 생성
+$ docker network ls
+$ docker run -d --network demonet --name demoApp mynginx                # 사용자 정의 네트워크로 컨테이너 실행
+$ docker inspect demoApp | grep IP                                      # IP 확인
+$ docker run -d --network demonet --name demoApp2 -p 1234:80 mynginx    # [중요] 사용자 정의 네트워크로 컨테이너 실행(-p: 포트 포워딩): 요청 포트:응답 포트
+                                                                        # http://172.16.0.101:1234
+$ docker rm -f $(docker container ls -a -q)                             # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
+```
+
+
+- Storage(Volume) for ContainerE
+  - /var/lib/docker/volumes by Docker
+  - ... by 사용자 정의
+```bash
+# EFK(Elastic Search + Fluentd + Kibana) vs. PLG(Promtail + Loki + Grafana) for Logging
+$ docker volume ls
 ```
