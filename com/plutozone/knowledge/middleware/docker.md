@@ -132,7 +132,7 @@ $ docker logs -f [CONTAINER ID%]
 $ docker inspect [NAME or CONTAINER ID%]
 $ docker inspect -f '{{ .NetworkSettings.IPAddress }}' [NAME or CONTAINER ID%]  # IP 확인
 $ docker rm [CONTAINER ID%]                                                     # 중지되어 있어야 삭제 가능
-$ docker run --rm                                                               # 컨테이너 중지 시 자동 삭제
+$ docker run --rm                                                               # 실행 후 즉시 삭제
 $ docker rm -f $(docker container ls -a -q)                                     # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제)
 $ docker rmi [IMAGE]                                                            # 이미지 삭제(해당 컨테이너가 삭제되어야 이미지 삭제 가능, -f 시 강제 삭제)
 ```
@@ -140,10 +140,11 @@ $ docker rmi [IMAGE]                                                            
 
 - Network for Container
 ```bash
-$ docker network ls                                # Default Network for Container
+$ docker network ls                                # Default Network(Default:bridge=자체, host=호스트, none=없음) for Container
 $ docker pull quay.io/uvelyster/busybox
 # docker tag quay.io/uvelyster/busybox mybusybox   # quay.io/uvelyster/busybox를 mybusybox로 설정(tag)
 $ docker images
-$ docker run --rm mybusybox ip a                   # 중지 후 자동 삭제(--rm), 이미지, IP 확인(ip a): 172.17.0.2 from 172.17.0.0 ~ 172.17.255.255
-$ docker run --rm --network host mybusybox ip a    # 중지 후 자동 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:lastest), IP 확인(ip a)
+$ docker run --rm mybusybox ip a                   # 실행 후 즉시 삭제(--rm), 이미지, IP 확인(ip a): 172.17.0.2 from 172.17.0.0 ~ 172.17.255.255
+$ docker run --rm --network host mybusybox ip a    # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:lastest), IP 확인(ip a)
+$ docker run --rm --network none mybusybox ip a    # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:lastest), IP 확인(ip a)
 ```
