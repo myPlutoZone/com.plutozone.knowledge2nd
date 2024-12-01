@@ -163,10 +163,28 @@ $ docker rm -f $(docker container ls -a -q)                             # 모든
 ```
 
 
-- Storage(Volume) for ContainerE
-  - /var/lib/docker/volumes by Docker
-  - ... by 사용자 정의
+- Storage(Volume) for Container
+  - /var/lib/docker/volumes by Docker(volume mount)
+  - ... by 사용자(bind mount)
+  - ... by 메모리(tempfs mount)
 ```bash
 # EFK(Elastic Search + Fluentd + Kibana) vs. PLG(Promtail + Loki + Grafana) for Logging
 $ docker volume ls
+$ docker volume create demoVol1
+$ docker volume inspect demoVol1
+$ docker run -d --name demoApp3 -p 1235:80 -v demoVol:/usr/share/nginx/html mynginx
+$ curl 172.17.0.1:1235
+$ curl 172.17.0.1:1234
+$ curl localhost:1234
+$ docker volume inspect demoVol1
+$ nano /var/lib/docker/volumes/demoVol1/_data/index.html
+$ curl 172.17.0.1:1235                                                                  # demoVol1 저장된 index.html(예: 동적 소스, 설정 등)
+$ curl 172.17.0.1:1234
+$ docker run -d --name demoApp4 -p 1236:80 -v demoVol1:/usr/share/nginx/html mynginx
+$ curl 172.17.0.1:1236                                                                  # demoVol1
+$ docker run -d --name demoApp5 -p 1237:80 -v /demoVol2:/usr/share/nginx/html mynginx   # "/"로 시작할 경우 by 사용자(bind mount)
+$ ls /
+$ docker run -d -e MYSQL_ROOT_PASSWORD=root mysql                                       # MySQL 설치 시 암호 설정(-e)
+$ docker volume ls                                                                      # MySQL 설치 시 데이터베이스 저장 공간이 자동 생성됨
+$ docker volume prune                                                                   # 생성된 모든 볼륨을 삭제 
 ```
