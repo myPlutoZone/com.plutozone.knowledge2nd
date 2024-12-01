@@ -82,7 +82,7 @@ $ docker -H 172.16.0.102:2375      # Remote Host 접속 시
 - Registry(Default: hub.docker.com)
 
 
-## Command
+## Commands
 - Search Image at Registry
 ```bash
 $ docker search nginx				        # Registry에서 nginx Image를 검색(=https://hub.docker.com/에서 nginx를 검색)	
@@ -138,7 +138,7 @@ $ docker rmi [IMAGE]                                                            
 ```
 
 
-- Network for Container
+## Network for Container
 ```bash
 $ docker network ls                                # Network(Default:bridge=자체, host=호스트, none=없음) for Container
 $ docker pull quay.io/uvelyster/busybox
@@ -163,7 +163,8 @@ $ docker rm -f $(docker container ls -a -q)                             # 모든
 ```
 
 
-- Storage(Volume) for Container
+## Storage(Volume) for Container
+- Storage Type
   - /var/lib/docker/volumes by Docker(volume mount)
   - ... by 사용자(bind mount)
   - ... by 메모리(tempfs mount)
@@ -188,4 +189,24 @@ $ docker run -d -e MYSQL_ROOT_PASSWORD=root mysql                               
 $ docker volume ls                                                                      # MySQL 설치 시 데이터베이스 저장 공간이 자동 생성됨
 $ docker rm -f $(docker container ls -a -q)                                             # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
 $ docker volume prune                                                                   # 생성된 모든 볼륨을 삭제
+```
+
+
+## Summary
+- Image는 myRegistry.com/hello-py:lastest
+- 로컬 /source 폴더를 컨테이너 /data에 바인딩
+- 로컬 1234 포트에 접속할 경우 컨테이너 5000 포트로 포워딩
+- 컨테이너 이름은 webTest
+- 환경 변수는 APP=python
+```bash
+$ docker run -d -v /source:/data -p 1234:5000 --name: webTest -e APP=python myRegistry.com/hello-py:lastest
+```
+
+
+## Build for Container
+- Build Type
+  - 수동 빌드(docker commit)
+  - 자동 빌드(docker build)
+```bash
+docker build -t myRegistry.com/hello-py .
 ```
