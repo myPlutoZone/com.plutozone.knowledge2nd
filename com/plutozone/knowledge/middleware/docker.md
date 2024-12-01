@@ -152,7 +152,7 @@ $ docker tag quay.io/uvelyster/nginx myNginx       # tag 설정
 $ docker images
 $ docker run -d myBusybox sleep 1d                 # sleep 1d로 해당 컨테이너를 실행
 $ docker network inspect bridge                    # bridge detail
-$ docker exec -it [CONTAINER ID%] bash             # bash로 해당 컨테이너로 접근
+$ docker exec -it [Name or CONTAINER ID%] bash     # bash로 해당 컨테이너로 접근
 $ docker network create demoNet --subnet 172.20.0.0/24                  # 사용자 정의 네트워크 생성
 $ docker network ls
 $ docker run -d --network demoNet --name demoApp myNginx                # 사용자 정의 네트워크로 컨테이너 실행
@@ -188,6 +188,10 @@ $ ls /
 $ docker run -d -e MYSQL_ROOT_PASSWORD=root mysql                                       # MySQL 설치 시 암호 설정(-e)
 $ docker volume ls                                                                      # MySQL 설치 시 데이터베이스 저장 공간이 자동 생성됨
 $ docker rm -f $(docker container ls -a -q)                                             # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
+$ docker rm -vf [Name or CONTAINER ID%]                                                 # 컨테이너 삭제 시 볼륨 자동 삭제
+$ docker volume ls
+$ docker volume rm demoVol1                                                             # 볼륨 수동 삭제
+$ docker volume ls
 $ docker volume prune                                                                   # 생성된 모든 볼륨을 삭제
 ```
 
@@ -208,5 +212,24 @@ $ docker run -d -v /source:/data -p 1234:5000 --name: webTest -e APP=python myRe
   - 수동 빌드(docker commit)
   - 자동 빌드(docker build)
 ```bash
+# 수동 빌드(docker commit)
+$ docker run -d --name builder myNginx
+$ echo "hello world" > index.html
+$ docker cp index.html builder:/usr/share/nginx/html/index.html
+$ docker commit builder myNginx:v2
+$ docker images
+$ docker history myNginx | wc -l
+$ docker history myNginx:v2 | wc -l
+$ docker run -d -p 1234:80 myNginx:v2
+$ docker tag myNginx myNginx:v1
+$ docker tag myNginx:v2 myNginx
+$ docker tag myNginx:latest myRegistry.com/myNginx
+$ docker run -d --name builder2 myNginx:v2
+$ docker commit builder2 myNginx:v3
+$ docker history myNginx:v1 | wc -l
+$ docker history myNginx:v2 | wc -l
+$ docker history myNginx:v3 | wc -l
+
+# 자동 빌드(docker build)
 docker build -t myRegistry.com/hello-py .
 ```
