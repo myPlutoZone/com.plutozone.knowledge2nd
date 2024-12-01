@@ -97,8 +97,8 @@ $ docker images
 - Pull
 ```bash
 # [중요] 하나의 공인 IP에 대해 6시간동안 100건?으로 제한 vs. 로그인 후에는 150건? at hub.docker.com
-$ docker pull nginx				                                 # Default(at hub.docker.com, Tag 생략 시 lastest)
-$ docker pull quay.io/uvelyster/nginx				               # at quay.io/uvelyster/nginx(Domain/Owner/Repository, Tag 생략 시 lastest)
+$ docker pull nginx				                                 # Default(at hub.docker.com, Tag 생략 시 latest)
+$ docker pull quay.io/uvelyster/nginx				               # at quay.io/uvelyster/nginx(Domain/Owner/Repository, Tag 생략 시 latest)
 $ docker pull plutomsw/cicd_guestbook:20240107064001_24    # at hub.docker.com/plutomsw/cicd_guestbook:20240107064001_24(Domain/Owner/Repository:Tag)
 ```
 
@@ -145,8 +145,8 @@ $ docker pull quay.io/uvelyster/busybox
 $ docker tag quay.io/uvelyster/busybox myBusybox   # quay.io/uvelyster/busybox를 myBusybox로 설정(tag)
 $ docker images
 $ docker run --rm myBusybox ip a                   # 실행 후 즉시 삭제(--rm), 이미지, IP 확인(ip a): 172.17.0.2 from 172.17.0.0 ~ 172.17.255.255
-$ docker run --rm --network host myBusybox ip a    # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:lastest), IP 확인(ip a = ip addr show)
-$ docker run --rm --network none myBusybox ip a    # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:lastest), IP 확인(ip a = ip addr show)
+$ docker run --rm --network host myBusybox ip a    # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:latest), IP 확인(ip a = ip addr show)
+$ docker run --rm --network none myBusybox ip a    # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:latest), IP 확인(ip a = ip addr show)
 $ docker network inspect bridge                    # bridge detail
 $ docker tag quay.io/uvelyster/nginx myNginx       # tag 설정
 $ docker images
@@ -198,13 +198,13 @@ $ docker volume prune                                                           
 
 
 ## Summary
-- Image는 myRegistry.com/hello-py:lastest
+- Image는 myRegistry.com/hello-py:latest
 - 로컬 /source 폴더를 컨테이너 /data에 바인딩
 - 로컬 1234 포트에 접속할 경우 컨테이너 5000 포트로 포워딩
 - 컨테이너 이름은 webTest
 - 환경 변수는 APP=python
 ```bash
-$ docker run -d -v /source:/data -p 1234:5000 --name: webTest -e APP=python myRegistry.com/hello-py:lastest
+$ docker run -d -v /source:/data -p 1234:5000 --name: webTest -e APP=python myRegistry.com/hello-py:latest
 ```
 
 
@@ -223,9 +223,9 @@ $ docker history myNginx | wc -l
 $ docker history myNginx:v2 | wc -l
 $ docker run -d -p 1234:80 myNginx:v2
 $ docker tag myNginx myNginx:v1                                          # 빌드 버전 변경(기존을 v1)
-$ docker tag myNginx:v2 myNginx                                          # 빌드 버전 변경(v2를 lastest)
-$ docker tag myNginx:lastest myRegistry.com/myNginx                      # lastest 설정(기본을 lastest)
-$ docker push myRegistry.com/myNginx                                     # lastest 등록 
+$ docker tag myNginx:v2 myNginx                                          # 빌드 버전 변경(v2를 latest)
+$ docker tag myNginx:latest myRegistry.com/myNginx                       # latest 설정(기본을 latest)
+$ docker push myRegistry.com/myNginx                                     # latest 등록 
 $ docker run -d --name builder2 myNginx:v2
 $ docker commit builder2 myNginx:v3
 $ docker history myNginx:v1 | wc -l
