@@ -142,22 +142,22 @@ $ docker rmi [IMAGE]                                                  # 이미�
 ```bash
 $ docker network ls                                # Network(Default:bridge=자체, host=호스트, none=없음) for Container
 $ docker pull quay.io/uvelyster/busybox
-$ docker tag quay.io/uvelyster/busybox myBusybox   # quay.io/uvelyster/busybox를 myBusybox로 설정(tag)
+$ docker tag quay.io/uvelyster/busybox busybox2nd  # quay.io/uvelyster/busybox를 busybox2nd로 설정(tag)
 $ docker images
-$ docker run --rm myBusybox ip a                   # 실행 후 즉시 삭제(--rm), 이미지, IP 확인(ip a): 172.17.0.2 from 172.17.0.0 ~ 172.17.255.255
-$ docker run --rm --network host myBusybox ip a    # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:latest), IP 확인(ip a = ip addr show)
-$ docker run --rm --network none myBusybox ip a    # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:latest), IP 확인(ip a = ip addr show)
+$ docker run --rm busybox2nd ip a                  # 실행 후 즉시 삭제(--rm), 이미지, IP 확인(ip a): 172.17.0.2 from 172.17.0.0 ~ 172.17.255.255
+$ docker run --rm --network host busybox2nd ip a   # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:latest), IP 확인(ip a = ip addr show)
+$ docker run --rm --network none busybox2nd ip a   # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:latest), IP 확인(ip a = ip addr show)
 $ docker network inspect bridge                    # bridge detail
-$ docker tag quay.io/uvelyster/nginx myNginx       # tag 설정
+$ docker tag quay.io/uvelyster/nginx nginx2nd      # tag 설정
 $ docker images
-$ docker run -d myBusybox sleep 1d                 # sleep 1d로 해당 컨테이너를 실행
+$ docker run -d busybox2nd sleep 1d                # sleep 1d로 해당 컨테이너를 실행
 $ docker network inspect bridge                    # bridge detail
 $ docker exec -it [Name or ID%] bash     # bash로 해당 컨테이너로 접근
 $ docker network create demoNet --subnet 172.20.0.0/24                  # 사용자 정의 네트워크 생성
 $ docker network ls
-$ docker run -d --network demoNet --name demoApp myNginx                # 사용자 정의 네트워크로 컨테이너 실행
+$ docker run -d --network demoNet --name demoApp nginx2nd               # 사용자 정의 네트워크로 컨테이너 실행
 $ docker inspect demoApp | grep IP                                      # IP 확인
-$ docker run -d --network demoNet --name demoApp2 -p 1234:80 myNginx    # [중요] 사용자 정의 네트워크로 컨테이너 실행(-p: 포트 포워딩): 요청 포트:응답 포트
+$ docker run -d --network demoNet --name demoApp2 -p 1234:80 nginx2nd   # [중요] 사용자 정의 네트워크로 컨테이너 실행(-p: 포트 포워딩): 요청 포트:응답 포트
                                                                         # http://172.16.0.101:1234
 $ docker rm -f $(docker container ls -a -q)                             # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
 $ docker network rm demoNet
@@ -174,7 +174,7 @@ $ docker network rm demoNet
 $ docker volume ls
 $ docker volume create demoVol1
 $ docker volume inspect demoVol1
-$ docker run -d --name demoApp3 -p 1235:80 -v demoVol1:/usr/share/nginx/html myNginx
+$ docker run -d --name demoApp3 -p 1235:80 -v demoVol1:/usr/share/nginx/html nginx2nd
 $ curl 172.17.0.1:1235
 $ curl 172.17.0.1:1234
 $ curl localhost:1234
@@ -182,9 +182,9 @@ $ docker volume inspect demoVol1
 $ nano /var/lib/docker/volumes/demoVol1/_data/index.html
 $ curl 172.17.0.1:1235                                                                  # demoVol1 저장된 index.html(예: 동적 소스, 설정 등)
 $ curl 172.17.0.1:1234
-$ docker run -d --name demoApp4 -p 1236:80 -v demoVol1:/usr/share/nginx/html myNginx
+$ docker run -d --name demoApp4 -p 1236:80 -v demoVol1:/usr/share/nginx/html nginx2nd
 $ curl 172.17.0.1:1236                                                                  # demoVol1
-$ docker run -d --name demoApp5 -p 1237:80 -v /demoVol2:/usr/share/nginx/html myNginx   # "/"로 시작할 경우 by 사용자(bind mount)
+$ docker run -d --name demoApp5 -p 1237:80 -v /demoVol2:/usr/share/nginx/html nginx2nd  # "/"로 시작할 경우 by 사용자(bind mount)
 $ ls /
 $ docker run -d -e MYSQL_ROOT_PASSWORD=root mysql                                       # MySQL 설치 시 암호 설정(-e)
 $ docker volume ls                                                                      # MySQL 설치 시 데이터베이스 저장 공간이 자동 생성됨
@@ -214,28 +214,28 @@ $ docker run -d -v /source:/data -p 1234:5000 --name: webTest -e APP=python myRe
   - **자동 빌드(docker build)**: 대부분 신규 이미지를 빌드(**베이스 이미지 선택 또는 설정이 가장 중요**)
 ```bash
 # 수동 빌드(docker commit)
-$ docker run -d --name builder myNginx                                  # 베이스 이미지(myNginx)를 이용하여 builder 이미지를 생성
+$ docker run -d --name builder nginx2nd                                  # 베이스 이미지(nginx2nd)를 이용하여 builder 이미지를 생성
 $ echo "hello world" > index.html
 $ docker cp index.html builder:/usr/share/nginx/html/index.html
-$ docker commit builder myNginx:v2                                      # 빌드된 이미지를 myNginx:v2 이미지로 생성
+$ docker commit builder nginx2nd:v2                                      # 빌드된 이미지를 nginx2nd:v2 이미지로 생성
 $ docker images
-$ docker history myNginx | wc -l
-$ docker history myNginx:v2 | wc -l
-$ docker run -d -p 1234:80 myNginx:v2
-$ docker tag myNginx myNginx:v1                                          # 빌드 버전 변경(기존을 v1)
-$ docker tag myNginx:v2 myNginx                                          # 빌드 버전 변경(v2를 latest)
-$ docker tag myNginx:latest myRegistry.com/myNginx                       # latest 설정(기본을 latest)
-$ docker push myRegistry.com/myNginx                                     # latest 등록 
-$ docker run -d --name builder2 myNginx:v2
-$ docker commit builder2 myNginx:v3
-$ docker history myNginx:v1 | wc -l
-$ docker history myNginx:v2 | wc -l
-$ docker history myNginx:v3 | wc -l
+$ docker history nginx2nd | wc -l
+$ docker history nginx2nd:v2 | wc -l
+$ docker run -d -p 1234:80 nginx2nd:v2
+$ docker tag nginx2nd nginx2nd:v1                                          # 빌드 버전 변경(기존을 v1)
+$ docker tag nginx2nd:v2 nginx2nd                                          # 빌드 버전 변경(v2를 latest)
+$ docker tag nginx2nd:latest myRegistry.com/nginx2nd                       # latest 설정(기본을 latest)
+$ docker push myRegistry.com/nginx2nd                                      # latest 등록 
+$ docker run -d --name builder2 nginx2nd:v2
+$ docker commit builder2 nginx2nd:v3
+$ docker history nginx2nd:v1 | wc -l
+$ docker history nginx2nd:v2 | wc -l
+$ docker history nginx2nd:v3 | wc -l
 
 # 자동 빌드(docker build)
 $ mkdir buildTest
 $ vi buildTest/Dockerfile                     # [참고] Docker File Instruction
-FROM myBusybox                                # 로컬에 해당 베이스 이미지가 다운로드되어 있어야 함
+FROM busybox2nd                               # 로컬에 해당 베이스 이미지가 다운로드되어 있어야 함
 CMD echo helloworld                           # CMD ["echo", "hello", "world"]
 $ docker build buildTest                      # 이미지 빌드
 # docker images
