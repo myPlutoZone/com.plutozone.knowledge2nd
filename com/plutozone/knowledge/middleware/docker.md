@@ -209,21 +209,22 @@ $ docker run -d -v /source:/data -p 1234:5000 --name: webTest -e APP=python myRe
 
 ## Build for Container
 - Build Type
-  - 수동 빌드(docker commit)
-  - 자동 빌드(docker build)
+  - 수동 빌드(docker commit): 대부분 기존 이미지를 기반으로 이미지 빌드
+  - **자동 빌드(docker build)**: 대부분 신규 이미지를 빌드(**베이스 이미지 선택 또는 설정이 가장 중요**)
 ```bash
 # 수동 빌드(docker commit)
-$ docker run -d --name builder myNginx
+$ docker run -d --name builder myNginx                                  # 베이스 이미지(myNginx)를 이용하여 builder 이미지를 생성
 $ echo "hello world" > index.html
 $ docker cp index.html builder:/usr/share/nginx/html/index.html
-$ docker commit builder myNginx:v2
+$ docker commit builder myNginx:v2                                      # 빌드된 이미지를 myNginx:v2 이미지로 생성
 $ docker images
 $ docker history myNginx | wc -l
 $ docker history myNginx:v2 | wc -l
 $ docker run -d -p 1234:80 myNginx:v2
-$ docker tag myNginx myNginx:v1
-$ docker tag myNginx:v2 myNginx
-$ docker tag myNginx:latest myRegistry.com/myNginx
+$ docker tag myNginx myNginx:v1                                          # 빌드 버전 변경(기존을 v1)
+$ docker tag myNginx:v2 myNginx                                          # 빌드 버전 변경(v2를 lastest)
+$ docker tag myNginx:lastest myRegistry.com/myNginx                      # lastest 설정(기본을 lastest)
+$ docker push myRegistry.com/myNginx                                     # lastest 등록 
 $ docker run -d --name builder2 myNginx:v2
 $ docker commit builder2 myNginx:v3
 $ docker history myNginx:v1 | wc -l
@@ -231,5 +232,18 @@ $ docker history myNginx:v2 | wc -l
 $ docker history myNginx:v3 | wc -l
 
 # 자동 빌드(docker build)
-docker build -t myRegistry.com/hello-py .
+$ mkdir buildTest
+$ vi buildTest/Dockerfile                     # [참고] Docker File Instruction
+FROM myBusybox                                # 로컬에 해당 베이스 이미지가 다운로드되어 있어야 함
+CMD echo helloworld                           # CMD ["echo", "hello", "world"]
+$ docker build buildTest                      # 이미지 빌드
+# docker images
+# docker tag [CONTAINER ID%] testimage        # 네임 부여(대문자 제외)
+# docker run testimage
+```
+
+
+## Docker File Instruction
+```bash
+
 ```
