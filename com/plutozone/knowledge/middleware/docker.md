@@ -160,6 +160,7 @@ $ docker inspect demoApp | grep IP                                      # IP 확
 $ docker run -d --network demoNet --name demoApp2 -p 1234:80 myNginx    # [중요] 사용자 정의 네트워크로 컨테이너 실행(-p: 포트 포워딩): 요청 포트:응답 포트
                                                                         # http://172.16.0.101:1234
 $ docker rm -f $(docker container ls -a -q)                             # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
+$ docker network rm demoNet
 ```
 
 
@@ -247,3 +248,6 @@ $ docker build buildTest                      # 이미지 빌드
 ```bash
 
 ```
+
+## Question
+- 이미지 이름에 대문자 안 됨! 컨테이너 이름은 대문자 가능!
