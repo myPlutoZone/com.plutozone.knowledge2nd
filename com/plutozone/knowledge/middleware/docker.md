@@ -186,5 +186,6 @@ $ docker run -d --name demoApp5 -p 1237:80 -v /demoVol2:/usr/share/nginx/html my
 $ ls /
 $ docker run -d -e MYSQL_ROOT_PASSWORD=root mysql                                       # MySQL 설치 시 암호 설정(-e)
 $ docker volume ls                                                                      # MySQL 설치 시 데이터베이스 저장 공간이 자동 생성됨
-$ docker volume prune                                                                   # 생성된 모든 볼륨을 삭제 
+$ docker rm -f $(docker container ls -a -q)                                             # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
+$ docker volume prune                                                                   # 생성된 모든 볼륨을 삭제
 ```
