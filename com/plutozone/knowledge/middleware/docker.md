@@ -97,8 +97,8 @@ $ docker images
 - Pull
 ```bash
 # [중요] 하나의 공인 IP에 대해 6시간동안 100건?으로 제한 vs. 로그인 후에는 150건? at hub.docker.com
-$ docker pull nginx				                                 # Default(at hub.docker.com, Tag 생략 시 Lastest)
-$ docker pull quay.io/uvelyster/nginx				               # at quay.io/uvelyster/nginx(Domain/Owner/Repository, Tag 생략 시 Lastest)
+$ docker pull nginx				                                 # Default(at hub.docker.com, Tag 생략 시 lastest)
+$ docker pull quay.io/uvelyster/nginx				               # at quay.io/uvelyster/nginx(Domain/Owner/Repository, Tag 생략 시 lastest)
 $ docker pull plutomsw/cicd_guestbook:20240107064001_24    # at hub.docker.com/plutomsw/cicd_guestbook:20240107064001_24(Domain/Owner/Repository:Tag)
 ```
 
@@ -107,7 +107,7 @@ $ docker pull plutomsw/cicd_guestbook:20240107064001_24    # at hub.docker.com/p
 $ docker run quay.io/uvelyster/nginx                       # Forground(stdout + stderr) Mode
 $ docker run -d quay.io/uvelyster/nginx                    # Background(stdout is none) Mode
 $ docker run -i quay.io/uvelyster/nginx                    # Interactive(stdin + stdout + stderr) Mode
-$ curl 172.17.0.2                                          # [중요] Default Container Network=172.17.0.0/24(Default: Container Host에서만 접속 가능)
+$ curl 172.17.0.2                                          # [중요] Default Container Network=172.17.0.0/16(Default: Container Host에서만 접속 가능)
 $ docker run quay.io/uvelyster/nginx echo helloworld       # Command Parameter(echo helloworld)
 $ docker run -d --name demoApp quay.io/uvelyster/nginx     # Background Mode(-d) + Alias Name(--name)
 $ docker run -i -t --name demoApp quay.io/uvelyster/nginx  # Interactive(stdin + stdout + stderr) / TTY Mode(=-it) + Alias Name
@@ -134,5 +134,16 @@ $ docker inspect -f '{{ .NetworkSettings.IPAddress }}' [NAME or CONTAINER ID%]  
 $ docker rm [CONTAINER ID%]                                                     # 중지되어 있어야 삭제 가능
 $ docker run --rm                                                               # 컨테이너 중지 시 자동 삭제
 $ docker rm -f $(docker container ls -a -q)                                     # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제)
-$ docker rmi [IMAGE]                                                            # 이미지 삭제(해당 컨테이너가 삭제되어야 이미지 삭제 가능)
+$ docker rmi [IMAGE]                                                            # 이미지 삭제(해당 컨테이너가 삭제되어야 이미지 삭제 가능, -f 시 강제 삭제)
+```
+
+
+- Network for Container
+```bash
+$ docker network ls                                # Default Network for Container
+$ docker pull quay.io/uvelyster/busybox
+# docker tag quay.io/uvelyster/busybox mybusybox   # quay.io/uvelyster/busybox를 mybusybox로 설정(tag)
+$ docker images
+$ docker run --rm mybusybox ip a                   # 중지 후 자동 삭제(--rm), 이미지, IP 확인(ip a): 172.17.0.2 from 172.17.0.0 ~ 172.17.255.255
+$ docker run --rm --network host mybusybox ip a    # 중지 후 자동 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:lastest), IP 확인(ip a)
 ```
