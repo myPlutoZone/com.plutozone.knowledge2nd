@@ -142,22 +142,22 @@ $ docker rmi [IMAGE]                                                            
 ```bash
 $ docker network ls                                # Network(Default:bridge=자체, host=호스트, none=없음) for Container
 $ docker pull quay.io/uvelyster/busybox
-$ docker tag quay.io/uvelyster/busybox mybusybox   # quay.io/uvelyster/busybox를 mybusybox로 설정(tag)
+$ docker tag quay.io/uvelyster/busybox myBusybox   # quay.io/uvelyster/busybox를 myBusybox로 설정(tag)
 $ docker images
-$ docker run --rm mybusybox ip a                   # 실행 후 즉시 삭제(--rm), 이미지, IP 확인(ip a): 172.17.0.2 from 172.17.0.0 ~ 172.17.255.255
-$ docker run --rm --network host mybusybox ip a    # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:lastest), IP 확인(ip a = ip addr show)
-$ docker run --rm --network none mybusybox ip a    # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:lastest), IP 확인(ip a = ip addr show)
+$ docker run --rm myBusybox ip a                   # 실행 후 즉시 삭제(--rm), 이미지, IP 확인(ip a): 172.17.0.2 from 172.17.0.0 ~ 172.17.255.255
+$ docker run --rm --network host myBusybox ip a    # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:lastest), IP 확인(ip a = ip addr show)
+$ docker run --rm --network none myBusybox ip a    # 실행 후 즉시 삭제(--rm), 네트워크 선택(--network), 이미지(=docker.io/library/busybox:lastest), IP 확인(ip a = ip addr show)
 $ docker network inspect bridge                    # bridge detail
-$ docker tag quay.io/uvelyster/nginx mynginx       # tag 설정
+$ docker tag quay.io/uvelyster/nginx myNginx       # tag 설정
 $ docker images
-$ docker run -d mybusybox sleep 1d                 # sleep 1d로 해당 컨테이너를 실행
+$ docker run -d myBusybox sleep 1d                 # sleep 1d로 해당 컨테이너를 실행
 $ docker network inspect bridge                    # bridge detail
 $ docker exec -it [CONTAINER ID%] bash             # bash로 해당 컨테이너로 접근
-$ docker network create demonet --subnet 172.20.0.0/24                  # 사용자 정의 네트워크 생성
+$ docker network create demoNet --subnet 172.20.0.0/24                  # 사용자 정의 네트워크 생성
 $ docker network ls
-$ docker run -d --network demonet --name demoApp mynginx                # 사용자 정의 네트워크로 컨테이너 실행
+$ docker run -d --network demoNet --name demoApp myNginx                # 사용자 정의 네트워크로 컨테이너 실행
 $ docker inspect demoApp | grep IP                                      # IP 확인
-$ docker run -d --network demonet --name demoApp2 -p 1234:80 mynginx    # [중요] 사용자 정의 네트워크로 컨테이너 실행(-p: 포트 포워딩): 요청 포트:응답 포트
+$ docker run -d --network demoNet --name demoApp2 -p 1234:80 myNginx    # [중요] 사용자 정의 네트워크로 컨테이너 실행(-p: 포트 포워딩): 요청 포트:응답 포트
                                                                         # http://172.16.0.101:1234
 $ docker rm -f $(docker container ls -a -q)                             # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
 ```
@@ -172,7 +172,7 @@ $ docker rm -f $(docker container ls -a -q)                             # 모든
 $ docker volume ls
 $ docker volume create demoVol1
 $ docker volume inspect demoVol1
-$ docker run -d --name demoApp3 -p 1235:80 -v demoVol:/usr/share/nginx/html mynginx
+$ docker run -d --name demoApp3 -p 1235:80 -v demoVol1:/usr/share/nginx/html myNginx
 $ curl 172.17.0.1:1235
 $ curl 172.17.0.1:1234
 $ curl localhost:1234
@@ -180,9 +180,9 @@ $ docker volume inspect demoVol1
 $ nano /var/lib/docker/volumes/demoVol1/_data/index.html
 $ curl 172.17.0.1:1235                                                                  # demoVol1 저장된 index.html(예: 동적 소스, 설정 등)
 $ curl 172.17.0.1:1234
-$ docker run -d --name demoApp4 -p 1236:80 -v demoVol1:/usr/share/nginx/html mynginx
+$ docker run -d --name demoApp4 -p 1236:80 -v demoVol1:/usr/share/nginx/html myNginx
 $ curl 172.17.0.1:1236                                                                  # demoVol1
-$ docker run -d --name demoApp5 -p 1237:80 -v /demoVol2:/usr/share/nginx/html mynginx   # "/"로 시작할 경우 by 사용자(bind mount)
+$ docker run -d --name demoApp5 -p 1237:80 -v /demoVol2:/usr/share/nginx/html myNginx   # "/"로 시작할 경우 by 사용자(bind mount)
 $ ls /
 $ docker run -d -e MYSQL_ROOT_PASSWORD=root mysql                                       # MySQL 설치 시 암호 설정(-e)
 $ docker volume ls                                                                      # MySQL 설치 시 데이터베이스 저장 공간이 자동 생성됨
