@@ -255,6 +255,33 @@ RUN commandl || command2 || command3    # 앞 부분이 실패해야 다음 실�
 RUN commandl | command2 | command3      # 파이프 라인 실행
 ```
 
-
-## Question
-- `이미지 이름에 대문자 안 됨! 컨테이너 이름은 대문자 가능!`
+## Compose for Container
+```bash
+# Compose(Build 이후에 Build 자동화 툴, 예시: GitLab)
+$ mkdir compose
+$ cd compose
+$ vi docker-compose.yaml
+services:
+  gitlab:
+    image: 'quay.io/uvelyster/gitlab-ce:latest'
+    restart: always
+    hostname: 'mygitlab.com'
+    container_name: gitlab
+    dns: 172.16.0.200
+    environment:
+      GITLAB_ROOT_PASSWORD: P@ssw0rd
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://mygitlab.com'
+        registry_external_url 'https://myregistry.com'
+    ports:
+      - '80:80'
+      - '443:443'
+    volumes:
+      - '/root/gitlab/config:/etc/gitlab'
+      - '/auth:/etc/gitlab/ssl'
+      - '/root/gitlab/logs:/var/log/gitlab'
+      - '/root/gitlab/data:/var/opt/gitlab'
+      - '/root/gitlab/backup:/var/opt/gitlab/backups'
+      - '/root/gitlab/registry:/var/opt/gitlab/gitlab-rails/shared/registry'
+$ docker compose up -d
+```
