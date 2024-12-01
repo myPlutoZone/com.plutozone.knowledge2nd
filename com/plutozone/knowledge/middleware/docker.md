@@ -246,8 +246,15 @@ $ docker build buildTest                      # 이미지 빌드
 
 ## Docker File Instruction
 ```bash
-
+RUN commandl ; command2 ; command3      # 실패 여부에 관계없이 모두 실행
+RUN commandl ; \
+    command2 ; \
+    command3                            # 실패 여부에 관계없이 모두 실행 + 가독성(\)
+RUN commandl && command2 && command3    # 앞 부분이 성공해야 다음 실행
+RUN commandl || command2 || command3    # 앞 부분이 실패해야 다음 실행
+RUN commandl | command2 | command3      # 파이프 라인 실행
 ```
 
+
 ## Question
-- 이미지 이름에 대문자 안 됨! 컨테이너 이름은 대문자 가능!
+- `이미지 이름에 대문자 안 됨! 컨테이너 이름은 대문자 가능!`
