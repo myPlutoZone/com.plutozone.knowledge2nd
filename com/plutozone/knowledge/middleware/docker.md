@@ -124,17 +124,17 @@ $ exit                                                             # 해당 컨�
 - LifeCycle for Container
 ```bash
 $ docker create [IMAGE]
-$ docker start [IMAGE]                                                          # run = create + start
-$ docker restart [NAME or CONTAINER ID%]
-$ docker stop [NAME or CONTAINER ID%]                                           # SIGTERM(15)에 해당하는 안전 종료(참고: kill -l)
-$ docker kill [NAME or CONTAINER ID%]                                           # SIGTERM(9)에 해당하는 강제 종료
-$ docker logs -f [CONTAINER ID%]
-$ docker inspect [NAME or CONTAINER ID%]
-$ docker inspect -f '{{ .NetworkSettings.IPAddress }}' [NAME or CONTAINER ID%]  # IP 확인
-$ docker rm [CONTAINER ID%]                                                     # 중지되어 있어야 삭제 가능
-$ docker run --rm                                                               # 실행 후 즉시 삭제
-$ docker rm -f $(docker container ls -a -q)                                     # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
-$ docker rmi [IMAGE]                                                            # 이미지 삭제(해당 컨테이너가 삭제되어야 이미지 삭제 가능, -f 시 강제 삭제)
+$ docker start [IMAGE]                                                # run = create + start
+$ docker restart [NAME or ID%]
+$ docker stop [NAME or ID%]                                           # SIGTERM(15)에 해당하는 안전 종료(참고: kill -l)
+$ docker kill [NAME or ID%]                                           # SIGTERM(9)에 해당하는 강제 종료
+$ docker logs -f [ID%]
+$ docker inspect [NAME or ID%]
+$ docker inspect -f '{{ .NetworkSettings.IPAddress }}' [NAME or ID%]  # IP 확인
+$ docker rm [ID%]                                                     # 중지되어 있어야 삭제 가능
+$ docker run --rm                                                     # 실행 후 즉시 삭제
+$ docker rm -f $(docker container ls -a -q)                           # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
+$ docker rmi [IMAGE]                                                  # 이미지 삭제(해당 컨테이너가 삭제되어야 이미지 삭제 가능, -f 시 강제 삭제)
 ```
 
 
@@ -152,7 +152,7 @@ $ docker tag quay.io/uvelyster/nginx myNginx       # tag 설정
 $ docker images
 $ docker run -d myBusybox sleep 1d                 # sleep 1d로 해당 컨테이너를 실행
 $ docker network inspect bridge                    # bridge detail
-$ docker exec -it [Name or CONTAINER ID%] bash     # bash로 해당 컨테이너로 접근
+$ docker exec -it [Name or ID%] bash     # bash로 해당 컨테이너로 접근
 $ docker network create demoNet --subnet 172.20.0.0/24                  # 사용자 정의 네트워크 생성
 $ docker network ls
 $ docker run -d --network demoNet --name demoApp myNginx                # 사용자 정의 네트워크로 컨테이너 실행
@@ -188,7 +188,7 @@ $ ls /
 $ docker run -d -e MYSQL_ROOT_PASSWORD=root mysql                                       # MySQL 설치 시 암호 설정(-e)
 $ docker volume ls                                                                      # MySQL 설치 시 데이터베이스 저장 공간이 자동 생성됨
 $ docker rm -f $(docker container ls -a -q)                                             # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
-$ docker rm -vf [Name or CONTAINER ID%]                                                 # 컨테이너 삭제 시 볼륨 자동 삭제
+$ docker rm -vf [Name or ID%]                                                           # 컨테이너 삭제 시 볼륨 자동 삭제
 $ docker volume ls
 $ docker volume rm demoVol1                                                             # 볼륨 수동 삭제
 $ docker volume ls
@@ -238,7 +238,7 @@ FROM myBusybox                                # 로컬에 해당 베이스 이�
 CMD echo helloworld                           # CMD ["echo", "hello", "world"]
 $ docker build buildTest                      # 이미지 빌드
 # docker images
-# docker tag [CONTAINER ID%] testimage        # 네임 부여(대문자 제외)
+# docker tag [ID%] testimage                  # 네임 부여(대문자 제외)
 # docker run testimage
 ```
 
