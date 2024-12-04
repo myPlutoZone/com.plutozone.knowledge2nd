@@ -4,11 +4,11 @@
 ## Installation
 - pip
 ```cmd
-# pip list			# 설치된 라이브러리 목록
+# pip list						# 설치된 라이브러리 목록
 # pip install beautifulsoup4	# 라이브러리 설치(예: Beautiful Soup)
-# pip install openpyxl		# 라이브러리 설치(예: Openpyxl)
-# pip install selenium		# Firefox headless와 geckodriver가 자동 설치됨(사전에 하위 버전의 FireFox 설치 권장)
-# pip install jupyter		# C:\>jupyter notebook(웹 브라우저에서 실행되는 대화형 파이썬 환경)
+# pip install openpyxl			# 라이브러리 설치(예: Openpyxl)
+# pip install selenium			# Firefox headless와 geckodriver가 자동 설치됨(사전에 하위 버전의 FireFox 설치 권장)
+# pip install jupyter			# C:\>jupyter notebook(웹 브라우저에서 실행되는 대화형 파이썬 환경)
 ```
 
 - Colab(코랩: https://colab.research.google.com, 구글이 대화식 개발(파이션 등) 환경인 Jupyter(https://jupyter.org)를 커스터마이징하여 온라인으로 제공)
@@ -17,7 +17,7 @@
 
 
 ## Library
-- NumPy(넘파이, Numerical Python)
+- NumPy(Numerical Python, 넘파이)
 	- C 언어로 구현된 숫자, 배열 등 수학 계산에 유용
 	- NumPy 배열의 차원(Dimension)
 		- Scalar(스칼라)는 0차원 배열
@@ -30,7 +30,7 @@
 
 
 ## Grammar
-- None and pass
+- [예제] None and pass
 ```py
 def fn_None():
 	# 오류 방지를 위한 임의 객체
@@ -53,7 +53,32 @@ def fn_pass():
 			- 하나의 함수만 가져오는 것도 가능(함수 사용법은 Case 2.와 같음)
 			- 와일드 임포트는 뜻하지 않게 기존의 변수나 함수를 덮어 쓸 때가 있을 수 있으므로 해당 방법이 바람직
 
-- exception
+- [예제] list + for
+```py
+# 국어, 수학, 영어에 대한 평균 점수
+korean	= [49, 80, 20, 100, 80]
+math	= [43, 60, 85, 30, 90]
+english	= [49, 82, 48, 50, 100]
+
+subjects= [korean, math, english]
+
+scores	= [0, 0, 0, 0, 0]
+i = 0
+for subject in subjects:
+	for score in subject:
+		scores[i] += score
+		i = i + 1
+	i = 0
+
+scoreAaverage = [0, 0, 0, 0, 0]
+i = 0
+for score in scores:
+	scoreAaverage[i] = score / 3
+	i = i + 1
+print(scoreAaverage)
+```
+
+- [예제] exception
 ```py
 for i in range(10):
 	try:
@@ -75,7 +100,7 @@ print(get_binary_number(-10))
 print(get_binary_number(10))
 ```
 
-- files
+- [예제] files
 ```py
 # Read file(반드시 close)
 file = open("yesterday.txt", "r")
@@ -122,7 +147,6 @@ with open("data.json", "r") as file:
 # Create & Load a Pickle file
 import pickle
 
-
 with open("data.pickle", "wb") as file:
 	pickle.dump(data, file)
 
@@ -142,7 +166,7 @@ with open("data.pickle", "rb") as file:
 ```py
 contacts = dict()
 
-def insertDic():
+def insert_dic():
 	while True:
 		name = input("이름을 입력하시오: ")
 		if name == "":
@@ -152,7 +176,7 @@ def insertDic():
 		phone = input("전화번호를 입력하시오: ")
 		contacts[name] = phone
 
-insertDic()
+insert_dic()
 print(contacts)
 ```
 
@@ -166,11 +190,11 @@ class Student:
 
 student_list = []
 
-def insertStudent(name: str, age: int, score: float) -> None:
+def insert_student(name: str, age: int, score: float) -> None:
 	student = Student(name, age, score)
 	student_list.append(student)
 
-def scoreTop() -> str:
+def score_top() -> str:
 	score_list	= []
 	name_list	= []
 
@@ -182,10 +206,10 @@ def scoreTop() -> str:
 	max_index = score_list.index(max_score)
 	return name_list[max_index]
 
-insertStudent("유관순", 16, 88)
-insertStudent("이순신", 45, 95)
-insertStudent("김유신", 55, 85)
-print("최고점자: ", scoreTop())
+insert_student("유관순", 16, 88)
+insert_student("이순신", 45, 95)
+insert_student("김유신", 55, 85)
+print("최고점자: ", score_top())
 ```
 
 - 회문 여부
@@ -206,23 +230,23 @@ print(palindrome(s))
 ```py
 import random
 
-def randomEight():
+def random_eight():
 	alphabet	= [chr(i) for i in range(ord("A"), ord("Z") + 1)] + [chr(i) for i in range(ord("a"), ord("z") + 1)]
 	number		= [str(i) for i in range(10)]
 	password	= random.choices(alphabet + number, k=8)
 	return "".join(password)
 
-print(randomEight())
+print(random_eight())
 ```
 
 - 4자리 정수를 입력 받아 자리 수의 합 확인(예: 1234를 입력하면 1+2+3+4를 계산 및 반환)
 ```py
-def sumFour(num: int) -> int:
+def sum_four(num: int) -> int:
 	assert num >= 1000 and num <= 9999
 	str_num		= list(str(num))			# ['1', '2', '3', '4']
 	list_num	= list(map(int, str_num))	# [1, 2, 3, 4]
 	return sum(list_num)
 
 num = int(input("4자리 정수: "))
-print("자리수의 합: ", sumFour(num))
+print("자리수의 합: ", sum_four(num))
 ```

@@ -2,6 +2,7 @@
 
 
 ## Fundamental & Term
+- 분류와 예측 그리고 생성
 - Colab(코랩: https://colab.research.google.com, 구글이 대화식 개발(파이션 등) 환경인 Jupyter(https://jupyter.org)를 커스터마이징하여 온라인으로 제공)
 	- 노트북(Notebook)은 Jupyter 프로젝트의 대표적인 기능(제품)이며 코랩 노트북은 구글 클라우드의 가상 서버를 사용
 	- 노트북(Notebook) = 텍스트 셀(Text Cell) + 코드 셀(Code Cell)
