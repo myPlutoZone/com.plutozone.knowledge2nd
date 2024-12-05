@@ -53,6 +53,33 @@ def fn_pass():
 			- 하나의 함수만 가져오는 것도 가능(함수 사용법은 Case 2.와 같음)
 			- 와일드 임포트는 뜻하지 않게 기존의 변수나 함수를 덮어 쓸 때가 있을 수 있으므로 해당 방법이 바람직
 
+- [예제] if
+```py
+# 태어나 연도를 기준으로 학생 분류하기 by input and if
+year	= int(input("태어난 연도를 입력해 주세요: "))
+age		= 2024 - year + 1
+
+if age >= 20 and age <= 26:
+	student = "대학생"
+elif age >= 18 and age < 14:
+	student = "고등학생"
+elif age >= 14 and age < 17:
+	student = "중학생"
+else:
+	student = "학생이 아닙니다."
+print(student)
+
+if 20 <= age <= 26:
+	student = "대학생"
+elif 17 <= age < 20:
+	student = "고등학생"
+elif 14 <= age < 17:
+	stduent = "중학생"
+else:
+	student = "학생이 아닙니다."
+print(student)
+```
+
 - [예제] list + for
 ```py
 # 국어, 수학, 영어에 대한 평균 점수
@@ -76,6 +103,35 @@ for score in scores:
 	scoreAaverage[i] = score / 3
 	i = i + 1
 print(scoreAaverage)
+```
+
+- [예제] while and printF
+```py
+# 연속적인 구구단 출력하기 by while
+while True:
+	times_table	= int(input("구구단 몇 단을 출력할까요?: "))
+
+	if times_table == 0:
+		print("프로그램을 종료합니다.")
+		break
+	elif not (1 <= times_table <= 9):
+		print("잘못 입력하셨습니다. 1 ~ 9까지만 입력하세요!")
+		continue
+	else:
+		for i in range(1, 10):
+			print(f"{times_table} x {i} = {times_table * i}")
+
+# 구구단 출력하기 by printF
+times_table	= int(input("구구단 몇 단을 출력할까요?: "))
+
+# print(f"구구단 {times_table}단을 계산합니다.")
+# print("구구단" + str(times_table) + "단을 계산합니다.")
+# print("구구단", times_table, "단을 계산합니다.")
+print("구구단 {}단을 계산합니다.".format(times_table))
+
+for i in range(1, 10):
+	# print(f"{times_table} x {i} = {times_table * i}")
+	print(str(times_table) + " x " + str(i) + " = " + str(times_table * i))
 ```
 
 - [예제] exception
@@ -162,6 +218,35 @@ with open("data.pickle", "rb") as file:
 ```
 
 ## Example
+- list + zip
+```py
+# 입력 받은 "1 2 3 4 5"를 정수형 리스트로 저장
+list1 = list(map(int, input().split()))
+print(list1)
+
+score1 = [100, 90, 30]
+score2 = [50, 99, 81]
+for s1, s2 in zip(score1, score2):
+	print(s1, s2)
+
+score = [100, 90, 30]
+for i, s in enumerate(score):
+	print(i, s)
+for i in range(len(score)):
+	print(i, score[i])
+
+# 국어, 수학, 영어에 대한 평균 점수 구하기
+korean	= [49, 80, 20, 100, 80]
+math	= [43, 60, 85, 30, 90]
+english	= [49, 82, 48, 50, 100]
+
+listAverage = []
+for score in zip(korean, math, english):
+	listAverage.append(sum(score) / len(score))
+
+print(listAverage)
+```
+
 - 딕션너리 데이터 입력(이름:key, 전화번호:value)
 ```py
 contacts = dict()
