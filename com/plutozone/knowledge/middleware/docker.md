@@ -38,7 +38,7 @@
 - vhd/x for Windows
 
 
-## Install Docker
+## Install Docker(CE, Commmunity Edition)
 - install by root(#) at Rocky 9.5
 ```bash
 $ curl -fsSL https://download.docker.com/linux/centos/docker-ce.repo -o /etc/yum.repos.d/docker-ce.repo		
