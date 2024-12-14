@@ -6,7 +6,7 @@
 - Container Basic Lifecycle
 - Image Build vs. Source Build
 - Network and Storage
-- Compose(Docker=Container Engine, Kubernates=Orchestrator=Server Cluster Tool)
+- Compose(Docker=Container Engine, Kubernetes=Orchestrator=Server Cluster Tool)
 
 
 ## Enviroments
@@ -70,7 +70,7 @@ $ docker ps -a
 
 ## Server & Client
 - docker는 Client Tool이므로 Localhost 통신이 기본
-- kubernates는 Server Tool이므로 Remote Host 통신이 기본
+- Kubernetes는 Server Tool이므로 Remote Host 통신이 기본
 ```bash
 $ docker -H 172.16.0.102:2375      # Remote Host 접속 시
 ```
