@@ -16,8 +16,9 @@
 
 ## Installation
 ### master@192.168.56.10 + node1@192.168.56.11 + node2@192.168.56.12 by Kubeadm
-#### config and install Containerd
+#### config and install Containerd at master, node1, node2
 ```bash
+# config enviroment
 $ yum -y update
 $ timedatectl set-timezone Asia/Seoul
 $ cat << EOF >> /etc/hosts
@@ -33,25 +34,74 @@ br_netfilter
 EOF
 $ modprobe overlay
 $ modprobe br_netfilte
+$ cat <<EOF |tee /etc/sysctl.d/k8s.conf
+net.bridge.bridge-nf-call-iptables  = 1            # config bridge iptable
+net.bridge.bridge-nf-call-ip6tables = 1            # support IPv6
+net.ipv4.ip_forward                 = 1            # enable IP forware
+EOF
+$ sysctl --system
+
+# install Containerd(vs. Docker)
+$ yum install -y yum-utils
+$ yum-config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
+$ yum install -y containerd.io
+$ systemctl daemon-reload
+$ systemctl enable --now containerd
+
+# config Containerd for Kubernetes
+$ containerd config default > /etc/containerd/config.toml
+$ sed -i 's/ SystemdCgroup = false/ SystemdCgroup = true/' /etc/containerd/config.toml
+$ systemctl restart containerd
 ```
 
-#### install Kubernetes
+#### install Kubernetes at master, node1, node2
 ```bash
+$ cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
+enabled=1
+gpgcheck=1
+gpgkey=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
+exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
+EOF
+$ setenforce 0
+$ sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+$ sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 ```
 
-#### config Kubernetes Cluster at only Master
+#### config Kubernetes Cluster `at only Master`
 ```bash
+# Node Join Command(include Token) for nodes
+$ kubeadm init --pod-network-cidr=192.168.0.0/16 --apiserver-advertise-address 192.168.56.10
+
+$ mkdir -p $HOME/.kube
+$ cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+$ chown $(id -u):$(id -g) $HOME/.kube/config
+
+# install CNI
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.1/manifests/tigera-operator.yaml
+kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.1/manifests/custom-resources.yaml
+
+# [OPTION] recreate Token for nodes
+$ kubeadm token create --print-join-command
 ```
 
-#### Node Join
+#### Node Join at only node1, node2
 ```bash
+# EX) kubeadm join <control-plane-host>:<port> --token <token> --discovery-token-ca-cert-hash sha256:<hash>
 ```
 
-#### install Tools for Kubernetes at only Master
+#### install Tools for Kubernetes `at only Master`
 ```bash
+$ yum -y install bash-completion
+$ echo "source <(kubectl completion bash)" >> ~/.bashrc
+$ echo 'alias k=kubectl' >>~/.bashrc
+$ echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
+$ source ~/.bashrc
 ```
 
-#### Confirm
+#### Confirm at Master
 ```bash
 $ kubectl get node
 ```
