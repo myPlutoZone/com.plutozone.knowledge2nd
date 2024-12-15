@@ -8,7 +8,7 @@
 - Visual Studio Code for Yaml and Extentions(Kubernetes + Kubernetes Support + Remote SSH)
 
 
-## Overview at https://kubernetes.io/ko/docs/concepts/overview/
+## Overview(https://kubernetes.io/ko/docs/concepts/overview/)
 - Container Cluster = Container Orchestrator = Kubernetes
 - Kubernetes(k8s)
 - control-plane=master
@@ -17,10 +17,41 @@
 ## Installation
 ### master@192.168.56.10 + node1@192.168.56.11 + node2@192.168.56.12 by Kubeadm
 #### config and install Containerd
+```bash
+# Config
+$ yum -y update
+$ timedatectl set-timezone Asia/Seoul
+$ cat << EOF >> /etc/hosts
+192.168.56.10 master
+192.168.56.11 node1
+192.168.56.12 node2
+EOF
+$ systemctl stop firewalld && systemctl disable firewalld            # disable Firewall
+$ swapoff -a && sed -i '/ swap / s/^/#/' /etc/fstab                  # disable Swap
+$ cat <<EOF |tee /etc/modules-load.d/k8s.conf                        # auto run Kernal Modules(overlay와 br_netfilter) for Kubernetes
+overlay
+br_netfilter
+EOF
+$ modprobe overlay
+$ modprobe br_netfilte
+```
+
 #### install Kubernetes
+```bash
+```
+
 #### config Kubernetes Cluster at only Master
+```bash
+```
+
 #### Node Join
+```bash
+```
+
 #### install Tools for Kubernetes at only Master
+```bash
+```
+
 #### Confirm
 ```bash
 $ kubectl get node
@@ -105,7 +136,7 @@ $ docker ps -a
 - http://192.168.56.100
 ```
 
-### Kube Command(kubuctl) for Windows
+## Kube Command(kubuctl) for Windows
 - https://kubernetes.io/ko/docs/tasks/tools/install-kubectl-windows/#install-nonstandard-package-tools
 - copy to %USER%.kube\config from ~/.kube/config
 - C:\kubectl get node
