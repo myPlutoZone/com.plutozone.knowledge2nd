@@ -13,11 +13,18 @@
 - Kubernetes(k8s)
 - control-plane=master
 
+
 ## Installation
 ### master@192.168.56.10 + node1@192.168.56.11 + node2@192.168.56.12
 
 ### docker@192.168.56.100
 - install Docker at Rocky or Ubuntu
+
+### Kube Command(kubuctl) for Windows
+- https://kubernetes.io/ko/docs/tasks/tools/install-kubectl-windows/#install-nonstandard-package-tools
+```bash
+$ cat ~/.kube/config  # Certifiction for Kube Command(kubuctl)
+```
 
 
 ## NONE Ready(reset, rm and reconfig)
