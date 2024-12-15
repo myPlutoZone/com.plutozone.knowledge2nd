@@ -22,9 +22,8 @@
 
 ### Kube Command(kubuctl) for Windows
 - https://kubernetes.io/ko/docs/tasks/tools/install-kubectl-windows/#install-nonstandard-package-tools
-```bash
-$ cat ~/.kube/config  # Certifiction for Kube Command(kubuctl)
-```
+- copy to %USER%.kube\config from ~/.kube/config
+- C:\kubectl get node
 
 
 ## NONE Ready(reset, rm and reconfig)
