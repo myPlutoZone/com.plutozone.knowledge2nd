@@ -15,7 +15,16 @@
 
 
 ## Installation
-### master@192.168.56.10 + node1@192.168.56.11 + node2@192.168.56.12
+### master@192.168.56.10 + node1@192.168.56.11 + node2@192.168.56.12 by Kubeadm
+#### config and install Containerd
+#### install Kubernetes
+#### config Kubernetes Cluster at only Master
+#### Node Join
+#### install Tools for Kubernetes at only Master
+#### Confirm
+```bash
+$ kubectl get node
+```
 
 ### docker@192.168.56.100
 - install Docker at Rocky or Ubuntu
