@@ -95,6 +95,7 @@ $ kubeadm token create --print-join-command
 #### install Tools for Kubernetes `at only Master`
 ```bash
 $ yum -y install bash-completion
+$ cd ~
 $ echo "source <(kubectl completion bash)" >> ~/.bashrc
 $ echo 'alias k=kubectl' >>~/.bashrc
 $ echo 'complete -o default -F __start_kubectl k' >>~/.bashrc
@@ -186,7 +187,8 @@ $ docker ps -a
 ```
 
 
-## Kube Command(kubectl) for Windows
+## Client at Windows
+### install Kube Command(kubectl)
 - https://kubernetes.io/ko/docs/tasks/tools/install-kubectl-windows/#install-nonstandard-package-tools
 - copy to %USER%.kube\config from ~/.kube/config
 - C:\kubectl get node
@@ -207,6 +209,40 @@ spec:
 C:\k8s\pods\kubectl apply .\pod1.yaml
 C:\k8s\pods\kubectl get pod
 ```
+
+### config Terminal(docker) for Windows
+```bash
+# create Key Pair(RSA)
+$ yum install -y tar
+$ ssh-keygen -t rsa                    # generate private and public key
+$ cp id_rsa.pub authorized_keys        # copy for sshd_config at /etc/ssh/sshd_config
+
+# install Kubernetes Control
+$ cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
+[kubernetes]
+name=Kubernetes
+baseurl=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/
+enabled=1
+gpgcheck=1
+gpgkey=https://pkgs.k8s.io/core:/stable:/v1.29/rpm/repodata/repomd.xml.key
+exclude=kubelet kubeadm kubectl cri-tools kubernetes-cni
+EOF
+$ setenforce 0
+$ sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
+$ sudo yum install -y kubectl --disableexcludes=kubernetes
+
+# Copy Certification
+$ mkdir .kube
+$ scp root@192.168.56.10:/root/.kube/config .
+```
+
+### config for Windows
+- copy to %USER%.ssh\ from ~/.ssh/id_rsa    # copy private key
+```cmd
+C:\ssh ID@192.168.56.100
+```
+- config SSH at Visual Studio Code
+- install Extenstion(Kubenetes, Kubenetes Support) for Remote SSH
 
 ## NONE Ready(reset, rm and reconfig)
 ```bash
