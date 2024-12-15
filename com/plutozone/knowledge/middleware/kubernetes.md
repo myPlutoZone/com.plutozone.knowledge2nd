@@ -18,7 +18,6 @@
 ### master@192.168.56.10 + node1@192.168.56.11 + node2@192.168.56.12 by Kubeadm
 #### config and install Containerd
 ```bash
-# Config
 $ yum -y update
 $ timedatectl set-timezone Asia/Seoul
 $ cat << EOF >> /etc/hosts
@@ -28,7 +27,7 @@ $ cat << EOF >> /etc/hosts
 EOF
 $ systemctl stop firewalld && systemctl disable firewalld            # disable Firewall
 $ swapoff -a && sed -i '/ swap / s/^/#/' /etc/fstab                  # disable Swap
-$ cat <<EOF |tee /etc/modules-load.d/k8s.conf                        # auto run Kernal Modules(overlay와 br_netfilter) for Kubernetes
+$ cat <<EOF |tee /etc/modules-load.d/k8s.conf                        # run automatically Kernal Modules(overlay와 br_netfilter) for Kubernetes
 overlay
 br_netfilter
 EOF
