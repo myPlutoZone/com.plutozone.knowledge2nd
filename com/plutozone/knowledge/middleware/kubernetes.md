@@ -12,6 +12,7 @@
 - Container Cluster = Container Orchestrator = Kubernetes
 - Kubernetes(k8s)
 - control-plane=master
+- CNCF(https://landscape.cncf.io/)
 
 
 ## Installation
@@ -192,22 +193,58 @@ $ docker ps -a
 - https://kubernetes.io/ko/docs/tasks/tools/install-kubectl-windows/#install-nonstandard-package-tools
 - copy to %USER%.kube\config from ~/.kube/config
 - C:\kubectl get node
+
+### create YAML
 ```cmd
-C:\k8s\pods\type pod1.yaml                # Create POD by YAML vs. kubectl
+C:\k8s\pods\type pod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: app2nd
+  name: myapp
   labels:
-    name: app2nd
+    name: myapp
 spec:
   containers:
-  - name: app2nd
+  - name: myapp
     image: [ACCOUNT]/[REPOSITORY]:[TAG]
     ports:
       - containerPort: 5000
-C:\k8s\pods\kubectl apply .\pod1.yaml
+
+# Create POD by YAML
+C:\k8s\pods\kubectl apply -f .\pod.yaml
 C:\k8s\pods\kubectl get pod
+
+# Create POD by kubectl
+C:\k8s\pods\kubectl run nginx --image=nginx --labels=app=nginx
+C:\k8s\pods\kubectl get pod
+C:\k8s\pods\kubectl get pod -o wide
+
+# Delete POD
+C:\k8s\pods\kubectl delete pod [NAME]                                        # kubectl delete pod nginx
+C:\k8s\pods\kubectl delete pod --all
+
+# Expose POD
+C:\k8s\pods\type pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mysys
+  labels:
+    name: mysys
+spec:
+  containers:
+  - name: mysys
+    image: [ACCOUNT]/[REPOSITORY]:[TAG]
+    ports:
+      - containerPort: 5000
+C:\k8s\pods\kubectl apply -f .\pod.yaml                                                        # EX) name=mysys
+C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80                      # EX) kubectl expose pod mysys --name mysys-srv --port 80
+C:\k8s\pods\kubectl get svc
+C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 5000 --type NodePort    # EX) kubectl expose pod mysys --name mysys-srv2nd --port 5000 --type NodePort
+C:\k8s\pods\kubectl get svc
+C:\k8s\pods\kubectl delete svc [NAME_SERVICE]
+C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80 --type LoadBalancer  # EX) kubectl expose pod mysys --name mysys-srv3rd --port 80 --type LoadBalancer
+C:\k8s\pods\kubectl get svc
 ```
 
 ### config Terminal(docker) for Windows
@@ -243,6 +280,7 @@ C:\ssh ID@192.168.56.100
 ```
 - config SSH at Visual Studio Code
 - install Extenstion(Kubenetes, Kubenetes Support) for Remote SSH
+
 
 ## NONE Ready(reset, rm and reconfig)
 ```bash
