@@ -185,7 +185,8 @@ $ docker ps -a
 - http://192.168.56.100
 ```
 
-## Kube Command(kubuctl) for Windows
+
+## Kube Command(kubectl) for Windows
 - https://kubernetes.io/ko/docs/tasks/tools/install-kubectl-windows/#install-nonstandard-package-tools
 - copy to %USER%.kube\config from ~/.kube/config
 - C:\kubectl get node
