@@ -190,7 +190,23 @@ $ docker ps -a
 - https://kubernetes.io/ko/docs/tasks/tools/install-kubectl-windows/#install-nonstandard-package-tools
 - copy to %USER%.kube\config from ~/.kube/config
 - C:\kubectl get node
-
+```cmd
+C:\k8s\pods\type pod1.yaml                # Create POD by YAML vs. kubectl
+apiVersion: v1
+kind: Pod
+metadata:
+  name: app2nd
+  labels:
+    name: app2nd
+spec:
+  containers:
+  - name: app2nd
+    image: [ACCOUNT]/[REPOSITORY]:[TAG]
+    ports:
+      - containerPort: 5000
+C:\k8s\pods\kubectl apply .\pod1.yaml
+C:\k8s\pods\kubectl get pod
+```
 
 ## NONE Ready(reset, rm and reconfig)
 ```bash
