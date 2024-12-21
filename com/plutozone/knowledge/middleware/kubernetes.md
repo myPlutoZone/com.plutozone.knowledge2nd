@@ -1,12 +1,11 @@
 # com.plutozone.knowledge.middleware.Kubernetes
 
 
-## Software
+## Enviroments
 - Virtual Box and 4VM(3 for Kubernetes Cluster + 1 for Docker)
 - Rocky(rockylinux.org vs. mirror.navercorp.com)
 - MobaXterm
 - Visual Studio Code for Yaml and Extentions(Kubernetes + Kubernetes Support + Remote SSH)
-- https://www.shorturl.at/
 
 
 ## Overview(https://kubernetes.io/ko/docs/concepts/overview/)
@@ -190,7 +189,7 @@ $ docker images
 # push image
 $ docker login -u ID
 $ docker push [ACCOUNT]/[REPOSITORY]:[TAG]                               # EX) docker push ID/app:v1
-$ docker run -d -p 80:5000 --name my_app [ACCOUNT]/[REPOSITORY]:[TAG]    # EX) docker run -d -p 80:5000 --name my_app ID/app:v1
+$ docker run -d -p 80:5000 --name my-app [ACCOUNT]/[REPOSITORY]:[TAG]    # EX) docker run -d -p 80:5000 --name my-app ID/app:v1
 $ docker ps -a
 - http://192.168.56.100
 ```
@@ -202,33 +201,46 @@ $ docker ps -a
 - copy to %USER%.kube\config from ~/.kube/config
 - C:\kubectl get node
 
+### Create POD by Command(kubectl)
+```cmd
+C:\k8s\pods\kubectl run nginx --image=nginx
+C:\k8s\pods\kubectl get pod
+C:\k8s\pods\kubectl get pod -o wide
+C:\k8s\pods\kubectl expose pod nginx --name nginx-svc1st --port 80
+C:\k8s\pods\kubectl get svc                                                           # ClusterIP vs. NodePort vs. LoadBalancer
+C:\k8s\pods\kubectl expose pod nginx --name nginx-svc2nd --port 80 --type NodePort
+C:\k8s\pods\kubectl get svc
+C:\k8s\pods\kubectl expose pod nginx --name nginx-svc3rd --port 80 --type LoadBalancer
+C:\k8s\pods\kubectl get svc
+...
+... PORT(S) ...
+... 80:31843/TCP ...
+...
+```
+- http://master or node1 or node2:31843/
+
 ### create YAML
 ```cmd
 C:\k8s\pods\type pod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: my_app2nd
+  name: my-app
   labels:
-    name: my_app2nd
+    name: my-app
 spec:
   containers:
-  - name: my_app2nd
+  - name: my-app
     image: [ACCOUNT]/[REPOSITORY]:[TAG]
     ports:
       - containerPort: 5000
 
-# Create POD by YAML
+# Create POD by File(YAML or JSON)
 C:\k8s\pods\kubectl apply -f .\pod.yaml
 C:\k8s\pods\kubectl get pod
 
-# Create POD by kubectl
-C:\k8s\pods\kubectl run nginx --image=nginx --labels=app=my_nginx
-C:\k8s\pods\kubectl get pod
-C:\k8s\pods\kubectl get pod -o wide
-
 # Delete POD
-C:\k8s\pods\kubectl delete pod [NAME]                                        # kubectl delete pod nginx
+C:\k8s\pods\kubectl delete pod [NAME]                                      # kubectl delete pod nginx
 C:\k8s\pods\kubectl delete pod --all
 
 # Expose POD
@@ -236,22 +248,22 @@ C:\k8s\pods\type pod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: my_app3rd
+  name: my-app2nd
   labels:
-    name: my_app3rd
+    name: my-app2nd
 spec:
   containers:
-  - name: my_app3rd
+  - name: my-app2nd
     image: [ACCOUNT]/[REPOSITORY]:[TAG]
     ports:
       - containerPort: 5000
-C:\k8s\pods\kubectl apply -f .\pod.yaml                                                        # EX) name=my_app3rd
-C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80                      # EX) kubectl expose pod my_app3rd --name my_app3rd-srv --port 80
+C:\k8s\pods\kubectl apply -f .\pod.yaml                                                        # EX) name=my-app2nd
+C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80                      # EX) kubectl expose pod my-app2nd --name my-app2nd-srv1st --port 80
 C:\k8s\pods\kubectl get svc
-C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 5000 --type NodePort    # EX) kubectl expose pod my_app3rd --name my_app3rd-srv2nd --port 5000 --type NodePort
+C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 5000 --type NodePort    # EX) kubectl expose pod my-app2nd --name my-app2nd-srv2nd --port 5000 --type NodePort
 C:\k8s\pods\kubectl get svc
 C:\k8s\pods\kubectl delete svc [NAME_SERVICE]
-C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80 --type LoadBalancer  # EX) kubectl expose pod my_app3rd --name my_app3rd-srv3rd --port 80 --type LoadBalancer
+C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80 --type LoadBalancer  # EX) kubectl expose pod my-app2nd --name my-app2nd-srv3rd --port 80 --type LoadBalancer
 C:\k8s\pods\kubectl get svc
 ```
 
@@ -290,14 +302,14 @@ C:\ssh ID@192.168.56.100
 - install Extenstion(Kubenetes, Kubenetes Support) for Remote SSH
 
 
-## NONE Ready(reset, rm and reconfig)
+## Reference
+- NONE Ready(reset, rm and reconfig) at Node
 ```bash
 $ kubeadm reset		# at master/node1/node2
 $ rm -Ff .kube		# at master
 ```
 
-
-## Reference
+- Hostname and Network
 ```bash
 $ vi /etc/hostname                                     # update Hostname
 $ cd /etc/NetworkManager/system-connections            # select NIC and update IP at Rocky(Redhat)
