@@ -12,7 +12,7 @@
 ## Overview(https://kubernetes.io/ko/docs/concepts/overview/)
 - Container Cluster = Container Orchestrator = Kubernetes
 - Kubernetes(k8s)
-- control-plane=master
+- Control-Plane(Api + Scheduler + Etcd + Controller Manager + Cloud Conroller Manager) + Node(Kubelet + Kube-Proxy + Container Runtime) = Master + Worker Node
 - CNCF(https://landscape.cncf.io/)
 
 
@@ -70,6 +70,8 @@ EOF
 $ setenforce 0
 $ sed -i 's/^SELINUX=enforcing$/SELINUX=permissive/' /etc/selinux/config
 $ sudo yum install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
+$ systemctl restart kubelet   # restart
+$ systemctl enable kubelet    # autostart
 ```
 
 #### config Kubernetes Cluster `at only Master`
@@ -81,7 +83,7 @@ $ mkdir -p $HOME/.kube
 $ cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
 $ chown $(id -u):$(id -g) $HOME/.kube/config
 
-# install CNI
+# install CNI(Container Network Interface)
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.1/manifests/tigera-operator.yaml
 kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.1/manifests/custom-resources.yaml
 
@@ -89,12 +91,12 @@ kubectl create -f https://raw.githubusercontent.com/projectcalico/calico/v3.28.1
 $ kubeadm token create --print-join-command
 ```
 
-#### Node Join at only node1, node2
+#### join node at only node1, node2
 ```bash
 # EX) kubeadm join <control-plane-host>:<port> --token <token> --discovery-token-ca-cert-hash sha256:<hash>
 ```
 
-#### install Tools for Kubernetes `at only Master`
+#### [OPTION] install Tools for Kubernetes `at only Master`
 ```bash
 $ yum -y install bash-completion
 $ cd ~
@@ -114,6 +116,7 @@ $ kubectl get node
 - create REPOSITORY(EX: app) at hub.docker.com
 - build image and push
 ```bash
+# build image
 $ cd ~
 $ mkdir build
 $ cd build
@@ -181,9 +184,13 @@ COPY app.py .
 
 # 컨테이너 시작 시 실행할 명령어
 CMD ["python", "app.py"]
-$ docker build -t [ACCOUNT]/[REPOSITORY]:[TAG] .                    # EX) docker build -t ID/app:v1 .
-$ docker push [ACCOUNT]/[REPOSITORY]:[TAG]                          # EX) docker push ID/app:v1
-$ docker run -d -p 80:5000 --name app [ACCOUNT]/[REPOSITORY]:[TAG]  # EX) docker run -d -p 80:5000 --name app ID/app:v1
+$ docker build -t [ACCOUNT]/[REPOSITORY]:[TAG] .                         # EX) docker build -t ID/app:v1 .
+$ docker images
+
+# push image
+$ docker login -u ID
+$ docker push [ACCOUNT]/[REPOSITORY]:[TAG]                               # EX) docker push ID/app:v1
+$ docker run -d -p 80:5000 --name my_app [ACCOUNT]/[REPOSITORY]:[TAG]    # EX) docker run -d -p 80:5000 --name my_app ID/app:v1
 $ docker ps -a
 - http://192.168.56.100
 ```
@@ -201,12 +208,12 @@ C:\k8s\pods\type pod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: myapp
+  name: my_app2nd
   labels:
-    name: myapp
+    name: my_app2nd
 spec:
   containers:
-  - name: myapp
+  - name: my_app2nd
     image: [ACCOUNT]/[REPOSITORY]:[TAG]
     ports:
       - containerPort: 5000
@@ -216,7 +223,7 @@ C:\k8s\pods\kubectl apply -f .\pod.yaml
 C:\k8s\pods\kubectl get pod
 
 # Create POD by kubectl
-C:\k8s\pods\kubectl run nginx --image=nginx --labels=app=nginx
+C:\k8s\pods\kubectl run nginx --image=nginx --labels=app=my_nginx
 C:\k8s\pods\kubectl get pod
 C:\k8s\pods\kubectl get pod -o wide
 
@@ -229,26 +236,26 @@ C:\k8s\pods\type pod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: mysys
+  name: my_app3rd
   labels:
-    name: mysys
+    name: my_app3rd
 spec:
   containers:
-  - name: mysys
+  - name: my_app3rd
     image: [ACCOUNT]/[REPOSITORY]:[TAG]
     ports:
       - containerPort: 5000
-C:\k8s\pods\kubectl apply -f .\pod.yaml                                                        # EX) name=mysys
-C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80                      # EX) kubectl expose pod mysys --name mysys-srv --port 80
+C:\k8s\pods\kubectl apply -f .\pod.yaml                                                        # EX) name=my_app3rd
+C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80                      # EX) kubectl expose pod my_app3rd --name my_app3rd-srv --port 80
 C:\k8s\pods\kubectl get svc
-C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 5000 --type NodePort    # EX) kubectl expose pod mysys --name mysys-srv2nd --port 5000 --type NodePort
+C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 5000 --type NodePort    # EX) kubectl expose pod my_app3rd --name my_app3rd-srv2nd --port 5000 --type NodePort
 C:\k8s\pods\kubectl get svc
 C:\k8s\pods\kubectl delete svc [NAME_SERVICE]
-C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80 --type LoadBalancer  # EX) kubectl expose pod mysys --name mysys-srv3rd --port 80 --type LoadBalancer
+C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80 --type LoadBalancer  # EX) kubectl expose pod my_app3rd --name my_app3rd-srv3rd --port 80 --type LoadBalancer
 C:\k8s\pods\kubectl get svc
 ```
 
-### config Terminal(docker) for Windows
+### config for Terminal(Docker) at Windows
 ```bash
 # create Key Pair(RSA)
 $ yum install -y tar
@@ -293,5 +300,5 @@ $ rm -Ff .kube		# at master
 ## Reference
 ```bash
 $ vi /etc/hostname                                     # update Hostname
-$ cd /etc/NetworkManager/system-connections            # select NIC and update IP 
+$ cd /etc/NetworkManager/system-connections            # select NIC and update IP at Rocky(Redhat)
 ```
