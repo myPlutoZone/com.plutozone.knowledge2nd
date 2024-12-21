@@ -288,3 +288,10 @@ C:\ssh ID@192.168.56.100
 $ kubeadm reset		# at master/node1/node2
 $ rm -Ff .kube		# at master
 ```
+
+
+## Reference
+```bash
+$ vi /etc/hostname                                     # update Hostname
+$ cd /etc/NetworkManager/system-connections            # select NIC and update IP 
+```
