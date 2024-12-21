@@ -239,6 +239,42 @@ spec:
 C:\k8s\pods\kubectl apply -f .\pod.yaml
 C:\k8s\pods\kubectl get pod
 
+# Expose POD by File(YAML or JSON)
+C:\k8s\pods\type srv.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-svc
+spec:
+  selector:
+    name: my-app                                # Name of labels at my-app and my-app2nd
+  ports:
+  - port: 80
+    targetPort: 5000
+  type: LoadBalancer
+C:\k8s\pods\kubectl apply -f .\srv.yaml
+C:\k8s\pods\kubectl get svc
+
+```cmd
+C:\k8s\pods\type pod2nd.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app2nd
+  labels:
+    name: my-app
+spec:
+  containers:
+  - name: my-app2nd
+    image: [ACCOUNT]/[REPOSITORY]:[TAG]
+    ports:
+      - containerPort: 5000
+
+# Create POD by File(YAML or JSON)
+C:\k8s\pods\kubectl apply -f .\pod.yaml
+C:\k8s\pods\kubectl get pod
+C:\k8s\pods\kubectl get svc                                                # LoadBalancer for Pods(my-app and my-app2nd)
+
 # Delete POD
 C:\k8s\pods\kubectl delete pod [NAME]                                      # kubectl delete pod nginx
 C:\k8s\pods\kubectl delete pod --all
@@ -248,22 +284,22 @@ C:\k8s\pods\type pod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
-  name: my-app2nd
+  name: my-app3rd
   labels:
-    name: my-app2nd
+    name: my-app3rd
 spec:
   containers:
-  - name: my-app2nd
+  - name: my-app3rd
     image: [ACCOUNT]/[REPOSITORY]:[TAG]
     ports:
       - containerPort: 5000
-C:\k8s\pods\kubectl apply -f .\pod.yaml                                                        # EX) name=my-app2nd
-C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80                      # EX) kubectl expose pod my-app2nd --name my-app2nd-srv1st --port 80
+C:\k8s\pods\kubectl apply -f .\pod.yaml                                                        # EX) name=my-app3rd
+C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80                      # EX) kubectl expose pod my-app3rd --name my-app3rd-srv1st --port 80
 C:\k8s\pods\kubectl get svc
-C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 5000 --type NodePort    # EX) kubectl expose pod my-app2nd --name my-app2nd-srv2nd --port 5000 --type NodePort
+C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 5000 --type NodePort    # EX) kubectl expose pod my-app3rd --name my-app3rd-srv2nd --port 5000 --type NodePort
 C:\k8s\pods\kubectl get svc
 C:\k8s\pods\kubectl delete svc [NAME_SERVICE]
-C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80 --type LoadBalancer  # EX) kubectl expose pod my-app2nd --name my-app2nd-srv3rd --port 80 --type LoadBalancer
+C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80 --type LoadBalancer  # EX) kubectl expose pod my-app3rd --name my-app3rd-srv3rd --port 80 --type LoadBalancer
 C:\k8s\pods\kubectl get svc
 ```
 
@@ -300,6 +336,53 @@ C:\ssh ID@192.168.56.100
 ```
 - config SSH at Visual Studio Code
 - install Extenstion(Kubenetes, Kubenetes Support) for Remote SSH
+
+
+## Metal LB설치
+```bash
+# kube-proxy configmap 수정
+$ kubectl get configmap kube-proxy -n kube-system -o yaml | \
+sed -e "s/strictARP: false/strictARP: true/" | \
+kubectl apply -f - -n kube-system
+
+# Installation By Manifest
+$ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.14.4/config/manifests/metallb-native.yaml
+
+# config yaml  생성
+cat <<EOF | sudo tee /root/my-config.yaml
+apiVersion: metallb.io/v1beta1
+kind: IPAddressPool
+metadata:
+  name: ip-pool
+  namespace: metallb-system
+spec:
+  addresses:
+  - 192.168.56.200-192.168.56.250
+  autoAssign: true
+
+---
+
+apiVersion: metallb.io/v1beta1
+kind: L2Advertisement
+metadata:
+  name: l2-network
+  namespace: metallb-system
+spec:
+  ipAddressPools:
+    - ip-pool
+EOF
+
+# 재생성
+# 설정 확인
+$ kubectl get validatingwebhookconfigurations
+# 지우기
+$ kubectl delete validatingwebhookconfigurations  metallb-webhook-configuration
+# 설정 적용
+$ kubectl apply -f my-config.yaml
+# 최종 확인
+$ kubectl describe ipaddresspool.metallb.io --namespace metallb-system
+# 
+```
 
 
 ## Reference
