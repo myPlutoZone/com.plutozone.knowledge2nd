@@ -1,19 +1,18 @@
 # com.plutozone.knowledge.middleware.Docker
 
 
+## Enviroments
+- VM Tools(Virtual Box)
+- Linux Distribution(Rocky 9.5)
+- Terminal(MobaXterm)
+
+
 ## Docket container Basic
 - Containerization
 - Container Basic Lifecycle
 - Image Build vs. Source Build
 - Network and Storage
 - Compose(Docker=Container Engine, Kubernetes=Orchestrator=Server Cluster Tool)
-
-
-## Enviroments
-- VM Tools(Virtual Box)
-- Linux Distribution(Rocky 9.5)
-- Terminal(mobaxterm)
-- Zoomit(https://learn.microsoft.com/ko-kr/sysinternals/downloads/zoomit)
 
 
 ## Host Only Network at Virtual Box
