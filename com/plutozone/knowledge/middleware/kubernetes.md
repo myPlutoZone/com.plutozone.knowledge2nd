@@ -2,10 +2,11 @@
 
 
 ## Software
-- Virtual Box and 4VM(1 for Docker + 3 for Kubernetes Cluster)
-- Rocky
+- Virtual Box and 4VM(3 for Kubernetes Cluster + 1 for Docker)
+- Rocky(rockylinux.org vs. mirror.navercorp.com)
 - MobaXterm
 - Visual Studio Code for Yaml and Extentions(Kubernetes + Kubernetes Support + Remote SSH)
+- https://www.shorturl.at/
 
 
 ## Overview(https://kubernetes.io/ko/docs/concepts/overview/)
@@ -16,8 +17,8 @@
 
 
 ## Installation
-### master@192.168.56.10 + node1@192.168.56.11 + node2@192.168.56.12 by Kubeadm
-#### config and install Containerd at master, node1, node2
+### master@192.168.56.10 + node1@192.168.56.11 + node2@192.168.56.12 by Kubeadm(vs. Local vs. Cloud)
+#### config and install Containerd(vs. Docker) at master, node1, node2
 ```bash
 # config enviroment
 $ yum -y update
