@@ -255,7 +255,6 @@ spec:
 C:\k8s\pods\kubectl apply -f .\srv.yaml
 C:\k8s\pods\kubectl get svc
 C:\k8s\pods\kubectl get ep
-
 C:\k8s\pods\type pod2nd.yaml
 apiVersion: v1
 kind: Pod
@@ -338,11 +337,79 @@ spec:
   - port: 80
     targetPort: 5000
   type: LoadBalancer
-C:\k8s\rs\kubectl -f .\svc.yaml
+C:\k8s\rs\kubectl apply -f .\svc.yaml
 C:\k8s\rs\kubectl get svc
 C:\k8s\rs\kubectl get rs
 C:\k8s\rs\kubectl delete pod app-rs-*        # delete a pod but restart a new pod
 C:\k8s\rs\kubectl get rs
+C:\k8s\rs\kubectl get ns
+C:\k8s\rs\kubectl get pod -n kube-system
+C:\k8s\rs\kubectl get pod --show-labels
+C:\k8s\rs\kubectl scale rs app-rs --replicas 4
+
+# upgrade or downgrade application by RS vs. Deploy for NON-Downtime
+C:\k8s\deploy\type deploy.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  labels:
+    app: myApp
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: myApp
+  template:
+    metadata:
+      labels:
+        app: myApp
+    spec:
+      containers:
+      - name: myapp
+        image: plutomsw/app:v1
+        ports:
+        - containerPort: 5000
+C:\k8s\deploy\kubectl apply -f .\deploy.yaml
+C:\k8s\deploy\type srv.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: my-app-svc
+spec:
+  selector:
+    app: myApp
+  ports:
+  - port: 80
+    targetPort: 5000
+  type: LoadBalancer
+C:\k8s\deploy\kubectl apply -f .\svc.yaml
+C:\k8s\deploy\type deploy.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  labels:
+    app: myApp
+spec:
+  replicas: 5
+  selector:
+    matchLabels:
+      app: myApp
+  template:
+    metadata:
+      labels:
+        app: myApp
+    spec:
+      containers:
+      - name: myapp
+        image: plutomsw/app:v2
+        ports:
+        - containerPort: 5000
+C:\k8s\deploy\kubectl apply -f .\deploy.yaml
+C:\k8s\deploy\kubectl get deploy
+C:\k8s\deploy\kubectl get deploy -o yaml
+C:\k8s\deploy\kubectl edit deploy myapp
 ```
 
 ### config for Terminal(Docker) at Windows
