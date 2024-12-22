@@ -94,7 +94,7 @@ $ kubeadm token create --print-join-command
 # EX) kubeadm join <control-plane-host>:<port> --token <token> --discovery-token-ca-cert-hash sha256:<hash>
 ```
 
->>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+------------------------------------------------------------------------------------------------------------------------------------------
 #### [OPTION] install Tools for Kubernetes `at only Master`
 ```bash
 $ yum -y install bash-completion
@@ -203,15 +203,15 @@ $ docker ps -a
 
 ### Create POD by Command(kubectl)
 ```cmd
-C:\k8s\pods\kubectl run nginx --image=nginx
-C:\k8s\pods\kubectl get pod
-C:\k8s\pods\kubectl get pod -o wide
-C:\k8s\pods\kubectl expose pod nginx --name nginx-svc1st --port 80
-C:\k8s\pods\kubectl get svc                                                           # ClusterIP vs. NodePort vs. LoadBalancer
-C:\k8s\pods\kubectl expose pod nginx --name nginx-svc2nd --port 80 --type NodePort
-C:\k8s\pods\kubectl get svc
-C:\k8s\pods\kubectl expose pod nginx --name nginx-svc3rd --port 80 --type LoadBalancer
-C:\k8s\pods\kubectl get svc
+C:\k8s\pods> kubectl run nginx --image=nginx
+C:\k8s\pods> kubectl get pod
+C:\k8s\pods> kubectl get pod -o wide
+C:\k8s\pods> kubectl expose pod nginx --name nginx-svc1st --port 80
+C:\k8s\pods> kubectl get svc                                                           # ClusterIP vs. NodePort vs. LoadBalancer
+C:\k8s\pods> kubectl expose pod nginx --name nginx-svc2nd --port 80 --type NodePort
+C:\k8s\pods> kubectl get svc
+C:\k8s\pods> kubectl expose pod nginx --name nginx-svc3rd --port 80 --type LoadBalancer
+C:\k8s\pods> kubectl get svc
 ...
 ... PORT(S) ...
 ... 80:31843/TCP ...
@@ -221,7 +221,7 @@ C:\k8s\pods\kubectl get svc
 
 ### create YAML
 ```cmd
-C:\k8s\pods\type pod.yaml
+C:\k8s\pods> type pod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -236,11 +236,11 @@ spec:
       - containerPort: 5000
 
 # Create POD by File(YAML or JSON)
-C:\k8s\pods\kubectl apply -f .\pod.yaml
-C:\k8s\pods\kubectl get pod
+C:\k8s\pods> kubectl apply -f .\pod.yaml
+C:\k8s\pods> kubectl get pod
 
 # Expose POD by File(YAML or JSON)
-C:\k8s\pods\type srv.yaml
+C:\k8s\pods> type srv.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -252,10 +252,10 @@ spec:
   - port: 80
     targetPort: 5000
   type: LoadBalancer
-C:\k8s\pods\kubectl apply -f .\srv.yaml
-C:\k8s\pods\kubectl get svc
-C:\k8s\pods\kubectl get ep
-C:\k8s\pods\type pod2nd.yaml
+C:\k8s\pods> kubectl apply -f .\srv.yaml
+C:\k8s\pods> kubectl get svc
+C:\k8s\pods> kubectl get ep
+C:\k8s\pods> type pod2nd.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -270,17 +270,17 @@ spec:
       - containerPort: 5000
 
 # Create POD by File(YAML or JSON)
-C:\k8s\pods\kubectl apply -f .\pod.yaml
-C:\k8s\pods\kubectl get pod
-C:\k8s\pods\kubectl get svc                                                # LoadBalancer for Pods(my-app and my-app2nd)
-C:\k8s\pods\kubectl get ep
+C:\k8s\pods> kubectl apply -f .\pod.yaml
+C:\k8s\pods> kubectl get pod
+C:\k8s\pods> kubectl get svc                                                # LoadBalancer for Pods(my-app and my-app2nd)
+C:\k8s\pods> kubectl get ep
 
 # Delete POD
-C:\k8s\pods\kubectl delete pod [NAME]                                      # kubectl delete pod nginx
-C:\k8s\pods\kubectl delete pod --all
+C:\k8s\pods> kubectl delete pod [NAME]                                      # kubectl delete pod nginx
+C:\k8s\pods> kubectl delete pod --all
 
 # Expose POD
-C:\k8s\pods\type pod.yaml
+C:\k8s\pods> type pod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -293,17 +293,18 @@ spec:
     image: [ACCOUNT]/[REPOSITORY]:[TAG]
     ports:
       - containerPort: 5000
-C:\k8s\pods\kubectl apply -f .\pod.yaml                                                        # EX) name=my-app3rd
-C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80                      # EX) kubectl expose pod my-app3rd --name my-app3rd-srv1st --port 80
-C:\k8s\pods\kubectl get svc
-C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 5000 --type NodePort    # EX) kubectl expose pod my-app3rd --name my-app3rd-srv2nd --port 5000 --type NodePort
-C:\k8s\pods\kubectl get svc
-C:\k8s\pods\kubectl delete svc [NAME_SERVICE]
-C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80 --type LoadBalancer  # EX) kubectl expose pod my-app3rd --name my-app3rd-srv3rd --port 80 --type LoadBalancer
-C:\k8s\pods\kubectl get svc
-C:\k8s\pods\kubectl delete all --all                                                            # Delete All
-C:\k8s\pods\kubectl api-resources
-C:\k8s\rs\type rs.yaml
+C:\k8s\pods> kubectl apply -f .\pod.yaml                                                        # EX) name=my-app3rd
+C:\k8s\pods> kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80                      # EX) kubectl expose pod my-app3rd --name my-app3rd-srv1st --port 80
+C:\k8s\pods> kubectl get svc
+C:\k8s\pods> kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 5000 --type NodePort    # EX) kubectl expose pod my-app3rd --name my-app3rd-srv2nd --port 5000 --type NodePort
+C:\k8s\pods> kubectl get svc
+C:\k8s\pods> kubectl delete svc [NAME_SERVICE]
+C:\k8s\pods> kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80 --type LoadBalancer  # EX) kubectl expose pod my-app3rd --name my-app3rd-srv3rd --port 80 --type LoadBalancer
+C:\k8s\pods> kubectl get svc
+C:\k8s\pods> kubectl delete all --all                                                            # Delete All
+C:\k8s\pods> kubectl api-resources
+
+C:\k8s\rs> type rs.yaml
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
@@ -323,9 +324,9 @@ spec:
       containers:
         - name: myapp
           image: ID/REPOSITORY:TAG
-C:\k8s\rs\kubectl -f .\rs.yaml
-C:\k8s\rs\kubectl get pod
-C:\k8s\rs\type svc.yaml
+C:\k8s\rs> kubectl -f .\rs.yaml
+C:\k8s\rs> kubectl get pod
+C:\k8s\rs> type svc.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -337,18 +338,18 @@ spec:
   - port: 80
     targetPort: 5000
   type: LoadBalancer
-C:\k8s\rs\kubectl apply -f .\svc.yaml
-C:\k8s\rs\kubectl get svc
-C:\k8s\rs\kubectl get rs
-C:\k8s\rs\kubectl delete pod app-rs-*        # delete a pod but restart a new pod
-C:\k8s\rs\kubectl get rs
-C:\k8s\rs\kubectl get ns
-C:\k8s\rs\kubectl get pod -n kube-system
-C:\k8s\rs\kubectl get pod --show-labels
-C:\k8s\rs\kubectl scale rs app-rs --replicas 4
+C:\k8s\rs> kubectl apply -f .\svc.yaml
+C:\k8s\rs> kubectl get svc
+C:\k8s\rs> kubectl get rs
+C:\k8s\rs> kubectl delete pod app-rs-*        # delete a pod but restart a new pod
+C:\k8s\rs> kubectl get rs
+C:\k8s\rs> kubectl get ns
+C:\k8s\rs> kubectl get pod -n kube-system
+C:\k8s\rs> kubectl get pod --show-labels
+C:\k8s\rs> kubectl scale rs app-rs --replicas 4
 
 # upgrade or downgrade application by RS vs. Deploy for NON-Downtime
-C:\k8s\deploy\type deploy.yaml
+C:\k8s\deploy> type deploy.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -370,8 +371,8 @@ spec:
         image: plutomsw/app:v1
         ports:
         - containerPort: 5000
-C:\k8s\deploy\kubectl apply -f .\deploy.yaml
-C:\k8s\deploy\type srv.yaml
+C:\k8s\deploy> kubectl apply -f .\deploy.yaml
+C:\k8s\deploy> type srv.yaml
 apiVersion: v1
 kind: Service
 metadata:
@@ -383,8 +384,8 @@ spec:
   - port: 80
     targetPort: 5000
   type: LoadBalancer
-C:\k8s\deploy\kubectl apply -f .\svc.yaml
-C:\k8s\deploy\type deploy.yaml
+C:\k8s\deploy> kubectl apply -f .\svc.yaml
+C:\k8s\deploy> type deploy.yaml
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -406,13 +407,13 @@ spec:
         image: plutomsw/app:v2
         ports:
         - containerPort: 5000
-C:\k8s\deploy\kubectl apply -f .\deploy.yaml
-C:\k8s\deploy\kubectl get deploy
-C:\k8s\deploy\kubectl get deploy -o yaml
-C:\k8s\deploy\kubectl edit deploy myapp
-C:\k8s\deploy\kubectl describe deploy myapp
-C:\k8s\deploy\kubectl rollout history deploy myapp
-C:\k8s\deploy\kubectl rollout undo deploy myapp
+C:\k8s\deploy> kubectl apply -f .\deploy.yaml
+C:\k8s\deploy> kubectl get deploy
+C:\k8s\deploy> kubectl get deploy -o yaml
+C:\k8s\deploy> kubectl edit deploy myapp
+C:\k8s\deploy> kubectl describe deploy myapp
+C:\k8s\deploy> kubectl rollout history deploy myapp
+C:\k8s\deploy> kubectl rollout undo deploy myapp
 ```
 
 ### config for Terminal(Docker) at Windows
@@ -498,6 +499,11 @@ $ kubectl describe ipaddresspool.metallb.io --namespace metallb-system
 
 
 ## Reference
+- GKE(Google Kubernetes Engine)
+```cmd
+C:\> kubectl config get-contexts
+```
+
 - NONE Ready(reset, rm and reconfig) at Node
 ```bash
 $ kubeadm reset		# at master/node1/node2
