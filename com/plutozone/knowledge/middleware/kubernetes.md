@@ -414,6 +414,35 @@ C:\k8s\deploy> kubectl edit deploy myapp
 C:\k8s\deploy> kubectl describe deploy myapp
 C:\k8s\deploy> kubectl rollout history deploy myapp
 C:\k8s\deploy> kubectl rollout undo deploy myapp
+# mkdir /log/nginx at node1 and node2
+C:\k8s\storage> storage.yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: myapp
+  labels:
+    app: myApp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myApp
+  template:
+    metadata:
+      labels:
+        app: myApp
+    spec:
+      containers:
+      - name: myapp
+        image: nginx
+        volumeMounts:
+          - name: log
+            mountPath: /var/log/nginx
+      volumes:
+        - name: log
+          hostPath:
+            path: /log/nginx
+            type: Directory
 ```
 
 ### config for Terminal(Docker) at Windows
@@ -499,6 +528,7 @@ $ kubectl describe ipaddresspool.metallb.io --namespace metallb-system
 
 
 ## Reference
+- 내도메인 at 구글 for 무료 도메인
 - GKE(Google Kubernetes Engine)
 ```cmd
 C:\> kubectl config get-contexts
