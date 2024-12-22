@@ -227,7 +227,7 @@ kind: Pod
 metadata:
   name: my-app
   labels:
-    name: my-app
+    targetApp: my-app
 spec:
   containers:
   - name: my-app
@@ -247,22 +247,22 @@ metadata:
   name: my-app-svc
 spec:
   selector:
-    name: my-app                                # Name of labels at my-app and my-app2nd
+    targetApp: my-app                                # Name of labels at my-app and my-app2nd
   ports:
   - port: 80
     targetPort: 5000
   type: LoadBalancer
 C:\k8s\pods\kubectl apply -f .\srv.yaml
 C:\k8s\pods\kubectl get svc
+C:\k8s\pods\kubectl get ep
 
-```cmd
 C:\k8s\pods\type pod2nd.yaml
 apiVersion: v1
 kind: Pod
 metadata:
   name: my-app2nd
   labels:
-    name: my-app
+    targetApp: my-app
 spec:
   containers:
   - name: my-app2nd
@@ -274,6 +274,7 @@ spec:
 C:\k8s\pods\kubectl apply -f .\pod.yaml
 C:\k8s\pods\kubectl get pod
 C:\k8s\pods\kubectl get svc                                                # LoadBalancer for Pods(my-app and my-app2nd)
+C:\k8s\pods\kubectl get ep
 
 # Delete POD
 C:\k8s\pods\kubectl delete pod [NAME]                                      # kubectl delete pod nginx
@@ -301,6 +302,47 @@ C:\k8s\pods\kubectl get svc
 C:\k8s\pods\kubectl delete svc [NAME_SERVICE]
 C:\k8s\pods\kubectl expose pod [NAME_POD] --name [NAME_SERVICE] --port 80 --type LoadBalancer  # EX) kubectl expose pod my-app3rd --name my-app3rd-srv3rd --port 80 --type LoadBalancer
 C:\k8s\pods\kubectl get svc
+C:\k8s\pods\kubectl delete all --all                                                            # Delete All
+C:\k8s\pods\kubectl api-resources
+C:\k8s\rs\type rs.yaml
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: app-rs
+  labels:
+    app: myApp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: myApp
+  template:
+    metadata:
+      labels:
+        app: myApp
+    spec:
+      containers:
+        - name: myapp
+          image: ID/REPOSITORY:TAG
+C:\k8s\rs\kubectl -f .\rs.yaml
+C:\k8s\rs\kubectl get pod
+C:\k8s\rs\type svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  name: app-svc
+spec:
+  selector:
+    app: myApp
+  ports:
+  - port: 80
+    targetPort: 5000
+  type: LoadBalancer
+C:\k8s\rs\kubectl -f .\svc.yaml
+C:\k8s\rs\kubectl get svc
+C:\k8s\rs\kubectl get rs
+C:\k8s\rs\kubectl delete pod app-rs-*        # delete a pod but restart a new pod
+C:\k8s\rs\kubectl get rs
 ```
 
 ### config for Terminal(Docker) at Windows
