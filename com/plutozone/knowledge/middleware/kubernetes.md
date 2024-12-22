@@ -9,9 +9,8 @@
 
 
 ## Overview(https://kubernetes.io/ko/docs/concepts/overview/)
-- Container Cluster = Container Orchestrator = Kubernetes
-- Kubernetes(k8s)
-- Control-Plane(Api + Scheduler + Etcd + Controller Manager + Cloud Conroller Manager) + Node(Kubelet + Kube-Proxy + Container Runtime) = Master + Worker Node
+- Container Cluster = Container Orchestrator = Kubernetes(k8s)
+- Control-Plane(API + Scheduler + Etcd + Controller Manager + Cloud Conroller Manager) + Node(Kubelet + Kube-Proxy + Container Runtime) = Master + Worker Node
 - CNCF(https://landscape.cncf.io/)
 
 
@@ -95,6 +94,7 @@ $ kubeadm token create --print-join-command
 # EX) kubeadm join <control-plane-host>:<port> --token <token> --discovery-token-ca-cert-hash sha256:<hash>
 ```
 
+>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 #### [OPTION] install Tools for Kubernetes `at only Master`
 ```bash
 $ yum -y install bash-completion
