@@ -410,6 +410,9 @@ C:\k8s\deploy\kubectl apply -f .\deploy.yaml
 C:\k8s\deploy\kubectl get deploy
 C:\k8s\deploy\kubectl get deploy -o yaml
 C:\k8s\deploy\kubectl edit deploy myapp
+C:\k8s\deploy\kubectl describe deploy myapp
+C:\k8s\deploy\kubectl rollout history deploy myapp
+C:\k8s\deploy\kubectl rollout undo deploy myapp
 ```
 
 ### config for Terminal(Docker) at Windows
