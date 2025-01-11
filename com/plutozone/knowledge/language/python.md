@@ -1,6 +1,11 @@
 # com.plutozone.knowledge.language.Python
 
 
+## Overview
+- Python and PSF(Python Software Foundation)
+- Python의 시스템 요구 사항, 배포 그리고 속도 문제
+
+
 ## Installation
 - pip
 ```cmd
