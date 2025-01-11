@@ -8,7 +8,7 @@ root@ubutu:~# cd /
 root@ubutu:/#
 ```
 
-- 고정 IP(Static IP) 설정
+- 고정 IP(Static IP) 설정 over Ubuntu 20.04.x
 ```bash
 # 고정 IP 설정
 pluto@ubuntu:~$ sudo nano /etc/netplan/*.yaml
