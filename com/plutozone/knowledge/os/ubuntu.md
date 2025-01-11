@@ -3,14 +3,15 @@
 
 - ROOT 계정으로 강제 전환
 ```bash
-$ sudo -i
-# 
+pluto@ubuntu:~$ sudo -i
+root@ubutu:~# cd /
+root@ubutu:/#
 ```
 
 - 고정 IP(Static IP) 설정
 ```bash
 # 고정 IP 설정
-$ sudo nano /etc/netplan/*.yaml
+pluto@ubuntu:~$ sudo nano /etc/netplan/*.yaml
 network:
  ethernets:
   enp0s3:
@@ -25,17 +26,17 @@ network:
  version: 2
 
 # 설정 적용
-$ sudo netplan apply
+pluto@ubuntu:~$ sudo netplan apply
 
 # 설정 확인
-$ netstat -rn
+pluto@ubuntu:~$ netstat -rn
 ```
 
 - 시간대(TimeZone) 설정
 ```bash
 # 시간대를 서울(KST)로 변경
-$ sudo timedatectl set-timezone Asia/Seoul
+pluto@ubuntu:~$ sudo timedatectl set-timezone Asia/Seoul
 
 # 변경된 시간대 확인
-$ date
+pluto@ubuntu:~$ date
 ```
