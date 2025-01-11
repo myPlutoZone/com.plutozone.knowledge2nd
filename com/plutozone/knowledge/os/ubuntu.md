@@ -1,13 +1,15 @@
 # com.plutozone.knowledge.os.Ubuntu
 
-- Change to ROOT
+
+- ROOT 계정으로 강제 전환
 ```bash
 $ sudo -i
 # 
 ```
 
-- Static IP
+- 고정 IP(Static IP) 설정
 ```bash
+# 고정 IP 설정
 $ sudo nano /etc/netplan/*.yaml
 network:
  ethernets:
@@ -22,14 +24,14 @@ network:
      via: 192.168.0.1
  version: 2
 
-# 설정 정보 적용
+# 설정 적용
 $ sudo netplan apply
 
-# 네트워크 설정 확인
+# 설정 확인
 $ netstat -rn
 ```
 
-- TimeZone
+- 시간대(TimeZone) 설정
 ```bash
 # 시간대를 서울(KST)로 변경
 $ sudo timedatectl set-timezone Asia/Seoul
