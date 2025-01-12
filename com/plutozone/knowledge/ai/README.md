@@ -1,4 +1,4 @@
-# com.plutozone.knowledge.AI
+# com.plutozone.knowledge.ai
 
 
 ## Fundamental & Term
