@@ -22,7 +22,7 @@
 
 
 ## OS
-- [@Ubuntu](./com/plutozone/knowledge/os/ubuntu.md)
+- [Ubuntu](./com/plutozone/knowledge/os/ubuntu.md)
 
 
 ## Language
