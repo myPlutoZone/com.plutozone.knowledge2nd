@@ -9,6 +9,17 @@
 - AI(인공 지능)
 	- 일반인공지능 or 강인공지능=The Terminator
 	- 약인공지능=Char GPT
+- Generative AI(생성형 AI)
+	- 대량의 데이터를 학습하여
+	- 데이터 안에 있는 패턴이나 규칙을 이해하고
+	- 학습된 패턴을 바탕으로 새로운 콘텐츠(Text, Image, Audio and Music, Video and Movie)를 생성하는 기술
+- ChatGPT(Chat Generative Pretrained Transformer)
+	- 번역과 요약(문서, 회의, 영상 등)
+	- 아이디어
+	- 콘텐츠(텍스트, 이미지, 영상 등) 제작
+	- 데이터 분석
+	- 코드 작성
+	- 정보 검색
 - 학습의 종류
 	- 지도 학습: 입력(데이터)과 타켓(답)을 전달하여 모델을 훈련하여 새로운(테스트) 입력(데이터)의 타겟(답)을 분류 또는 예측(예: 길이와 무게에 따른 어류 확인 등, 손 글씨 이미지와 글자에 따른 글자 확인 등)
 	- 비지도 학습: 타켓(답)이 없이 입력(데이터)만 제공하여 다른 데이터의 규칙성 확인(무엇을 분류 또는 예측하는 것이 아니라 입력 데이터에서 어떤 특징을 찾는데 주로 활용)
@@ -85,8 +96,16 @@ $ python -m http.server --cgi 8080
 
 
 ## Reference
-- https://chat.openai.com/auth/login
-- https://platform.openai.com/
-- https://bard.google.com/
+- https://chat.openai.com
+- https://platform.openai.com
+- https://bard.google.com
 - https://learn.microsoft.com/ko-kr/azure/ai-services/openai/chatgpt-quickstart?tabs=command-line%2Cpython&pivots=programming-language-studio
-- https://clova-x.naver.com/
+- https://clova-x.naver.com
+- ClovaNote(STT: Speech To Text)
+- ClovaDubbing(TTS: Text To Speech)
+- 11Labs(TTS: Text To Speech + AI Voice Generator)
+- https://sora.com
+- www.midjourney.com(Image)
+- www.genspark.ai(Search Engine + AI for 교차 검증)
+- https://zapier.com
+- https://actions.zapier.com
