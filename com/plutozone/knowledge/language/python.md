@@ -11,12 +11,13 @@
 ```cmd
 C:\> pip list						# 설치된 라이브러리 목록
 C:\> pip install beautifulsoup4		# 라이브러리 설치(예: Beautiful Soup)
-# pip install openpyxl			# 라이브러리 설치(예: Openpyxl)
-# pip install selenium			# Firefox headless와 geckodriver가 자동 설치됨(사전에 하위 버전의 FireFox 설치 권장)
-# pip install jupyter			# C:\>jupyter notebook(웹 브라우저에서 실행되는 대화형 파이썬 환경)
+C:\> pip install openpyxl			# 라이브러리 설치(예: Openpyxl)
+C:\> pip install selenium			# Firefox headless와 geckodriver가 자동 설치됨(사전에 하위 버전의 FireFox 설치 권장)
+C:\> pip install jupyter			# C:\> jupyter notebook(웹 브라우저에서 실행되는 대화형 파이썬 환경)
 ```
 
-- Colab(코랩: https://colab.research.google.com, 구글이 대화식 개발(파이션 등) 환경인 Jupyter(https://jupyter.org)를 커스터마이징하여 온라인으로 제공)
+- Colab(코랩: https://colab.research.google.com)
+	- 구글이 대화식 개발(파이션 등) 환경인 Jupyter(https://jupyter.org)를 커스터마이징하여 온라인으로 제공
 	- 노트북(Notebook)은 Jupyter 프로젝트의 대표적인 기능(제품)이며 코랩 노트북은 구글 클라우드의 가상 서버를 사용
 	- 노트북(Notebook) = 텍스트 셀(Text Cell) + 코드 셀(Code Cell)
 

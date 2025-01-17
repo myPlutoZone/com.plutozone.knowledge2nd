@@ -2,19 +2,19 @@
 
 
 ## Fundamental & Term
-- 분류와 예측 그리고 생성(Generative)
-- Colab(코랩: https://colab.research.google.com)
+- 분류와 예측 그리고 생성(Generative)이란?
+- Colab(코랩: https://colab.research.google.com)이란?
 	- 구글이 대화식 개발(파이션 등) 환경인 Jupyter(https://jupyter.org)를 커스터마이징하여 온라인으로 제공
 	- 노트북(Notebook)은 Jupyter 프로젝트의 대표적인 기능(제품)이며 코랩 노트북은 구글 클라우드의 가상 서버를 사용
 	- 노트북(Notebook) = 텍스트 셀(Text Cell) + 코드 셀(Code Cell)
-- AI(인공 지능, Artificial Intelligence)
+- AI(인공 지능, Artificial Intelligence)의 분류
 	- 일반 인공지능 or 강 인공지능=The Terminator
 	- 약 인공지능=Chat GPT
-- Generative AI(생성형 AI)
+- Generative AI(생성형 AI)란?
 	- 1) 대량의 데이터를 학습하여
 	- 2) 데이터 안에 있는 패턴이나 규칙을 이해하고
 	- 3) 학습된 패턴을 바탕으로 새로운 콘텐츠(Text, Image, Audio and Music, Video and Movie)를 생성하는 기술
-- Chat GPT(Chat Generative Pretrained Transformer)
+- Chat GPT(Chat Generative Pretrained Transformer)의 활용(안)
 	- 번역과 요약(문서, 회의, 영상 등)
 	- 아이디어
 	- 콘텐츠(텍스트, 이미지, 영상 등) 제작
@@ -25,10 +25,10 @@
 	- 지도 학습: 입력(데이터)과 타켓(답)을 전달하여 모델을 훈련하여 새로운(테스트) 입력(데이터)의 타겟(답)을 분류 또는 예측(예: 길이와 무게에 따른 어류 확인 등, 손 글씨 이미지와 글자에 따른 글자 확인 등)
 	- 비지도 학습: 타켓(답)이 없이 입력(데이터)만 제공하여 다른 데이터의 규칙성 확인(무엇을 분류 또는 예측하는 것이 아니라 입력 데이터에서 어떤 특징을 찾는데 주로 활용)
 	- 강화 학습(알파고 등): 부분적 답을 제공하여 데이터를 기반으로 최적의 답을 확인
-- ML(Machine Learning, 머신러닝)
+- ML(Machine Learning, 머신러닝)이란?
 	- 수 많은 데이터를 학습 시켜서 패턴을 찾아 내고 패턴을 기반으로 데이터를 **분류**하고 **예측**하는 것(예: 크기, 색깔 등에 따른 독버섯 구분)
 	- 대표적인 ML 라이브러리는 Scikit-Learn(사이킷런, 구글에서 개발한 머신러닝 프레임워크)
-- DL(Deep Learning, 딥러닝)
+- DL(Deep Learning, 딥러닝)이란?
 	- ML 알고리즘 중에서 인공 신경망을 기반으로 한 방법들을 통칭
 	- 러닝머신에서는 특성을 직접 지정하지만 딥러닝에서는 학습 데이터를 통해 자동으로 특성을 추출(예: 사과와 포도를 판별하는 경우 머신러닝에서는 특성으로 색을 지정했다면 러닝머신에는 대량의 데이터 학습을 통해 자동으로 찾아서 색이 될 수도 모양이 될 수도 있음)
 	- 대표적인 DL 라이브러리는 TensorFlow(텐서플로 by 구글)와 PyTorch(파이토치 by 페이스북)

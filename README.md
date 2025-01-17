@@ -4,7 +4,7 @@
 
 
 # com.plutozone.knowledge
-- Only MarkDown + Example and Demo Source + Image + PDF for IT(Information Technology)
+- Markdown + Example or Demo Source + Image + PDF for IT(Information Technology)
 - Open Source exists in a other Repository
 
 
@@ -15,7 +15,7 @@
 04. [Development .......................................................................... 개발](#development)
 05. [Database .................................................................... 데이터베이스]
 06. [Middleware ...................................................................... 미들웨어](#middleware)
-07. [AI(ML+DL) ....................................................................... 인공 지능](./com/plutozone/knowledge/ai/README.md)
+07. [AI(ML + DL) ..................................................................... 인공 지능](./com/plutozone/knowledge/ai/README.md)
 08. [Management ............................. 시스템과 서비스에 대한 관리 및 정책]
 09. [History .................................................................................... 이력](#history)
 10. [Reference ............................................................................... 참고](#reference)
@@ -63,20 +63,21 @@
 			- Java 또는 Dynamic Web Project를 Maven Project로 변경
 			- pom.xml 설정(dependacy 등 포함)
 			- GitLab에 Maven-Wrapper 및 Project 업로드
-	- Git Client + Shell을 통한 Build and Deploy	
+	- Git Client + Shell을 통한 Build and Deploy
 		- Install Git and Clone Repository
 		- Build & Deploy by run.sh
-	- Jenkins을 통한 Build(mvnw.sh 및 pom.xml을 통해 *.war 생성 등) and Deploy	
+	- Jenkins을 통한 Build(mvnw.sh 및 pom.xml을 통해 *.war 생성 등) and Deploy
 		- Jenkins(Build Server)에서 GitLab의 Project 다운로드 후 빌드
 		- Jenkins(Deploy Server)를 통하여 Tomat(Application Server)에 배포
 
 - 개발 표준 가이드
 	- CSS
 		- 기본적으로 속성들은 스페이스(Space)로 분리하지만 include일 경우 스페이스(Space)를 생략(예: border:1px solid red;text-aling:center;)한다. 특히 min 파일일 경우
+
 - Slack
 	- Slack + GitLab
 		- Slack
-    			- Add Channel for **GitLab** Repository
+    		- Add Channel for **GitLab** Repository
 			- Add Apps
 			- Add "Incoming WebHooks"
 			- Select Channel and Copy Webhook URL(예: https://hooks.slack.com/services/...) for GitLab
@@ -84,7 +85,7 @@
 			- Go settins > Integrations > Slack notificatios and Paste Webook URL(예: https://hooks.slack.com/services/...)
 	- Slack + GitHub
 		- Slack
-    			- Add a Channel for **GitHub** Repository
+    		- Add a Channel for **GitHub** Repository
 			- Add Apps at Slack
 			- Add "GitHub"
 			- Select a Channel and Write command(/github subscribe [Owner/Repository] or /github unsubscribe [Owner/Repository])

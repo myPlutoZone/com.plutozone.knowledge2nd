@@ -1,14 +1,14 @@
 # com.plutozone.knowledge.os.Ubuntu
 
 
-- root 계정으로 강제 전환
+- root 계정으로 전환
 ```bash
 pluto@ubuntu:~$ sudo -i
 root@ubutu:~# cd /
 root@ubutu:/#
 ```
 
-- 고정 IP(Static IP)로 설정 over Ubuntu 20.04.x
+- 고정(Static) IP 설정 over Ubuntu 20.04.x
 ```bash
 # 고정 IP 설정
 pluto@ubuntu:~$ sudo nano /etc/netplan/*.yaml
