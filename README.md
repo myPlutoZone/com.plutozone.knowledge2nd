@@ -26,7 +26,7 @@
 
 
 ## Language
-- [@Python](./com/plutozone/knowledge/language/python.md)
+- [Python](./com/plutozone/knowledge/language/python.md)
 
 
 ## Development
