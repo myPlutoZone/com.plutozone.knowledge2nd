@@ -1,22 +1,24 @@
 # com.plutozone.knowledge.cloud.AWS(Amazon Web Service)
 
 
-## Fundamental & Term
+## Fundamental
 - On-Premise vs. Cloud
 - OpenStack for IaaS vs.OpenShift for PaaS by Red Hat
 
 
-## 계정 및 서비스 종류
-### 계정
-- 루트
-- 일반(비용 설정 및 사용량 확인 불가)
+## Term, Login and Service
+### Term
+- EIP(Elastic IP=Public and Static IP, 최대 5개) vs. PIP(Public IP=Public and Dynamic IP)
 
-### 서비스
-- Route53(=DNS, 자체 또는 외부 DNS 관리)
-- ACM(Amazon Certificate Manager=HTTPS/SSL 인증서 관리)
-	- 상용(com, co.kr 등)이 아닌 개인(store, shop 등) 도메인에 대한 무료 SSL 인증서 발급 지원
-- IAM(Identity and Access Management=Account)
+### Login
+- Sign in as the root user
+- Sign in as an IAM user(비용 설정 및 사용량 확인 불가)
+
+### Service
+- ACM(Amazon Certificate Manager=HTTPS/SSL 인증서 관리): 상용(com, co.kr 등)이 아닌 개인(store, shop 등) 도메인에 대한 무료 SSL 인증서 발급 지원
+- ECS(Elastic Container Service) vs. EKS(Elastic Kubernetes Service)
 - ELB(Elastic Load Balancing=L4)
+- IAM(Identity and Access Management=Account)
 - VPC(Virtual Private Cloud=Network, 최대 5개)
 	- **Inside(=Private) for WAS + Outside(=Public) for WS vs. All Inside(=Private)**
 	- CIDR(Classless Inter-Domain Routing) is not modified at AWS
@@ -42,9 +44,7 @@
 	- Create EC2 Instances
 		- Make PEM for ec2-user at Amazon Linux 2
 		- Install Nginx or Tomcat
-- EIP(Elastic IP=Public and Static IP, 최대 5개) vs. PIP(Public IP=Public and Dynamic IP)
-- ECS(Elastic Container Service)
-- EKS(Elastic Kubernetes Service)
+- Route53(=DNS, 자체 또는 외부 DNS 관리)
 
 
 ## Step for Create Network and EC2 Instances

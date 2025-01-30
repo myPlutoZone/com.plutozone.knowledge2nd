@@ -1,7 +1,7 @@
 # com.plutozone.knowledge.ai
 
 
-## Fundamental & Term
+## Fundamental
 - 분류와 예측 그리고 생성(Generative)이란?
 - Colab(코랩: https://colab.research.google.com)이란?
 	- 구글이 대화식 개발(파이션 등) 환경인 Jupyter(https://jupyter.org)를 커스터마이징하여 온라인으로 제공
