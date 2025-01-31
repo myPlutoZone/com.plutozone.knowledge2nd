@@ -15,7 +15,8 @@
 - Sign in as an IAM user(비용 설정 및 사용량 확인 불가)
 
 ### Service
-- ACM(Amazon Certificate Manager=HTTPS/SSL 인증서 관리): 상용(com, co.kr 등)이 아닌 개인(store, shop 등) 도메인에 대한 무료 SSL 인증서 발급 지원
+- ACM(Amazon Certificate Manager=HTTPS/SSL 인증서 관리)
+	- 상용(com, co.kr 등)이 아닌 개인(store, shop 등) 도메인에 대한 SSL 인증서 발급 무료 지원
 - ECS(Elastic Container Service) vs. EKS(Elastic Kubernetes Service)
 - ELB(Elastic Load Balancing=L4)
 - IAM(Identity and Access Management=Account)

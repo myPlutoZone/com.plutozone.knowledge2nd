@@ -30,7 +30,7 @@
 
 
 ## Development
-- [@AWS](./com/plutozone/knowledge/cloude/aws.md)
+- [@AWS](./com/plutozone/knowledge/development/cloud/aws.md)
 
 
 ## Middleware
