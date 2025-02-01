@@ -1,23 +1,23 @@
 # com.plutozone.knowledge.middleware.GitLab
 
 
-- Install Git Client
+- Install **Git Client**
 ```bash
-# Git Client 설치
+# 설치
 $ sudo apt install git
 
-# Git Client 버전 확인
+# 버전 확인
 $ git --version
 
-# Git Client 정보 등록
+# 정보 등록
 $ git config --global user.name pluto
 $ git config --global user.mail pluto@plutozone.com
 
-# Git Glient 정보 확인
+# 정보 확인
 $ git config -l
 $ cat ~/.gitconfig
 
-# Gi Client 정보 삭제(또는 pico ~/.gitconfig)
+# 정보 삭제(또는 pico ~/.gitconfig)
 $ git config --unset --global user.name
 $ git config --unset --global user.mail
 
@@ -28,7 +28,7 @@ $ ls -al
 # Git Pull at Repository Directory
 $ git pull
 
-# 접속된 계정 정보를 삭제
+# 접속된 계정 정보 삭제
 # 1. 특정 저장소(local)
 git config --local --unset credential.helper  
 
@@ -42,7 +42,7 @@ git config --system --unset credential.helper
 git config --global credential.helper store
 ```
 
-- Install GitLab Server
+- Install **GitLab Server**
 ```bash
 # [옵션] SSH Server 설치
 $ sudo apt install -y curl openssh-server ca-certificates
