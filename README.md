@@ -55,7 +55,7 @@
 - 2023-08-24 [REPORT] Generate a token for an Eclipse Password(Profile > Settings > Developer Settings > Personal access tokens (classic) at GitHub)
 
 
-## Memo
+## Temporary
 - Builder(Ant, Maven, Gradle 등) + CI(GitLab, GitHub 등) + CD(Jenkins 등) + WAS(Tomcat 등)
 	- Common
 		- Eclipse Maven Project(Spring Web at mavenForMoon.zip)
