@@ -7,15 +7,14 @@
 - Terminal(MobaXterm)
 
 
-## Docket container Basic
-- Containerization
-- Container Basic Lifecycle
+## Docket Container Basic
+- Containerization and Container Basic Lifecycle
 - Image Build vs. Source Build
 - Network and Storage
 - Compose(Docker=Container Engine, Kubernetes=Orchestrator=Server Cluster Tool)
 
 
-## Host Only Network at Virtual Box
+## Change Host Only Network Properties at Virtual Box
 - 172.16.0.0/24(24 = 11111111.11111111.11111111.00000000 = 255.255.255.0)
 - 172.16.0.101 ~ 254 for DHCP(172.16.0.100)
 
@@ -42,22 +41,22 @@
 ```bash
 $ curl -fsSL https://download.docker.com/linux/centos/docker-ce.repo -o /etc/yum.repos.d/docker-ce.repo		
 $ yum install -y docker-ce		
-$ docker version            # only Client
+$ docker version            # Only Client
 $ systemctl start docker		# Server Start
-$ systemctl enable docker		# start on boot
+$ systemctl enable docker		# Start on Boot
 $ docker version		        # Client and Server Version
-$ docker run hello-world		# download and print Hello from Docker!
+$ docker run hello-world		# Download and Print Hello from Docker!
 ```
 
 - install at Ubuntu 24.04.1(https://docs.docker.com/engine/install/ubuntu/)
 ```bash
-$ sudo apt update                                                                                                # update
-$ sudo apt install apt-transport-https ca-certificates curl                                                      # install requried package
+$ sudo apt update                                                                                                # Update
+$ sudo apt install apt-transport-https ca-certificates curl                                                      # Install requried package
 $ curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -                                   # Docker official GPG Key
 $ sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"  # Docker Repository
-$ sudo apt update                                                                                                # update
-$ sudo apt-get update && sudo apt-get install docker-ce docker-ce-cli containerd.io                              # install Docker
-$ sudo docker run hello-world                                                                                    # confirm Docker
+$ sudo apt update                                                                                                # Update
+$ sudo apt-get update && sudo apt-get install docker-ce docker-ce-cli containerd.io                              # Install Docker
+$ sudo docker run hello-world                                                                                    # Confirm Docker
 $ sudo docker version
 
 # Run without sudo for Docker
@@ -84,11 +83,11 @@ $ docker -H 172.16.0.102:2375      # Remote Host 접속 시
 ## Commands
 - Search Image at Registry
 ```bash
-$ docker search nginx				        # Registry에서 nginx Image를 검색(=https://hub.docker.com/에서 nginx를 검색)	
-$ docker search quay.io/nginx				# quay Registry에서 Image를 검색	
+$ docker search nginx				        # Default Registry(hub.docker.com))에서 nginx Image를 검색(=https://hub.docker.com/에서 nginx를 검색)	
+$ docker search quay.io/nginx				# quay.io Registry에서 nginx Image를 검색	
 ```
 
-- Search Image at localhost
+- Search Image at Localhost
 ```bash
 $ docker images
 ```
