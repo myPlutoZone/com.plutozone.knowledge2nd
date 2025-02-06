@@ -30,7 +30,7 @@
 
 
 ## Run VM vs. Container(OCI, Open Container Initiative)
-- vdi for Oracle
+- vdi for Oracle VirtualBox
 - vmdk for VMware
 - qcow2 for OpenSource
 - vhd/x for Windows
