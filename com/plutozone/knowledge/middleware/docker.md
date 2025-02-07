@@ -16,11 +16,11 @@
 
 ## Change Host Only Network Properties at Virtual Box
 - 172.16.0.0/24(24 = 11111111.11111111.11111111.00000000 = 255.255.255.0)
-- 172.16.0.101 ~ 254 for DHCP(172.16.0.100)
+- `172.16.0.101 ~ 254 for DHCP(172.16.0.100)`
 
 
 ## Create VM
-- 1 vCPU, 2GB, NAT(enp0s3) for External + Host Only(enp0s8, 172.16.0.0/24) for Internal + 20GB/25GB at Rocky/Ubuntu
+- `1 vCPU, 2GB, NAT(enp0s3) for External` + `Host Only(enp0s8, 172.16.0.0/24) for Internal` + 20GB/25GB at Rocky/Ubuntu
 
 
 ## What's Container
