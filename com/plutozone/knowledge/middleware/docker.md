@@ -37,18 +37,20 @@
 
 
 ## Install Docker(CE, Commmunity Edition)
-- install by root(#) at Rocky 9.5(https://docs.rockylinux.org/gemstones/containers/docker/)
+- Install by root(#) at Rocky 9.5(https://docs.rockylinux.org/gemstones/containers/docker/)
 ```bash
 $ curl -fsSL https://download.docker.com/linux/centos/docker-ce.repo -o /etc/yum.repos.d/docker-ce.repo		
 $ yum install -y docker-ce		
-$ docker version            # Only Client
+$ docker version            # Only Client Version
 $ systemctl start docker		# Server Start
-$ systemctl enable docker		# Start on Boot
+$ systemctl enable docker		# Server Start on Boot
 $ docker version		        # Client and Server Version
+$ docker images
 $ docker run hello-world		# Download and Print Hello from Docker!
+$ docker images
 ```
 
-- install at Ubuntu 24.04.1(https://docs.docker.com/engine/install/ubuntu/)
+- Install at Ubuntu 24.04.1(https://docs.docker.com/engine/install/ubuntu/)
 ```bash
 $ sudo apt update                                                                                                # Update
 $ sudo apt install apt-transport-https ca-certificates curl                                                      # Install requried package
