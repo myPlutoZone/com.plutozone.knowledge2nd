@@ -76,7 +76,7 @@ $ docker -H 172.16.0.102:2375      # Remote Host 접속 시
 ```
 
 
-## Docker Host(=Daemon/Server) 구성
+## Docker Host(=Server/Daemon) 구성
 - Containers(Thin Read/Write)
 - Images(Read Only + Version 및 Source, Runtime 등으로 구분됨)
 - Registry(Default: hub.docker.com)
@@ -85,7 +85,7 @@ $ docker -H 172.16.0.102:2375      # Remote Host 접속 시
 ## Commands
 - Search Image at Registry
 ```bash
-$ docker search nginx				        # Default Registry(hub.docker.com))에서 nginx Image를 검색(=https://hub.docker.com/에서 nginx를 검색)	
+$ docker search nginx				        # Default Registry(hub.docker.com)에서 nginx Image를 검색 = https://hub.docker.com/에서 nginx를 검색
 $ docker search quay.io/nginx				# quay.io Registry에서 nginx Image를 검색	
 ```
 
@@ -97,7 +97,7 @@ $ docker images
 - Pull
 ```bash
 # [중요] 하나의 공인 IP에 대해 6시간동안 100건?으로 제한 vs. 로그인 후에는 150건? at hub.docker.com
-$ docker pull nginx				                                 # Default(at hub.docker.com, Tag 생략 시 latest)
+$ docker pull nginx				                                 # Default = at hub.docker.com + Tag 생략 시 latest
 $ docker pull quay.io/uvelyster/nginx				               # at quay.io/uvelyster/nginx(Domain/Owner/Repository, Tag 생략 시 latest)
 $ docker pull plutomsw/cicd_guestbook:20240107064001_24    # at hub.docker.com/plutomsw/cicd_guestbook:20240107064001_24(Domain/Owner/Repository:Tag)
 ```
