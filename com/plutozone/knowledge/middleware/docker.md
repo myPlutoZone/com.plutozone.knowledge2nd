@@ -39,12 +39,12 @@
 ## Install Docker(CE, Commmunity Edition)
 - Install by root(#) at Rocky 9.5(https://docs.rockylinux.org/gemstones/containers/docker/)
 ```bash
-$ curl -fsSL https://download.docker.com/linux/centos/docker-ce.repo -o /etc/yum.repos.d/docker-ce.repo		
-$ yum install -y docker-ce		
-$ docker version            # Only Client Version
+$ curl -fsSL https://download.docker.com/linux/centos/docker-ce.repo -o /etc/yum.repos.d/docker-ce.repo
+$ yum install -y docker-ce
+$ docker version				# Only Client Version
 $ systemctl start docker		# Server Start
 $ systemctl enable docker		# Server Start on Boot
-$ docker version		        # Client and Server Version
+$ docker version				# Client and Server Version
 $ docker images
 $ docker run hello-world		# Download and Print Hello from Docker!
 $ docker images
@@ -85,7 +85,7 @@ $ docker -H 172.16.0.102:2375      # Remote Host 접속 시
 ## Commands
 - Search Image at Registry
 ```bash
-$ docker search nginx				        # Default Registry(hub.docker.com)에서 nginx Image를 검색 = https://hub.docker.com/에서 nginx를 검색
+$ docker search nginx               # Default Registry(hub.docker.com)에서 nginx Image를 검색 = https://hub.docker.com/에서 nginx를 검색
 $ docker search quay.io/nginx				# quay.io Registry에서 nginx Image를 검색	
 ```
 
