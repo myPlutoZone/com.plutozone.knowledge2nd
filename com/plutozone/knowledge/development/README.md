@@ -24,7 +24,9 @@
 	- RESTful(POST, GET, PUT, DELETE, HEAD, ...) API vs. HTTP only POST API
 - JSP
 - JavaScript
+	- 난독화	
 - HTML
 	- POST vs. GET
 - CSS
+  	- 난독화	
 	- 기본적으로 속성들은 스페이스(Space)로 분리하지만 include일 경우 스페이스(Space)를 생략(예: border:1px solid red;text-aling:center;)한다. 특히 min 파일일 경우
