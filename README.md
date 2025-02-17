@@ -1,47 +1,19 @@
-- ![Generic badge](https://img.shields.io/badge/IMPORTANT-comment_...-red.svg)
-- ![Generic badge](https://img.shields.io/badge/CONFIRM-comment_...-green.svg)
-- ![Generic badge](https://img.shields.io/badge/REFERENCE-comment_...-blue.svg)
+> YOU ARE STRICTLY PROHIBITED TO COPY, DISCLOSE, DISTRIBUTE, MODIFY OR USE THIS
+DOCUMENT IN PART OR AS A WHOLE WITHOUT THE PRIOR WRITTEN CONSENT OF
+PLUTOZONE.COM.
+PLUTOZONE.COM OWNS THE INTELLECTUAL PROPERTY RIGHTS IN AND TO THIS DOCUMENT.
+COPYRIGHT (C) 2005 PLUTOZONE.COM ALL RIGHTS RESERVED
+***
+> 하기 문서에 대한 저작권을 포함한 지적재산권은 plutozone.com에 있으며 plutozone.com이 명시적으
+로 허용하지 않는 사용, 복사, 변경 및 제 3자에 의한 공개, 배포는 엄격히 금지되며
+plutozone.com의 지적재산권 침해에 해당된다.
+***
+> Copyright (C) 2005 plutozone.com All Rights Reserved
+- `Markdown + Example or Demo Source + Image + PDF for IT(Information Technology)`
+- `Open Source exists in a other Repository`
 
 
-# com.plutozone.knowledge
-- Markdown + Example or Demo Source + Image + PDF for IT(Information Technology)
-- Open Source exists in a other Repository
-
-
-## Contents
-01. [Fundamental of IT Education ........................... 정보기술 교육의 기본]
-02. [OS ................................................................................... 운영 체제](#os)
-03. [Language ............................................................... 프로그래밍 언어](#language)
-04. [Development .......................................................................... 개발](#development)
-05. [Database .................................................................... 데이터베이스]
-06. [Middleware ...................................................................... 미들웨어](#middleware)
-07. [AI(ML + DL) ..................................................................... 인공 지능](./com/plutozone/knowledge/ai/README.md)
-08. [Management ............................. 시스템과 서비스에 대한 관리 및 정책]
-09. [History .................................................................................... 이력](#history)
-10. [Reference ............................................................................... 참고](#reference)
-
-
-## OS
-- [Ubuntu](./com/plutozone/knowledge/os/ubuntu.md)
-
-
-## Language
-- [Python](./com/plutozone/knowledge/language/python.md)
-
-
-## Development
-- [AWS](./com/plutozone/knowledge/development/cloud/aws.md)
-
-
-## Middleware
-- [@Docker](./com/plutozone/knowledge/middleware/docker.md)
-- [GitLab](./com/plutozone/knowledge/middleware/gitlab.md)
-- [@Jenkins](./com/plutozone/knowledge/middleware/jenkins.md)
-- [@Kubernates](./com/plutozone/knowledge/middleware/kubernetes.md)
-- [Tomcat](./com/plutozone/knowledge/middleware/tomcat.md)
-
-
-## History
+# History
 - 2024-10-16 [REPORT] Renewal begins!
 - 2024-04-30 [UPDATE] Repository Name(The previous repository name was com.plutozone.education)
 - 2023-09-29 [UPDATE] Repository Name(The previous repository name was com.plutozone.programming.java)
@@ -50,12 +22,12 @@
 - 2023-08-23 [CREATE] Initial Release
 
 
-## Reference
+# Reference
 - 2023-08-24 [INSERT] Comment in only 개선(BETTER), 추가(INSERT), 결함(FAULT), 수정(UPDATE), 삭제(DELETE), 참고(REPORT) for Push
 - 2023-08-24 [REPORT] Generate a token for an Eclipse Password(Profile > Settings > Developer Settings > Personal access tokens (classic) at GitHub)
 
 
-## Temporary
+# Temporary
 - Builder(Ant, Maven, Gradle 등) + CI(GitLab, GitHub 등) + CD(Jenkins 등) + WAS(Tomcat 등)
 	- Common
 		- Eclipse Maven Project(Spring Web at mavenForMoon.zip)
@@ -96,3 +68,34 @@
 		- 침해의 기준은 복사가 아닌 손해가 실제 발생한 경우에 적용될 수도 있다.
 		- 소스 저작권 vs. 오픈 소스 저작권
 	- 지식(지적) 재산권의 분류와 관할 기관 및 기한 in Korea
+
+
+# Markdown
+- ![Generic badge](https://img.shields.io/badge/IMPORTANT-comment_...-red.svg)
+  
+- ![Generic badge](https://img.shields.io/badge/CONFIRM-comment_...-green.svg)
+
+- ![Generic badge](https://img.shields.io/badge/REFERENCE-comment_...-blue.svg)
+  
+- *기울이기*
+
+- **볼드체**
+
+Header 1 | Header 2
+--------- | ---------
+Content 1 | Content 3
+Content 2 | Content 4
+
+| Header 1 | Header 2 | Header 3 |
+| :-------- | :--------: | --------: |
+| Left | Center | Right |
+
+<details><summary>CLICK ME</summary>
+```
+pythonprint("hello world!")
+```
+</details>
+
+[Google](http://www.google.co.kr "구글")
+
+![alt text](/noImage.png )
