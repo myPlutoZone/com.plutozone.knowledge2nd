@@ -9,6 +9,10 @@ COPYRIGHT (C) 2005 PLUTOZONE.COM ALL RIGHTS RESERVED
 plutozone.com의 지적재산권 침해에 해당된다.
 ***
 > Copyright (C) 2005 plutozone.com All Rights Reserved
+
+
+# Overview
+- Our knowledge and wisdom are learned from someone and should be given to the next person.
 - `Markdown + Example or Demo Source + Image + PDF for IT(Information Technology)`
 - `Open Source exists in a other Repository`
 
