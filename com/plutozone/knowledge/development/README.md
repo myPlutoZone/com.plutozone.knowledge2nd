@@ -3,10 +3,21 @@
 
 ## Standard Guide for Development since 2005-04-11
 - Common
-	- 저작권(Copyright)과 주석 at File, Class, Method, Attribute
+	- Workspace vs. Project vs. Package vs. Class
+  	- 저작권(Copyright)과 주석 at File, Class, Method, Attribute
    	- TODO Comment for 필수, 개선 그리고 향후
    	- Code Rule for Insert, Update, Delete
 	- Tab vs. Space for File Size and Usage
+- Framework for MVC
+  	- Dependency for Spring Web(Spring Version + Java Version) vs. Spring Boot(Spring Boot Version + Spring Version + Java Version)
+  	- Componet Name(ex: @Controller("com.plutozone.common.controller.SystemExceptionCtrl) at Spring Object
+  	- CRUD Page(list, writeForm, writeProc, view, modifyForm, modifyProc, remove, ...) at Controller
+  	- Frist Error for View and try/catch/finally at Controller
+  	- Service Message for Write, Update, ... and Redirect or Forward at Controller
+  	- System Transation vs. User Transaction at Service
+  	- Default Error Page(ex: Tomcat) vs. User Defined Error Page for 404, 500, ...
+  	- Logging(DEBUG, INFO, ...)
+  	- Support Multi Database and Language
 - Java
 	- Variable Initialization(Primitive vs. Object) at DTO/VO
 	- RESTful(POST, GET, PUT, DELETE, HEAD, ...) API vs. HTTP only POST API
