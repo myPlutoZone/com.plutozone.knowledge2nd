@@ -8,6 +8,7 @@
    	- TODO Comment for 필수, 개선 그리고 향후
    	- Code Rule for Insert, Update, Delete
 	- Tab vs. Space for File Size and Usage
+	- 로컬 개발 환경 설정(Static vs. Dynamic Resouce)
 - Framework for MVC
   	- Dependency for Spring Web(Spring Version + Java Version) vs. Spring Boot(Spring Boot Version + Spring Version + Java Version)
   	- Componet Name(ex: @Controller("com.plutozone.common.controller.SystemExceptionCtrl) at Spring Object
