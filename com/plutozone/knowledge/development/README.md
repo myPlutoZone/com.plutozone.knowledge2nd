@@ -17,6 +17,7 @@
   	- Service Message for Write, Update, ... and Redirect or Forward at Controller
   	- System Transation vs. User Transaction at Service
   	- Default Error Page(ex: Tomcat) vs. User Defined Error Page for 404, 500, ...
+  	- Static and Dynamic Properties
   	- Logging(DEBUG, INFO, ...)
   	- Support Multi Database and Language
 - Java
