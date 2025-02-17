@@ -31,3 +31,10 @@
 - CSS
   	- 난독화	
 	- 기본적으로 속성들은 스페이스(Space)로 분리하지만 include일 경우 스페이스(Space)를 생략(예: border:1px solid red;text-aling:center;)한다. 특히 min 파일일 경우
+
+
+## Co-Work at Web Development
+- Web Developer vs. 사업
+- Web Developer vs. 기획
+- Web Developer vs. 디자인
+- Web Developer vs. Publisher or App Developer or DBA or SE
