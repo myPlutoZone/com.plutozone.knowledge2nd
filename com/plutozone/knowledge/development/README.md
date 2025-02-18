@@ -2,6 +2,9 @@
 
 
 ## Standard Guide for Development since 2005-04-11
+- Working
+	- 입력값(예: 아이디/비밀번호 등)
+	- 세션 등
 - Common
 	- Workspace vs. Project vs. Package vs. Class
   	- 저작권(Copyright)과 주석 at File, Class, Method, Attribute
