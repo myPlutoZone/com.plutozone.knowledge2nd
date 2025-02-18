@@ -69,6 +69,10 @@ plutozone.com의 지적재산권 침해에 해당된다.
 		- 침해의 기준은 복사가 아닌 손해가 실제 발생한 경우에 적용될 수도 있다.
 		- 소스 저작권 vs. 오픈 소스 저작권
 	- 지식(지적) 재산권의 분류와 관할 기관 및 기한 in Korea
+- cmd.exe
+```cmd
+C:\>netstat -ano | find "80"		# "80" 확인 vs. "LISTEN" 등
+```
 
 
 # Markdown
