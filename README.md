@@ -10,6 +10,8 @@ plutozone.com의 지적재산권 침해에 해당된다.
 ***
 > Copyright (C) 2005 plutozone.com All Rights Reserved
 
+![정보기술-개발](./IT-development.png )
+
 
 # Overview
 - Our knowledge and wisdom are learned from someone and should be given to the next person.
@@ -96,5 +98,3 @@ pythonprint("hello world!")
 </details>
 
 [Google](http://www.google.co.kr "구글")
-
-![alt text](/noImage.png )
