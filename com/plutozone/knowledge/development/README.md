@@ -12,12 +12,13 @@
 	- 효율적 기준 정보(예: 코드와 값)와 입력값(예: 로그인 아이디와 암호, 회원 가입 정보) 관리
 - Framework for MVC
   	- Dependency for Spring Web(Spring Version + Java Version) vs. Spring Boot(Spring Boot Version + Spring Version + Java Version)
-  	- Componet Name(ex: @Controller("com.plutozone.common.controller.SystemExceptionCtrl) at Spring Object
-  	- Session or Token vs. Filter vs. AOP vs. Interceptor 그리고 방어 코드
+  	- MVC = M(Service + Dao) + V(View) + C(Controller)
   	- [Controller] CRUD Page(list, writeForm, writeProc, view, modifyForm, modifyProc, remove, ...)
   	- [Controller] Frist Error for View and try/catch/finally
   	- [Controller] Service Message for Write, Update, ... and Redirect or Forward
   	- [Service] System Transation vs. User Transaction
+  	- Componet Name(ex: @Controller("com.plutozone.common.controller.SystemExceptionCtrl) at Spring Object
+  	- Session or Token vs. Filter vs. AOP vs. Interceptor 그리고 방어 코드
   	- Default Error Page(ex: Tomcat) vs. User Defined Error Page for 404, 500, ...
   	- Static and Dynamic Properties
   	- Logging(DEBUG, INFO, ...)
