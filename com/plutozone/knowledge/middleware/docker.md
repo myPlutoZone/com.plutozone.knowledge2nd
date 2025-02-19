@@ -41,12 +41,12 @@
 ```bash
 $ curl -fsSL https://download.docker.com/linux/centos/docker-ce.repo -o /etc/yum.repos.d/docker-ce.repo
 $ yum install -y docker-ce
-$ docker version				# Only Client Version
-$ systemctl start docker		# Server Start
-$ systemctl enable docker		# Server Start on Boot
-$ docker version				# Client and Server Version
+$ docker version                # Only Client Version
+$ systemctl start docker        # Server Start
+$ systemctl enable docker       # Server Start on Boot
+$ docker version                # Client and Server Version
 $ docker images
-$ docker run hello-world		# Download and Print Hello from Docker!
+$ docker run hello-world        # Download and Print Hello from Docker!
 $ docker images
 ```
 
@@ -85,8 +85,8 @@ $ docker -H 172.16.0.102:2375      # Remote Host 접속 시
 ## Commands
 - Search Image at Registry
 ```bash
-$ docker search nginx               # Default Registry(hub.docker.com)에서 nginx Image를 검색 = https://hub.docker.com/에서 nginx를 검색
-$ docker search quay.io/nginx				# quay.io Registry에서 nginx Image를 검색	
+$ docker search nginx            # Default Registry(hub.docker.com)에서 nginx Image를 검색 = https://hub.docker.com/에서 nginx를 검색
+$ docker search quay.io/nginx    # quay.io Registry에서 nginx Image를 검색	
 ```
 
 - Search Image at Localhost
@@ -97,9 +97,10 @@ $ docker images
 - Pull
 ```bash
 # [중요] 하나의 공인 IP에 대해 6시간동안 100건?으로 제한 vs. 로그인 후에는 150건? at hub.docker.com
-$ docker pull nginx				                                 # Default = at hub.docker.com + Tag 생략 시 latest
-$ docker pull quay.io/uvelyster/nginx				               # at quay.io/uvelyster/nginx(Domain/Owner/Repository, Tag 생략 시 latest)
-$ docker pull plutomsw/cicd_guestbook:20240107064001_24    # at hub.docker.com/plutomsw/cicd_guestbook:20240107064001_24(Domain/Owner/Repository:Tag)
+$ docker pull nginx                                        # Default(hub.docker.com) + nginx + Tag 생략 시 latest
+$ docker pull openjdk:8-alpine                             # Default(hub.docker.com) + openjdk + 8-apline
+$ docker pull quay.io/uvelyster/nginx                      # quay.io/uvelyster/nginx(Registry/Owner/Repository, Tag 생략 시 latest)
+$ docker pull plutomsw/cicd_guestbook:20240107064001_24    # hub.docker.com/plutomsw/cicd_guestbook:20240107064001_24(Registry/Owner/Repository:Tag)
 ```
 
 - Run and Example
