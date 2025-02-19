@@ -1,7 +1,7 @@
 # com.plutozone.knowledge.development
 
 
-## Standard Guide for Development since 2005-04-11
+## Standard Guide for Development
 - Common
 	- Workspace vs. Project vs. Package vs. Class
   	- 저작권(Copyright)과 주석 at File, Class, Method, Attribute
