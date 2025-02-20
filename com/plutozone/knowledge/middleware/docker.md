@@ -272,28 +272,22 @@ $ docker history demo-nginx:v1 | wc -l
 $ docker run -d --name demoNginxLatest -p 1234:80 demo-nginx
 $ docker run -d --name demoNginxV1 -p 1235:80 demo-nginx:v1
 $ docker ps
-$ docker tag demo-nginx demo-nginx:v2                                    # 최종 이미지를 버전 업하기 전에 태그(demo-nginx:v2) 변경
+$ docker tag demo-nginx demo-nginx:v2                                   # 최종 이미지를 버전 업하기 전에 태그(demo-nginx:v2) 변경
 $ docker images
 $ echo "hello world Final" > index.html
 $ docker cp index.html demoNginxLatest:/usr/share/nginx/html/index.html
-$ docker commit demoNginxLatest demo-nginx                               # 재변경되어 실행중인 컨테이너(demoNginxLatest)를 demo-nginx:latest 이미지로 생성(이미지명에 대문자 사용 불가)
+$ docker commit demoNginxLatest demo-nginx                              # 재변경되어 실행중인 컨테이너(demoNginxLatest)를 demo-nginx:latest 이미지로 생성(이미지명에 대문자 사용 불가)
 $ docker images
 $ docker ps
-$ docker tag demo-nginx demo-nginx:v3                                    # 빌드 버전 변경(기존을 v3)
+$ docker tag demo-nginx demo-nginx:v3                                   # 빌드 버전 변경(기존을 v3)
 $ docker images
-$ docker tag demo-nginx:v3 demo-nginx                                    # 빌드 버전 변경(v3를 latest) [중요] 실제 컨테이너 변경이 없으므로 v3와 lastest의 IMAGE_ID가 동일(v3는 불필요)
+$ docker tag demo-nginx:v3 demo-nginx                                   # 빌드 버전 변경(v3를 latest) [중요] 실제 컨테이너 변경이 없으므로 v3와 lastest의 IMAGE_ID가 동일(v3는 불필요)
 $ docker images
 $ docker ps
-
-$ docker tag demo-nginx:latest myRegistry.com/demo-nginx                 # latest 설정(기본을 latest)
-$ docker push myRegistry.com/demo-nginx                                  # latest 등록
-
-
-$ docker run -d --name builder2 nginx2nd:v2
-$ docker commit builder2 nginx2nd:v3
-$ docker history nginx2nd:v1 | wc -l
-$ docker history nginx2nd:v2 | wc -l
-$ docker history nginx2nd:v3 | wc -l
+$ docker tag demo-nginx:latest myRegistry.com/ID/demo-nginx             # latest 설정(기본을 latest) [참고] hug.docker.com일 경우는 도메인 생략
+$ docker images
+$ docker login -u ID                                                    # [참고] docker.io(hub.docker.com)을 사용할 경우 로그인
+$ docker push myRegistry.com/ID/demo-nginx                              # latest 등록 [참고] hug.docker.com일 경우는 도메인 생략
 
 # 자동 빌드(docker build)
 $ mkdir buildTest
