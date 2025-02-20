@@ -161,7 +161,7 @@ $ docker kill [NAME or ID%]                                           # SIGTERM(
 $ docker logs -f [ID%]
 $ docker inspect [NAME or ID%]
 $ docker inspect -f '{{ .NetworkSettings.IPAddress }}' [NAME or ID%]  # IP 확인
-$ docker rm [ID%]                                                     # 중지되어 있어야 삭제 가능
+$ docker rm [ID%]                                                     # 이미지는 중지되어 있어야 삭제 가능
 $ docker run --rm                                                     # 실행 후 즉시 삭제
 $ docker rm -f $(docker container ls -a -q)                           # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
 $ docker rmi [IMAGE]                                                  # 이미지 삭제(해당 컨테이너가 삭제되어야 이미지 삭제 가능, -f 시 강제 삭제)
@@ -228,13 +228,20 @@ $ docker volume prune                                                           
 
 
 ## Summary
-- Image는 myRegistry.com/hello-py:latest
-- 로컬 /source 폴더를 컨테이너 /data에 바인딩
-- 로컬 1234 포트에 접속할 경우 컨테이너 5000 포트로 포워딩
-- 컨테이너 이름은 webTest
-- 환경 변수는 APP=python
 ```bash
-$ docker run -d -v /source:/data -p 1234:5000 --name: webTest -e APP=python myRegistry.com/hello-py:latest
+# Image는 myRegistry.com/hello-py:latest이며 로컬에 없을 경우 다운로드되어 백그라운드 모드로 실행(-d)
+# 로컬의 /source 폴더를 컨테이너의 /data에 바인딩(-v /source:/data)
+# 로컬 1234 포트에 접속할 경우 컨테이너 5000 포트로 포워딩(-p 1234:5000)
+# 컨테이너 이름은 demoHelloPy
+# 환경 변수는 APP=python
+$ docker run -d -v /source:/data -p 1234:5000 --name demoHelloPy -e APP=python myRegistry.com/hello-py:latest
+
+# Image는 nginx이며 로컬에 없을 경우 다운로드되어 백그라운드 모드로 실행(-d)
+# 로컬의 /source 폴더를 컨테이너의 /data에 바인딩(-v /source:/data)
+# 로컬 1234 포트에 접속할 경우 컨테이너 80 포트로 포워딩(-p 1234:80)
+# 컨테이너 이름은 demoNginx
+# 환경 변수는 ENV=hello
+$ docker run -d -v /source:/data -p 1234:80 --name demoNginx -e ENV=hello nginx
 ```
 
 
