@@ -69,8 +69,7 @@ $ docker ps -a
 ```
 
 ## Server & Client
-- docker는 Client Tool이므로 Localhost 통신이 기본
-- Kubernetes는 Server Tool이므로 Remote Host 통신이 기본
+- docker는 Client Tool이므로 Localhost 통신이 기본 vs. Kubernetes는 Server Tool이므로 Remote Host 통신이 기본
 ```bash
 $ docker -H 172.16.0.102:2375      # Remote Host 접속 시
 ```
@@ -97,50 +96,59 @@ $ docker images
 - Pull
 ```bash
 # [중요] 하나의 공인 IP에 대해 6시간동안 100건?으로 제한 vs. 로그인 후에는 150건? at hub.docker.com
+$ docker images
 $ docker pull nginx                                        # Default(hub.docker.com) + nginx + Tag 생략 시 latest
 $ docker pull openjdk                                      # Default(hub.docker.com) + openjdk + Tag 생략 시 latest
 $ docker pull openjdk:8-alpine                             # Default(hub.docker.com) + openjdk + 8-apline
-$ docker pull quay.io/uvelyster/nginx                      # quay.io/uvelyster/nginx(Registry/Owner/Repository, Tag 생략 시 latest)
-$ docker pull plutomsw/cicd_guestbook:20240107064001_24    # hub.docker.com/plutomsw/cicd_guestbook:20240107064001_24(Registry/Owner/Repository:Tag)
+$ docker pull quay.io/uvelyster/nginx                      # [D] quay.io/uvelyster/nginx(Registry/Owner/Repository, Tag 생략 시 latest)
+$ docker pull plutomsw/cicd_guestbook:20240107064001_24    # [U] hub.docker.com/plutomsw/cicd_guestbook:20240107064001_24(Registry/Owner/Repository:Tag)
+$ docker images
 ```
 
 - Run and Example
 ```bash
 $ docker images
+$ docker run nginx                                               # Forground(stdout + stderr) Mode 
 $ docker run openjdk:8-alpine                                    # Forground(stdout + stderr) Mode
-$ docker run quay.io/uvelyster/nginx                             # Forground(stdout + stderr) Mode
+$ docker run quay.io/uvelyster/nginx                             # [D] Forground(stdout + stderr) Mode
 $ docker ps
 $ docker ps -a
+$ docker run -d nginx                                            # Background(stdout is none) Mode
 $ docker run -d openjdk:8-alpine                                 # Background(stdout is none) Mode
-$ docker run -d quay.io/uvelyster/nginx                          # Background(stdout is none) Mode
+$ docker run -d quay.io/uvelyster/nginx                          # [D] Background(stdout is none) Mode
 $ docker ps
 $ docker ps -a
+$ docker run -i nginx                                            # Interactive(stdin + stdout + stderr) Mode
 $ docker run -i openjdk:8-alpine                                 # Interactive(stdin + stdout + stderr) Mode
-$ docker run -i quay.io/uvelyster/nginx                          # Interactive(stdin + stdout + stderr) Mode
+$ docker run -i quay.io/uvelyster/nginx                          # [D] Interactive(stdin + stdout + stderr) Mode
 $ docker ps
 $ docker ps -a
 $ curl 172.17.0.2                                                # [중요] Default Container Network=172.17.0.0/16(Default: Container Host에서만 접속 가능)
-$ docker run openjdk:8-alpine echo helloworld                    # Command Parameter(echo helloworld)
-$ docker run quay.io/uvelyster/nginx echo helloworld             # Command Parameter(echo helloworld)
+$ docker run nginx echo helloworld                               # Forground(stdout + stderr) Mode + Command Parameter(echo helloworld)
+$ docker run openjdk:8-alpine echo helloworld                    # Forground(stdout + stderr) Mode + Command Parameter(echo helloworld)
+$ docker run quay.io/uvelyster/nginx echo helloworld             # [D] Command Parameter(echo helloworld)
+$ docker ps
+$ docker ps -a
+$ docker run -d --name demoNginx-1 nginx                         # Background Mode(-d) + Alias Name(--name)
 $ docker run -d --name demoOpenJdk8-1 openjdk:8-alpine           # Background Mode(-d) + Alias Name(--name)
-$ docker run -d --name demoApp-1 quay.io/uvelyster/nginx         # Background Mode(-d) + Alias Name(--name)
+$ docker run -d --name demoApp-1 quay.io/uvelyster/nginx         # [D] Background Mode(-d) + Alias Name(--name)
 $ docker ps
 $ docker ps -a
-$ docker run -it --name demoOpenJdk8-2 openjdk:8-alpine          # Interactive(stdin + stdout + stderr) / TTY Mode(=-it) + Alias Name(--name)
-$ docker run -it --name demoApp-2 quay.io/uvelyster/nginx        # Interactive(stdin + stdout + stderr) / TTY Mode(=-it) + Alias Name(--name)
-$ docker run -i -t --name demoApp-3 quay.io/uvelyster/nginx      # Interactive(stdin + stdout + stderr) / TTY Mode(=-it) + Alias Name(--name)
+$ docker run -it --name demoNginx-2 nginx                        # Interactive(stdin + stdout + stderr) / Interactive + TTY Mode(=-i -t) + Alias Name(--name)
+$ docker run -it --name demoOpenJdk8-2 openjdk:8-alpine          # Interactive(stdin + stdout + stderr) / Interactive + TTY Mode(=-i -t) + Alias Name(--name)
+$ docker run -it --name demoApp-2 quay.io/uvelyster/nginx        # [D] Interactive(stdin + stdout + stderr) / Interactive + TTY Mode(=-i -t) + Alias Name(--name)
 $ docker ps
 $ docker ps -a
-$ docker inspect demoOpenJdk8-1
-$ docker inspect demoOpenJdk8-2
-$ docker inspect demoApp-1
-$ docker inspect demoApp-2
-$ docker inspect demoApp-3
-$ docker cp demoApp:/usr/share/nginx/html/index.html .             # 컨테이너 파일을 로컬(.)로 복사
+$ docker inspect demoNginx-1                                      # Backgroud Mode and Service
+$ docker inspect demoNginx-2                                      # Forground Mode
+$ docker inspect demoOpenJdk8-1                                   # Backgroud Mode and Non Service
+$ docker inspect demoOpenJdk8-2                                   # Forground Mode
+$ docker cp demoNginx-1:/usr/share/nginx/html/index.html .        # 컨테이너 파일을 로컬(.)로 복사 [중요] demoNginx-1 is a live!!!
 $ nano index.html
-$ docker cp ./index.html demoApp:/usr/share/nginx/html/index.html  # 로컬 파일을 컨테이너 파일로 복사
-$ docker exec -it demoApp /bin/bash				                         # [중요] 해당 컨테이너에 접근=exec addtional process(i: Interactive, t: TTY) after run(PID=1)
-$ exit                                                             # 해당 컨테이너에서 나가기
+$ docker cp ./index.html demoNginx-1:/usr/share/nginx/html/index.html  # 로컬 파일을 컨테이너 파일로 복사
+$ docker exec -it demoNginx-1 /bin/bash				                         # [중요] 해당 컨테이너에 접근=exec addtional process(i: Interactive, t: TTY) after run(PID=1)
+$ cat /usr/share/nginx/html/index.html
+$ exit                                                                 # 해당 컨테이너에서 나가기
 ```
 
 - LifeCycle for Container
