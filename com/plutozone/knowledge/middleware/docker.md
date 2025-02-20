@@ -153,18 +153,19 @@ $ exit                                                                 # 해당 
 
 - LifeCycle for Container
 ```bash
-$ docker create [IMAGE]                                               # 대문자 사용 불가
-$ docker start [IMAGE]                                                # run = create + start
-$ docker restart [NAME or ID%]
-$ docker stop [NAME or ID%]                                           # SIGTERM(15)에 해당하는 안전 종료(참고: kill -l)
-$ docker kill [NAME or ID%]                                           # SIGTERM(9)에 해당하는 강제 종료
-$ docker logs -f [ID%]
-$ docker inspect [NAME or ID%]
-$ docker inspect -f '{{ .NetworkSettings.IPAddress }}' [NAME or ID%]  # IP 확인
-$ docker rm [ID%]                                                     # 이미지는 중지되어 있어야 삭제 가능
-$ docker run --rm                                                     # 실행 후 즉시 삭제
-$ docker rm -f $(docker container ls -a -q)                           # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
-$ docker rmi [IMAGE]                                                  # 이미지 삭제(해당 컨테이너가 삭제되어야 이미지 삭제 가능, -f 시 강제 삭제)
+$ docker run [IMAGE_NAME]                                                                   # 실행(run = create + start)
+$ docker create [IMAGE_NAME]                                                                # 생성(대문자 사용 불가)
+$ docker start [CONTAINTER_NAME or CONTAINTER_ID%]                                          # 시작
+$ docker restart [CONTAINTER_NAME or CONTAINTER_ID%]                                        # 재시작
+$ docker stop [CONTAINTER_NAME or CONTAINTER_ID%]                                           # SIGTERM(15)에 해당하는 안전 종료(참고: kill -l)
+$ docker kill [CONTAINTER_NAME or CONTAINTER_ID%]                                           # SIGTERM(9)에 해당하는 강제 종료
+$ docker logs -f [CONTAINTER_ID%]
+$ docker inspect [CONTAINTER_NAME or CONTAINTER_ID%]
+$ docker inspect -f '{{ .NetworkSettings.IPAddress }}' [CONTAINTER_NAME or CONTAINTER_ID%]  # IP 확인
+$ docker rm [CONTAINTER_ID%]                                                                # 종료(stop or kill)되어 있어야 삭제 가능
+$ docker run --rm                                                                           # 실행 후 즉시 삭제
+$ docker rm -f $(docker container ls -a -q)                                                 # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
+$ docker rmi [**IMAGE**IMAGE_NAME]                                                          # 이미지 삭제(해당 컨테이너가 삭제되어야 이미지 삭제 가능, -f 시 강제 삭제)
 ```
 
 
@@ -242,6 +243,7 @@ $ docker run -d -v /source:/data -p 1234:5000 --name demoHelloPy -e APP=python m
 # 컨테이너 이름은 demoNginx
 # 환경 변수는 ENV=hello
 $ docker run -d -v /source:/data -p 1234:80 --name demoNginx -e ENV=hello nginx
+$ docker exec -it demoNginx /bin/bash
 ```
 
 
