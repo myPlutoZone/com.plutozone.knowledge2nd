@@ -165,7 +165,7 @@ $ docker inspect -f '{{ .NetworkSettings.IPAddress }}' [CONTAINTER_NAME or CONTA
 $ docker rm [CONTAINTER_ID%]                                                                # 종료(stop or kill)되어 있어야 삭제 가능
 $ docker run --rm                                                                           # 실행 후 즉시 삭제
 $ docker rm -f $(docker container ls -a -q)                                                 # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
-$ docker rmi [**IMAGE**IMAGE_NAME]                                                          # 이미지 삭제(해당 컨테이너가 삭제되어야 이미지 삭제 가능, -f 시 강제 삭제)
+$ docker rmi [IMAGE_NAME]                                                                   # 이미지 삭제(해당 컨테이너가 삭제되어야 이미지 삭제 가능, -f 시 강제 삭제)
 ```
 
 
@@ -253,23 +253,29 @@ $ docker exec -it demoNginx /bin/bash
   - **자동 빌드(docker build)**: 대부분 신규 이미지를 빌드(**베이스 이미지 선택 또는 설정이 가장 중요**)
 ```bash
 # 수동 빌드(docker commit)
-$ docker run -d --name demoNginx nginx                                  # 베이스 이미지(nginx)를 이용하여 demoNginx 이미지를 생성
+$ docker run -d --name demoNginx nginx                                  # 베이스 이미지(nginx)를 이용하여 demoNginx로 실행
 $ docker ps
 $ echo "hello world" > index.html
 $ docker cp index.html demoNginx:/usr/share/nginx/html/index.html
-$ docker commit demoNginx demo_nginx:v1                                 # 빌드된 이미지를 demo_nginx:v1 이미지로 생성(이미지명에 대문자 사용 불가)
+$ docker commit demoNginx demo_nginx:v1                                 # 실행중인 컨테이너(demoNginx)를 demo_nginx:v1 이미지로 생성(이미지명에 대문자 사용 불가)
 $ docker images
-$ @ docker history demo_nginx
+$ docker history nginx
+$ docker history demoNginx
+$ docker history demo_nginx
+$ docker history demo_nginx:v1
+$ docker history demo_nginx:v1 | wc -l
+$ docker run -d -p 1234:80 demo_nginx:v1
+$ docker ps
 
 $ docker run -d --name builder nginx2nd                                  # 베이스 이미지(nginx2nd)를 이용하여 builder 이미지를 생성
 $ echo "hello world" > index.html
 $ docker cp index.html builder:/usr/share/nginx/html/index.html
 $ docker commit builder nginx2nd:v2                                      # 빌드된 이미지를 nginx2nd:v2 이미지로 생성
 $ docker images
-
 $ docker history nginx2nd | wc -l
 $ docker history nginx2nd:v2 | wc -l
 $ docker run -d -p 1234:80 nginx2nd:v2
+
 $ docker tag nginx2nd nginx2nd:v1                                          # 빌드 버전 변경(기존을 v1)
 $ docker tag nginx2nd:v2 nginx2nd                                          # 빌드 버전 변경(v2를 latest)
 $ docker tag nginx2nd:latest myRegistry.com/nginx2nd                       # latest 설정(기본을 latest)
