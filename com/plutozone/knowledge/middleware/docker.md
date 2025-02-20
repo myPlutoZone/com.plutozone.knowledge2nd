@@ -146,14 +146,14 @@ $ docker inspect demoOpenJdk8-2                                   # Forground Mo
 $ docker cp demoNginx-1:/usr/share/nginx/html/index.html .        # 컨테이너 파일을 로컬(.)로 복사 [중요] demoNginx-1 is a live!!!
 $ nano index.html
 $ docker cp ./index.html demoNginx-1:/usr/share/nginx/html/index.html  # 로컬 파일을 컨테이너 파일로 복사
-$ docker exec -it demoNginx-1 /bin/bash				                         # [중요] 해당 컨테이너에 접근=exec addtional process(i: Interactive, t: TTY) after run(PID=1)
+$ docker exec -it demoNginx-1 /bin/bash                                # [중요] 해당 컨테이너에 접근=exec addtional process(i: Interactive, t: TTY) after run(PID=1)
 $ cat /usr/share/nginx/html/index.html
 $ exit                                                                 # 해당 컨테이너에서 나가기
 ```
 
 - LifeCycle for Container
 ```bash
-$ docker create [IMAGE]
+$ docker create [IMAGE]                                               # 대문자 사용 불가
 $ docker start [IMAGE]                                                # run = create + start
 $ docker restart [NAME or ID%]
 $ docker stop [NAME or ID%]                                           # SIGTERM(15)에 해당하는 안전 종료(참고: kill -l)
