@@ -197,8 +197,8 @@ $ docker network create demoNet --subnet 172.20.0.0/24                  # 사용
 $ docker network ls
 $ docker run -d --network demoNet --name demoApp nginx2nd               # 사용자 정의 네트워크로 컨테이너 실행
 $ docker inspect demoApp | grep IP                                      # IP 확인
-$ docker run -d --network demoNet --name demoApp2 -p 1234:80 nginx2nd   # [중요] 사용자 정의 네트워크로 컨테이너 실행(-p: 포트 포워딩): 요청 포트:응답 포트
-                                                                        # http://172.16.0.101:1234
+$ docker run -d --network demoNet --name demoApp2 -p 1000:80 nginx2nd   # [중요] 사용자 정의 네트워크로 컨테이너 실행(-p: 포트 포워딩): 요청 포트:응답 포트
+                                                                        # http://172.16.0.101:1000
 $ docker rm -f $(docker container ls -a -q)                             # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
 $ docker network rm demoNet
 ```
@@ -241,17 +241,17 @@ $ docker volume prune                                                           
 ```bash
 # Image는 myRegistry.com/hello-py:latest이며 로컬에 없을 경우 다운로드되어 백그라운드 모드로 실행(-d)
 # 로컬의 /source 폴더를 컨테이너의 /data에 바인딩(-v /source:/data)
-# 로컬 1234 포트에 접속할 경우 컨테이너 5000 포트로 포워딩(-p 1234:5000)
+# 로컬 1000 포트에 접속할 경우 컨테이너 5000 포트로 포워딩(-p 1000:5000)
 # 컨테이너 이름은 demoHelloPy
 # 환경 변수는 APP=python
-$ docker run -d -v /source:/data -p 1234:5000 --name demoHelloPy -e APP=python myRegistry.com/hello-py:latest
+$ docker run -d -v /source:/data -p 1000:5000 --name demoHelloPy -e APP=python myRegistry.com/hello-py:latest
 
 # Image는 nginx이며 로컬에 없을 경우 다운로드되어 백그라운드 모드로 실행(-d)
 # 로컬의 /source 폴더를 컨테이너의 /data에 바인딩(-v /source:/data)
-# 로컬 1234 포트에 접속할 경우 컨테이너 80 포트로 포워딩(-p 1234:80)
+# 로컬 1000 포트에 접속할 경우 컨테이너 80 포트로 포워딩(-p 1000:80)
 # 컨테이너 이름은 demoNginx
 # 환경 변수는 ENV=hello
-$ docker run -d -v /source:/data -p 1234:80 --name demoNginx -e ENV=hello nginx
+$ docker run -d -v /source:/data -p 1000:80 --name demoNginx -e ENV=hello nginx
 $ docker exec -it demoNginx /bin/bash
 ```
 
@@ -278,7 +278,7 @@ $ docker images
 
 $ docker images
 $ docker ps -a
-$ docker run -d --name demoNginxV1 -p 1234:80 nginx                           # 베이스 이미지(nginx)를 이용하여 demoNginxV1로 실행
+$ docker run -d --name demoNginxV1 -p 1000:80 nginx                           # 베이스 이미지(nginx)를 이용하여 demoNginxV1로 실행
 $ docker ps -a                                                                
 $ docker commit demoNginxV1 demo-nginx                                        # 실행중인 컨테이너(demoNginxV1)를 demo-nginx:latest 이미지로 생성
 $ docker images
@@ -292,7 +292,7 @@ $ docker images
 $ docker tag myRegistry.com/ID/demo-nginx myRegistry.com/ID/demo-nginx:v1     # 최종 이미지를 버전 업하기 전에 태그(demo-nginx:v1) 변경
 $ docker images
 $ docker push myRegistry.com/ID/demo-nginx:v1                                 # v1 등록
-$ docker run -d --name demoNginxV2 -p 1235:80 myRegistry.com/ID/demo-nginx    # 최종 이미지(demo-nginx)를 이용하여 demoNginxV2로 실행하고 하기에서 소스 버전 업
+$ docker run -d --name demoNginxV2 -p 1001:80 myRegistry.com/ID/demo-nginx    # 최종 이미지(demo-nginx)를 이용하여 demoNginxV2로 실행하고 하기에서 소스 버전 업
 $ echo "hello world, First Update" > index.html
 $ docker cp index.html demoNginxV2:/usr/share/nginx/html/index.html
 $ docker commit demoNginxV2 myRegistry.com/ID/demo-nginx                      # 변경되어 실행중인 컨테이너(demoNginxV2)를 demo-nginx:latest 이미지로 생성
@@ -306,7 +306,7 @@ $ docker ps -a
 $ docker tag myRegistry.com/ID/demo-nginx myRegistry.com/ID/demo-nginx:v2     # 최종 이미지를 버전 업하기 전에 태그(demo-nginx:v2) 변경
 $ docker images
 $ docker push myRegistry.com/ID/demo-nginx:v2                                 # v2 등록
-$ docker run -d --name demoNginxV3 -p 1236:80 myRegistry.com/ID/demo-nginx    # 최종 이미지(demo-nginx)를 이용하여 demoNginxV3로 실행하고 하기에서 소스 버전 업
+$ docker run -d --name demoNginxV3 -p 1002:80 myRegistry.com/ID/demo-nginx    # 최종 이미지(demo-nginx)를 이용하여 demoNginxV3로 실행하고 하기에서 소스 버전 업
 $ echo "hello world, Second Update" > index.html
 $ docker cp index.html demoNginxV3:/usr/share/nginx/html/index.html
 $ docker commit demoNginxV3 myRegistry.com/ID/demo-nginx                      # 재변경되어 실행중인 컨테이너(demoNginxV3)를 demo-nginx:latest 이미지로 생성
@@ -318,9 +318,9 @@ $ docker rmi myRegistry.com/ID/demo-nginx:v1                                  # 
 $ docker rmi myRegistry.com/ID/demo-nginx:v2
 $ docker rmi myRegistry.com/ID/demo-nginx
 $ docker images
-$ docker run -d --name demoNginx -p 1234:80 myRegistry.com/ID/demo-nginx      # demo-nginx:latest pull 및 run
-$ docker run -d --name demoNginxV2 -p 1235:80 myRegistry.com/ID/demo-nginx:v2 # demo-nginx:v2 pull 및 run
-$ docker run -d --name demoNginxV1 -p 1236:80 myRegistry.com/ID/demo-nginx:v1 # demo-nginx:v1 pull 및 run
+$ docker run -d --name demoNginx -p 1000:80 myRegistry.com/ID/demo-nginx      # demo-nginx:latest pull 및 run
+$ docker run -d --name demoNginxV2 -p 1001:80 myRegistry.com/ID/demo-nginx:v2 # demo-nginx:v2 pull 및 run
+$ docker run -d --name demoNginxV1 -p 1002:80 myRegistry.com/ID/demo-nginx:v1 # demo-nginx:v1 pull 및 run
 $ docker ps -a
 $ docker images
 
