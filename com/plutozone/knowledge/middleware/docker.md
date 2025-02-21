@@ -268,7 +268,7 @@ $ docker run -d --name demoSpringboot openjdk:8-alpine                  # 베이
 $ docker ps -a
 $ docker commit demoSpringboot demo-springboot                          # 실행중인 컨테이너(demoSpringboot)를 demo-springboot:latest 이미지로 생성(이미지명에 대문자 사용 불가, 이하 동일)
 $ docker images
-$ docker tag demo-springboot:latest myRegistry.com/ID/demo-springboot   # latest 설정(기본을 latest) [참고] hug.docker.com일 경우는 도메인 생략(myRegistry.com/, 이하 동일)
+$ docker tag demo-springboot:latest myRegistry.com/ID/demo-springboot   # 태그 설정(latest 생략 가능) [참고] hug.docker.com일 경우는 도메인 생략(myRegistry.com/, 이하 동일)
 $ docker images
 $ docker login -u ID                                                    # [참고] docker.io(hub.docker.com)을 사용할 경우 로그인(이하 동일)
 $ docker push myRegistry.com/ID/demo-springboot                         # latest 등록
@@ -279,11 +279,11 @@ $ docker images
 
 $ docker images
 $ docker ps -a
-$ docker run -d --name demoNginx nginx                                        # 베이스 이미지(nginx)를 이용하여 demoNginx로 실행
-$ docker ps -a
-$ docker commit demoNginx demo-nginx                                          # 실행중인 컨테이너(demoNginx)를 demo-nginx:latest 이미지로 생성
+$ docker run -d --name demoNginxV1 -p 1234:80 nginx                           # 베이스 이미지(nginx)를 이용하여 demoNginxV1로 실행
+$ docker ps -a                                                                
+$ docker commit demoNginxV1 demo-nginx                                        # 실행중인 컨테이너(demoNginxV1)를 demo-nginx:latest 이미지로 생성
 $ docker images
-$ docker tag demo-nginx:latest myRegistry.com/ID/demo-nginx                   # latest 설정(기본을 latest)
+$ docker tag demo-nginx myRegistry.com/ID/demo-nginx                          # 태그 설정(latest)
 $ docker images
 $ docker login -u ID
 $ docker push myRegistry.com/ID/demo-nginx                                    # latest 등록
@@ -291,18 +291,20 @@ $ docker images
 $ docker rmi demo-nginx
 $ docker images
 $ docker tag myRegistry.com/ID/demo-nginx myRegistry.com/ID/demo-nginx:v1     # 최종 이미지를 버전 업하기 전에 태그(demo-nginx:v1) 변경
+$ docker push myRegistry.com/ID/demo-nginx:v1                                 # v1 등록
 $ docker images
+$ docker run -d --name demoNginxV2 -p 1235:80 myRegistry.com/ID/demo-nginx    # 최종 이미지(demo-nginx)를 이용하여 demoNginxV2로 실행하고 하기에서 소스 버전 업
 $ echo "hello world, First Update" > index.html
-$ docker cp index.html demoNginx:/usr/share/nginx/html/index.html
-$ docker commit demoNginx myRegistry.com/ID/demo-nginx                        # 변경되어 실행중인 컨테이너(demoNginx)를 demo-nginx:latest 이미지로 생성
+$ docker cp index.html demoNginxV2:/usr/share/nginx/html/index.html
+$ docker commit demoNginxV2 myRegistry.com/ID/demo-nginx                      # 변경되어 실행중인 컨테이너(demoNginxV2)를 demo-nginx:latest 이미지로 생성
 $ docker images
 $ docker history nginx
 $ docker history myRegistry.com/ID/demo-nginx
 $ docker history myRegistry.com/ID/demo-nginx:v1
 $ docker history myRegistry.com/ID/demo-nginx:v1 | wc -l
-$ docker run -d --name demoNginxV2 -p 1234:80 myRegistry.com/ID/demo-nginx
-$ docker run -d --name demoNginxV1 -p 1235:80 myRegistry.com/ID/demo-nginx:v1
+$ docker push myRegistry.com/ID/demo-nginx                                    # latest 등록
 $ docker ps -a
+
 $ docker tag myRegistry.com/ID/demo-nginx myRegistry.com/ID/demo-nginx:v2     # 최종 이미지를 버전 업하기 전에 태그(demo-nginx:v2) 변경
 $ docker images
 $ echo "hello world, Second Update" > index.html
