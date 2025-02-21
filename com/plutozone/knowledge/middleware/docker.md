@@ -276,51 +276,50 @@ $ docker images
 $ docker rmi demo-springboot
 $ docker images
 
+$ docker rm -f $(docker container ls -a -q)
 $ docker images
 $ docker ps -a
-$ docker run -d --name demoNginxV1 -p 1000:80 nginx                           # 베이스 이미지(nginx)를 이용하여 demoNginxV1로 실행
+$ docker run -d --name demoNginx -p 1000:80 nginx                             # 베이스 이미지(nginx)를 이용하여 demoNginx로 실행
 $ docker ps -a                                                                
-$ docker commit demoNginxV1 demo-nginx                                        # 실행중인 컨테이너(demoNginxV1)를 demo-nginx:latest 이미지로 생성
+$ docker commit demoNginx demo-nginx                                          # 실행중인 컨테이너(demoNginx)를 demo-nginx:latest 이미지로 생성
 $ docker images
 $ docker tag demo-nginx myRegistry.com/ID/demo-nginx                          # 태그 설정(latest)
 $ docker images
 $ docker login -u ID
-$ docker push myRegistry.com/ID/demo-nginx                                    # latest 등록
+$ docker push myRegistry.com/ID/demo-nginx                                    # [Registry] latest 최초 등록
 $ docker images
 $ docker rmi demo-nginx
 $ docker images
 $ docker tag myRegistry.com/ID/demo-nginx myRegistry.com/ID/demo-nginx:v1     # 최종 이미지를 버전 업하기 전에 태그(demo-nginx:v1) 변경
 $ docker images
-$ docker push myRegistry.com/ID/demo-nginx:v1                                 # v1 등록
-$ docker run -d --name demoNginxV2 -p 1001:80 myRegistry.com/ID/demo-nginx    # 최종 이미지(demo-nginx)를 이용하여 demoNginxV2로 실행하고 하기에서 소스 버전 업
+$ docker push myRegistry.com/ID/demo-nginx:v1                                 # [Registry] v1 등록
 $ echo "hello world, First Update" > index.html
-$ docker cp index.html demoNginxV2:/usr/share/nginx/html/index.html
-$ docker commit demoNginxV2 myRegistry.com/ID/demo-nginx                      # 변경되어 실행중인 컨테이너(demoNginxV2)를 demo-nginx:latest 이미지로 생성
+$ docker cp index.html demoNginx:/usr/share/nginx/html/index.html
+$ docker commit demoNginx myRegistry.com/ID/demo-nginx                        # 변경되어 실행중인 컨테이너(demoNginx)를 demo-nginx:latest 이미지로 생성
 $ docker images
 $ docker history nginx
 $ docker history myRegistry.com/ID/demo-nginx
 $ docker history myRegistry.com/ID/demo-nginx:v1
 $ docker history myRegistry.com/ID/demo-nginx:v1 | wc -l
-$ docker push myRegistry.com/ID/demo-nginx                                    # latest 등록
+$ docker push myRegistry.com/ID/demo-nginx                                    # [Registry] latest 변경 등록
 $ docker ps -a
 $ docker tag myRegistry.com/ID/demo-nginx myRegistry.com/ID/demo-nginx:v2     # 최종 이미지를 버전 업하기 전에 태그(demo-nginx:v2) 변경
 $ docker images
-$ docker push myRegistry.com/ID/demo-nginx:v2                                 # v2 등록
-$ docker run -d --name demoNginxV3 -p 1002:80 myRegistry.com/ID/demo-nginx    # 최종 이미지(demo-nginx)를 이용하여 demoNginxV3로 실행하고 하기에서 소스 버전 업
+$ docker push myRegistry.com/ID/demo-nginx:v2                                 # [Registry] v2 등록
 $ echo "hello world, Second Update" > index.html
-$ docker cp index.html demoNginxV3:/usr/share/nginx/html/index.html
-$ docker commit demoNginxV3 myRegistry.com/ID/demo-nginx                      # 재변경되어 실행중인 컨테이너(demoNginxV3)를 demo-nginx:latest 이미지로 생성
+$ docker cp index.html demoNginx:/usr/share/nginx/html/index.html
+$ docker commit demoNginx myRegistry.com/ID/demo-nginx                        # 재변경되어 실행중인 컨테이너(demoNginx)를 demo-nginx:latest 이미지로 생성
 $ docker images
-$ docker push myRegistry.com/ID/demo-nginx                                    # latest 등록
+$ docker push myRegistry.com/ID/demo-nginx                                    # latest 변경 등록
 $ docker ps -a
-$ docker rm -f $(docker container ls -a -q)                                   # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
-$ docker rmi myRegistry.com/ID/demo-nginx:v1                                  # demo-nginx:* 이미지 삭제
+$ docker rm -f demoNginx                                                      # 컨테이너(demoNginx) 삭제(-f: 강제 중지 후 삭제)
+$ docker rmi myRegistry.com/ID/demo-nginx:v1                                  # 모든 이미지(demo-nginx*) 삭제
 $ docker rmi myRegistry.com/ID/demo-nginx:v2
 $ docker rmi myRegistry.com/ID/demo-nginx
 $ docker images
 $ docker run -d --name demoNginx -p 1000:80 myRegistry.com/ID/demo-nginx      # demo-nginx:latest pull 및 run
 $ docker run -d --name demoNginxV2 -p 1001:80 myRegistry.com/ID/demo-nginx:v2 # demo-nginx:v2 pull 및 run
-$ docker run -d --name demoNginxV1 -p 1002:80 myRegistry.com/ID/demo-nginx:v1 # demo-nginx:v1 pull 및 run
+$ docker run -d --name demoNginxV1 -p 1001:80 myRegistry.com/ID/demo-nginx:v1 # demo-nginx:v1 pull 및 run
 $ docker ps -a
 $ docker images
 
