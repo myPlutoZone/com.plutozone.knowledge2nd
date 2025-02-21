@@ -291,8 +291,8 @@ $ docker images
 $ docker rmi demo-nginx
 $ docker images
 $ docker tag myRegistry.com/ID/demo-nginx myRegistry.com/ID/demo-nginx:v1     # 최종 이미지를 버전 업하기 전에 태그(demo-nginx:v1) 변경
-$ docker push myRegistry.com/ID/demo-nginx:v1                                 # v1 등록
 $ docker images
+$ docker push myRegistry.com/ID/demo-nginx:v1                                 # v1 등록
 $ docker run -d --name demoNginxV2 -p 1235:80 myRegistry.com/ID/demo-nginx    # 최종 이미지(demo-nginx)를 이용하여 demoNginxV2로 실행하고 하기에서 소스 버전 업
 $ echo "hello world, First Update" > index.html
 $ docker cp index.html demoNginxV2:/usr/share/nginx/html/index.html
@@ -304,19 +304,16 @@ $ docker history myRegistry.com/ID/demo-nginx:v1
 $ docker history myRegistry.com/ID/demo-nginx:v1 | wc -l
 $ docker push myRegistry.com/ID/demo-nginx                                    # latest 등록
 $ docker ps -a
-
 $ docker tag myRegistry.com/ID/demo-nginx myRegistry.com/ID/demo-nginx:v2     # 최종 이미지를 버전 업하기 전에 태그(demo-nginx:v2) 변경
 $ docker images
+$ docker push myRegistry.com/ID/demo-nginx:v2                                 # v2 등록
+$ docker run -d --name demoNginxV3 -p 1236:80 myRegistry.com/ID/demo-nginx    # 최종 이미지(demo-nginx)를 이용하여 demoNginxV3로 실행하고 하기에서 소스 버전 업
 $ echo "hello world, Second Update" > index.html
-$ docker cp index.html demoNginxLatest:/usr/share/nginx/html/index.html
-$ docker commit demoNginxLatest demo-nginx                                    # 재변경되어 실행중인 컨테이너(demoNginxLatest)를 demo-nginx:latest 이미지로 생성
+$ docker cp index.html demoNginxV3:/usr/share/nginx/html/index.html
+$ docker commit demoNginxV3 myRegistry.com/ID/demo-nginx                      # 재변경되어 실행중인 컨테이너(demoNginxV3)를 demo-nginx:latest 이미지로 생성
 $ docker images
-$ docker ps
-$ docker tag demo-nginx demo-nginx:v3                                         # 빌드 버전 변경(기존을 v3)
-$ docker images
-$ docker tag demo-nginx:v3 demo-nginx                                         # 빌드 버전 변경(v3를 latest) [중요] 실제 컨테이너 변경이 없으므로 v3와 lastest의 IMAGE_ID가 동일(v3는 불필요)
-$ docker images
-$ docker ps
+$ docker push myRegistry.com/ID/demo-nginx                                    # latest 등록
+$ docker ps -a
 
 # 자동 빌드(docker build)
 $ mkdir buildTest
