@@ -111,16 +111,18 @@ $ docker images
 $ docker images
 $ docker run nginx                                               # Forground(stdout + stderr) Mode 
 $ docker run openjdk:8-alpine                                    # Forground(stdout + stderr) Mode
-$ docker run quay.io/uvelyster/nginx                             # Forground(stdout + stderr) Mode
 $ docker run plutomsw/demo-nginx                                 # Forground(stdout + stderr) Mode
+$ docker run quay.io/uvelyster/nginx                             # Forground(stdout + stderr) Mode
 $ docker ps
 $ docker ps -a
+
 $ docker run -d nginx                                            # Background(stdout is none) Mode
 $ docker run -d openjdk:8-alpine                                 # Background(stdout is none) Mode
 $ docker run -d plutomsw/demo-nginx                              # Background(stdout is none) Mode
 $ docker run -d quay.io/uvelyster/nginx                          # Background(stdout is none) Mode
 $ docker ps
 $ docker ps -a
+
 $ docker run -i nginx                                            # Interactive(stdin + stdout + stderr) Mode
 $ docker run -i openjdk:8-alpine                                 # Interactive(stdin + stdout + stderr) Mode
 $ docker run -i plutomsw/demo-nginx                              # Interactive(stdin + stdout + stderr) Mode
@@ -128,31 +130,36 @@ $ docker run -i quay.io/uvelyster/nginx                          # Interactive(s
 $ docker ps
 $ docker ps -a
 $ curl 172.17.0.2                                                # [중요] Default Container Network=172.17.0.0/16(Default: Container Host에서만 접속 가능)
+
 $ docker run nginx echo helloworld                               # Forground(stdout + stderr) Mode + Command Parameter(echo helloworld)
 $ docker run openjdk:8-alpine echo helloworld                    # Forground(stdout + stderr) Mode + Command Parameter(echo helloworld)
 $ docker run plutomsw/demo-nginx echo helloworld                 # Command Parameter(echo helloworld)
 $ docker run quay.io/uvelyster/nginx echo helloworld             # Command Parameter(echo helloworld)
 $ docker ps
 $ docker ps -a
+
 $ docker run -d --name demoNginx-1 nginx                         # Background Mode(-d) + Alias Name(--name)
 $ docker run -d --name demoOpenJdk8-1 openjdk:8-alpine           # Background Mode(-d) + Alias Name(--name)
 $ docker run -d --name myDemoNginx-1 plutomsw/demo-nginx         # Background Mode(-d) + Alias Name(--name)
 $ docker run -d --name demoApp-1 quay.io/uvelyster/nginx         # Background Mode(-d) + Alias Name(--name)
 $ docker ps
 $ docker ps -a
+
 $ docker run -it --name demoNginx-2 nginx                        # Forground Mode(stdin + stdout + stderr) / Interactive + TTY Mode(=-i -t) + Alias Name(--name)
 $ docker run -it --name demoOpenJdk8-2 openjdk:8-alpine          # Forground Mode(stdin + stdout + stderr) / Interactive + TTY Mode(=-i -t) + Alias Name(--name)
 $ docker run -it --name myDemoNginx-2 plutomsw/demo-nginx        # Forground Mode(stdin + stdout + stderr) / Interactive + TTY Mode(=-i -t) + Alias Name(--name)
 $ docker run -it --name demoApp-2 quay.io/uvelyster/nginx        # Forground Mode(stdin + stdout + stderr) / Interactive + TTY Mode(=-i -t) + Alias Name(--name)
 $ docker ps
 $ docker ps -a
+
 $ docker inspect demoNginx-1                                      # Backgroud Mode and Service
 $ docker inspect demoNginx-2                                      # Forground Mode
 $ docker inspect demoOpenJdk8-1                                   # Backgroud Mode and Non Service
 $ docker inspect demoOpenJdk8-2                                   # Forground Mode
 $ docker inspect myDemoNginx-1                                    # Backgroud Mode and Service
 $ docker inspect myDemoNginx-2                                    # Forground Mode
-$ docker cp demoNginx-1:/usr/share/nginx/html/index.html .        # 컨테이너 파일을 로컬(.)로 복사 [중요] demoNginx-1 is a live!!!
+
+$ docker cp demoNginx-1:/usr/share/nginx/html/index.html .             # 컨테이너 파일을 로컬(.)로 복사 [중요] demoNginx-1 is a live!!!
 $ nano index.html
 $ docker cp ./index.html demoNginx-1:/usr/share/nginx/html/index.html  # 로컬 파일을 컨테이너 파일로 복사
 $ docker exec -it demoNginx-1 /bin/bash                                # [중요] 해당 컨테이너에 접근=exec addtional process(i: Interactive, t: TTY) after run(PID=1)
