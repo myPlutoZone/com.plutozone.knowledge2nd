@@ -276,7 +276,6 @@ $ docker images
 $ docker rmi demo-springboot
 $ docker images
 
-
 $ docker images
 $ docker ps -a
 $ docker run -d --name demoNginxV1 -p 1234:80 nginx                           # 베이스 이미지(nginx)를 이용하여 demoNginxV1로 실행
