@@ -314,6 +314,16 @@ $ docker commit demoNginxV3 myRegistry.com/ID/demo-nginx                      # 
 $ docker images
 $ docker push myRegistry.com/ID/demo-nginx                                    # latest 등록
 $ docker ps -a
+$ docker rm -f $(docker container ls -a -q)                                   # 모든 컨테이너 삭제(-f: 강제 중지 후 삭제) or docker ps -aq
+$ docker rmi myRegistry.com/ID/demo-nginx:v1                                  # demo-nginx:* 이미지 삭제
+$ docker rmi myRegistry.com/ID/demo-nginx:v2
+$ docker rmi myRegistry.com/ID/demo-nginx
+$ docker images
+$ docker run -d --name demoNginx -p 1234:80 myRegistry.com/ID/demo-nginx      # demo-nginx:latest pull 및 run
+$ docker run -d --name demoNginxV2 -p 1235:80 myRegistry.com/ID/demo-nginx:v2 # demo-nginx:v2 pull 및 run
+$ docker run -d --name demoNginxV1 -p 1236:80 myRegistry.com/ID/demo-nginx:v1 # demo-nginx:v1 pull 및 run
+$ docker ps -a
+$ docker images
 
 # 자동 빌드(docker build)
 $ mkdir buildTest
