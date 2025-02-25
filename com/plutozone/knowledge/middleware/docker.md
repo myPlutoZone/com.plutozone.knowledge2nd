@@ -100,16 +100,17 @@ $ docker images
 $ docker pull nginx                                        # Default(hub.docker.com) + nginx + Tag 생략 시 latest
 $ docker pull openjdk                                      # Default(hub.docker.com) + openjdk + Tag 생략 시 latest
 $ docker pull openjdk:8-alpine                             # Default(hub.docker.com) + openjdk + 8-apline
-$ docker pull quay.io/uvelyster/nginx                      # quay.io/uvelyster/nginx(Registry/Owner/Repository, Tag 생략 시 latest)
 $ docker pull plutomsw/demo-nginx                          # hub.docker.com/plutomsw/demo-nginx(Registry/Owner/Repository, Tag 생략 시 latest)
 $ docker pull plutomsw/cicd_guestbook:20240107064001_24    # [UPDATE for demo-springboot from openjdk:8-alpine] hub.docker.com/plutomsw/cicd_guestbook:20240107064001_24(Registry/Owner/Repository:Tag)
+$ docker pull quay.io/uvelyster/nginx                      # quay.io/uvelyster/nginx(Registry/Owner/Repository, Tag 생략 시 latest)
 $ docker images
 ```
 
-- Run and Example
+- Run
 ```bash
 $ docker images
-$ docker run nginx                                               # Forground(stdout + stderr) Mode 
+$ docker run nginx                                               # Forground(stdout + stderr) Mode
+$ docker run openjdk                                             # Forground(stdout + stderr) Mode
 $ docker run openjdk:8-alpine                                    # Forground(stdout + stderr) Mode
 $ docker run plutomsw/demo-nginx                                 # Forground(stdout + stderr) Mode
 $ docker run quay.io/uvelyster/nginx                             # Forground(stdout + stderr) Mode
@@ -117,6 +118,7 @@ $ docker ps
 $ docker ps -a
 
 $ docker run -d nginx                                            # Background(stdout is none) Mode
+$ docker run -d openjdk                                          # Background(stdout is none) Mode
 $ docker run -d openjdk:8-alpine                                 # Background(stdout is none) Mode
 $ docker run -d plutomsw/demo-nginx                              # Background(stdout is none) Mode
 $ docker run -d quay.io/uvelyster/nginx                          # Background(stdout is none) Mode
@@ -124,6 +126,7 @@ $ docker ps
 $ docker ps -a
 
 $ docker run -i nginx                                            # Interactive(stdin + stdout + stderr) Mode
+$ docker run -i openjdk                                          # Interactive(stdin + stdout + stderr) Mode
 $ docker run -i openjdk:8-alpine                                 # Interactive(stdin + stdout + stderr) Mode
 $ docker run -i plutomsw/demo-nginx                              # Interactive(stdin + stdout + stderr) Mode
 $ docker run -i quay.io/uvelyster/nginx                          # Interactive(stdin + stdout + stderr) Mode
@@ -132,6 +135,7 @@ $ docker ps -a
 $ curl 172.17.0.2                                                # [중요] Default Container Network=172.17.0.0/16(Default: Container Host에서만 접속 가능)
 
 $ docker run nginx echo helloworld                               # Forground(stdout + stderr) Mode + Command Parameter(echo helloworld)
+$ docker run openjdk echo helloworld                             # Forground(stdout + stderr) Mode + Command Parameter(echo helloworld)
 $ docker run openjdk:8-alpine echo helloworld                    # Forground(stdout + stderr) Mode + Command Parameter(echo helloworld)
 $ docker run plutomsw/demo-nginx echo helloworld                 # Command Parameter(echo helloworld)
 $ docker run quay.io/uvelyster/nginx echo helloworld             # Command Parameter(echo helloworld)
@@ -139,6 +143,7 @@ $ docker ps
 $ docker ps -a
 
 $ docker run -d --name demoNginx-1 nginx                         # Background Mode(-d) + Alias Name(--name)
+$ docker run -d --name demoOpenJdk-1 openjdk                     # Background Mode(-d) + Alias Name(--name)
 $ docker run -d --name demoOpenJdk8-1 openjdk:8-alpine           # Background Mode(-d) + Alias Name(--name)
 $ docker run -d --name myDemoNginx-1 plutomsw/demo-nginx         # Background Mode(-d) + Alias Name(--name)
 $ docker run -d --name demoApp-1 quay.io/uvelyster/nginx         # Background Mode(-d) + Alias Name(--name)
@@ -146,6 +151,7 @@ $ docker ps
 $ docker ps -a
 
 $ docker run -it --name demoNginx-2 nginx                        # Forground Mode(stdin + stdout + stderr) / Interactive + TTY Mode(=-i -t) + Alias Name(--name)
+$ docker run -it --name demoOpenJdk-2 openjdk                    # Forground Mode(stdin + stdout + stderr) / Interactive + TTY Mode(=-i -t) + Alias Name(--name)
 $ docker run -it --name demoOpenJdk8-2 openjdk:8-alpine          # Forground Mode(stdin + stdout + stderr) / Interactive + TTY Mode(=-i -t) + Alias Name(--name)
 $ docker run -it --name myDemoNginx-2 plutomsw/demo-nginx        # Forground Mode(stdin + stdout + stderr) / Interactive + TTY Mode(=-i -t) + Alias Name(--name)
 $ docker run -it --name demoApp-2 quay.io/uvelyster/nginx        # Forground Mode(stdin + stdout + stderr) / Interactive + TTY Mode(=-i -t) + Alias Name(--name)
@@ -154,6 +160,8 @@ $ docker ps -a
 
 $ docker inspect demoNginx-1                                      # Backgroud Mode and Service
 $ docker inspect demoNginx-2                                      # Forground Mode
+$ docker inspect demoOpenJdk-1                                    # Backgroud Mode and Non Service
+$ docker inspect demoOpenJdk-2                                    # Forground Mode
 $ docker inspect demoOpenJdk8-1                                   # Backgroud Mode and Non Service
 $ docker inspect demoOpenJdk8-2                                   # Forground Mode
 $ docker inspect myDemoNginx-1                                    # Backgroud Mode and Service
@@ -265,8 +273,8 @@ $ docker exec -it demoNginx /bin/bash
 
 ## Build for Container
 - Build Type
-  - 수동 빌드(docker commit): 대부분 기존 이미지를 기반으로 이미지 빌드
-  - **자동 빌드(docker build)**: 대부분 신규 이미지를 빌드(**베이스 이미지 선택 또는 설정이 가장 중요**)
+  - 수동 빌드(=docker commit): 대부분 기존 이미지를 기반으로 이미지 빌드
+  - **자동 빌드(=docker build)**: 대부분 신규 이미지를 빌드(**베이스 이미지 선택 또는 설정이 가장 중요**)
 ```bash
 # 수동 빌드(docker commit)
 $ docker images
@@ -278,13 +286,13 @@ $ docker images
 $ docker tag demo-springboot:latest myRegistry.com/ID/demo-springboot                   # 태그 설정(latest 생략 가능) [참고] hug.docker.com일 경우는 도메인 생략(myRegistry.com/, 이하 동일)
 $ docker images
 $ docker login -u ID                                                                    # [참고] docker.io(hub.docker.com)을 사용할 경우 로그인(이하 동일)
-$ docker push myRegistry.com/ID/demo-springboot                                         # [Registry] latest 최초 등록
+$ docker push myRegistry.com/ID/demo-springboot                                         # [Registry] latest(=Open JDK 8 원본) 최초 등록
 $ docker images
 $ docker rmi demo-springboot
 $ docker images
 $ docker tag myRegistry.com/ID/demo-springboot myRegistry.com/ID/demo-springboot:v1     # 최종 이미지를 버전 업하기 전에 태그(demo-springboot:v1) 변경
 $ docker images
-$ docker push myRegistry.com/ID/demo-springboot:v1                                      # [Registry] v1 등록
+$ docker push myRegistry.com/ID/demo-springboot:v1                                      # [Registry] v1(=latest=Open JDK 8 원본) 등록
 
 $ docker rm -f $(docker container ls -a -q)
 $ docker images
@@ -296,17 +304,16 @@ $ docker images
 $ docker tag demo-nginx myRegistry.com/ID/demo-nginx                          # 태그 설정(latest)
 $ docker images
 $ docker login -u ID
-$ docker push myRegistry.com/ID/demo-nginx                                    # [Registry] latest 최초 등록
+$ docker push myRegistry.com/ID/demo-nginx                                    # [Registry] latest(=Nginx 원본) 최초 등록
 $ docker images
 $ docker rmi demo-nginx
 $ docker images
 $ docker tag myRegistry.com/ID/demo-nginx myRegistry.com/ID/demo-nginx:v1     # 최종 이미지를 버전 업하기 전에 태그(demo-nginx:v1) 변경
 $ docker images
-$ docker push myRegistry.com/ID/demo-nginx:v1                                 # [Registry] v1 등록
-
+$ docker push myRegistry.com/ID/demo-nginx:v1                                 # [Registry] v1(=latest=Nginx 원본) 등록
 $ echo "hello world, First Update" > index.html
 $ docker cp index.html demoNginx:/usr/share/nginx/html/index.html
-$ docker commit demoNginx myRegistry.com/ID/demo-nginx                        # 변경되어 실행중인 컨테이너(demoNginx)를 demo-nginx:latest 이미지로 생성
+$ docker commit demoNginx myRegistry.com/ID/demo-nginx                        # 1차 변경되어 실행중인 컨테이너(demoNginx)를 demo-nginx:latest 이미지로 생성
 $ docker images
 $ docker history nginx
 $ docker history myRegistry.com/ID/demo-nginx
@@ -319,7 +326,7 @@ $ docker images
 $ docker push myRegistry.com/ID/demo-nginx:v2                                 # [Registry] v2 등록
 $ echo "hello world, Second Update" > index.html
 $ docker cp index.html demoNginx:/usr/share/nginx/html/index.html
-$ docker commit demoNginx myRegistry.com/ID/demo-nginx                        # 재변경되어 실행중인 컨테이너(demoNginx)를 demo-nginx:latest 이미지로 생성
+$ docker commit demoNginx myRegistry.com/ID/demo-nginx                        # 2차 변경되어 실행중인 컨테이너(demoNginx)를 demo-nginx:latest 이미지로 생성
 $ docker images
 $ docker push myRegistry.com/ID/demo-nginx                                    # [Registry] latest 2차 변경 등록
 $ docker ps -a
