@@ -1,7 +1,7 @@
 # com.plutozone.knowledge.middleware.GitLab
 
 
-- Install **Git Client**
+- Install **Git Client** at Ubuntu
 ```bash
 # 설치
 $ sudo apt install git
@@ -11,7 +11,7 @@ $ git --version
 
 # 정보 등록
 $ git config --global user.name pluto
-$ git config --global user.mail pluto@plutozone.com
+$ git config --global user.mail pluto#plutozone.com
 
 # 정보 확인
 $ git config -l
@@ -42,7 +42,7 @@ git config --system --unset credential.helper
 git config --global credential.helper store
 ```
 
-- Install **GitLab Server**
+- Install **GitLab Server** at Ubuntu
 ```bash
 # [옵션] SSH Server 설치
 $ sudo apt install -y curl openssh-server ca-certificates
