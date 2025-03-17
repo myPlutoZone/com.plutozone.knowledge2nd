@@ -2,14 +2,8 @@
 
 
 ## Keynote
-<<<<<<< HEAD
 - 직업 교육(Education) vs. 직업 훈련(Training) and 교육의 가장 중요한 목적은 동기 부여
 - Fundamental vs. Basic and Prepare와 Choice
-=======
-- 직업 교육(Education) vs. 직업 훈련(Training)
-- 교육의 가장 중요한 목적은 동기 부여
-- Fundamental vs. Basic
->>>>>>> branch 'main' of https://github.com/myPlutoZone/com.plutozone.knowledge2nd.git
 - Developer in IT(Information Technology)
 - Illiterate, User, End User, Administrator, Nerd(Geek), Hacker, Guru, Wizard
 - Science vs. Engineering
