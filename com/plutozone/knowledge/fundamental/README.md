@@ -1,4 +1,7 @@
-# Fundamental of IT(Information Technology) Education
+# com.plutozone.knowledge.fundamental.Education
+
+
+## Keynote
 - 직업 교육(Education) vs. 직업 훈련(Training)
 - 교육의 가장 중요한 목적은 동기 부여
 - Fundamental vs. Basic
