@@ -3,12 +3,11 @@
 
 ## Keynote
 - 직업 교육(Education) vs. 직업 훈련(Training) and 교육의 가장 중요한 목적은 동기 부여
-- Fundamental vs. Basic and Prepare와 Choice
 - Developer in IT(Information Technology)
 - Illiterate, User, End User, Administrator, Nerd(Geek), Hacker, Guru, Wizard
-- Science vs. Engineering
-- 1 vs. 0 + true vs. false + Sever vs. Client + PC vs. Server & Network + IDC vs. Cloud
 - Network + Programming + Database
+- 1 vs. 0 + true vs. false + Sever vs. Client + PC vs. Server & Network + IDC vs. Cloud
+- Fundamental vs. Basic and Science vs. Engineering and Prepare vs. Choice
 - [학습 목표-1] "Main Project"를 목표로 한 "과목과 솔루션" 교육
 - [학습 목표-2] 1) 면접 시 자세와 의지 및 프로젝트 산출물 2) 참여 기업 솔루션 3) 정보처리기사
 
