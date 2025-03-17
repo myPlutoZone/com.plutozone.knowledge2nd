@@ -34,6 +34,10 @@ plutozone.com의 지적재산권 침해에 해당된다.
 
 
 # Temporary
+- Free Online Courses
+	- step.or.kr
+	- boostcourse.org
+	- kdata.or.kr
 - Builder(Ant, Maven, Gradle 등) + CI(GitLab, GitHub 등) + CD(Jenkins 등) + WAS(Tomcat 등)
 	- Common
 		- Eclipse Maven Project(Spring Web at mavenForMoon.zip)
@@ -50,7 +54,7 @@ plutozone.com의 지적재산권 침해에 해당된다.
 - Slack
 	- Slack + GitLab
 		- Slack
-    		- Add Channel for **GitLab** Repository
+			- Add Channel for **GitLab** Repository
 			- Add Apps
 			- Add "Incoming WebHooks"
 			- Select Channel and Copy Webhook URL(예: https://hooks.slack.com/services/...) for GitLab
@@ -58,7 +62,7 @@ plutozone.com의 지적재산권 침해에 해당된다.
 			- Go settins > Integrations > Slack notificatios and Paste Webook URL(예: https://hooks.slack.com/services/...)
 	- Slack + GitHub
 		- Slack
-    		- Add a Channel for **GitHub** Repository
+			- Add a Channel for **GitHub** Repository
 			- Add Apps at Slack
 			- Add "GitHub"
 			- Select a Channel and Write command(/github subscribe [Owner/Repository] or /github unsubscribe [Owner/Repository])
@@ -77,11 +81,11 @@ C:\>netstat -ano | find "80"		# "80" 확인 vs. "LISTEN" 등
 
 # Markdown
 - ![Generic badge](https://img.shields.io/badge/IMPORTANT-comment_...-red.svg)
-  
+
 - ![Generic badge](https://img.shields.io/badge/CONFIRM-comment_...-green.svg)
 
 - ![Generic badge](https://img.shields.io/badge/REFERENCE-comment_...-blue.svg)
-  
+
 - *기울이기*
 
 - **볼드체**
