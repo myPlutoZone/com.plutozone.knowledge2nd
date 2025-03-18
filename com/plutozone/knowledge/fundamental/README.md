@@ -1,15 +1,14 @@
-# com.plutozone.knowledge.fundamental.Education
+# com.plutozone.knowledge.fundamental.Education(80H)
 
 
 ## Keynote
 - 직업 교육(Education) vs. 직업 훈련(Training) and 교육의 가장 중요한 목적은 동기 부여
-- Developer in IT(Information Technology)
-- Illiterate, User, End User, Administrator, Nerd(Geek), Hacker, Guru, Wizard
+- Developer in IT(Information Technology) vs. Illiterate, User, End User, Administrator, Nerd(Geek), Hacker, Guru, Wizard
 - Network + Programming + Database
 - 1 vs. 0 + true vs. false + Sever vs. Client + PC vs. Server & Network + IDC vs. Cloud
 - Fundamental vs. Basic and Science vs. Engineering and Prepare vs. Choice
-- [학습 목표-1] "Main Project"를 목표로 한 "과목과 솔루션" 교육
-- [학습 목표-2] 1) 면접 시 자세와 의지 및 프로젝트 산출물 2) 참여 기업 솔루션 3) 정보처리기사
+- [학습 목표-1] "Team/Main Project"를 목표로 한 "과목과 참여 기업 솔루션" 교육
+- [학습 목표-2] 1) **면접 시 자세와 의지** 및 **팀프로젝트 산출물** 2) 참여 기업 솔루션 3) 정보처리기사
 
 
 ## Contents
@@ -27,22 +26,23 @@
 
 ## 과정 및 자기 소개 등
 ### 훈련(Training) 과정명
-- JAVA와 AI/RPA/빅데이터를 활용한 E-커머스 개발자 양성 취업과정 vs. Java와 AI 및 Big Data를 활용한 e-Commerce 웹 개발자 양성 과정
+- JAVA와 AI/RPA/빅데이터를 활용한 E-커머스 개발자 양성 취업과정
+- 개발 관점의 개선된 훈련 과정명은 `Java와 AI 및 Big Data를 활용한 e-Commerce 웹 개발자 양성 과정`
 
 ### 훈련(Training) 기간
-- 6개월(26주) = 80시간(선행 학습 2주) + 960시간 = 1040시간
+- 80시간(2주/선행 학습) + 960시간(24주/과정 학습:약 6개월) = 1040시간
 
 ### 정보 기술(Information Technology) 분야
-- [NOS] Windows, Ubuntu
-- [Programming] HTML, CSS, JavaScript(jQuery)
-- [Programming] Java, JSP, Spring, Python(Machine Learning + Deep Learning), Android
+- *[NOS] Windows, Ubuntu*
+- [Programming] HTML, CSS, JavaScript/jQuery
+- [Programming] Java, JSP, Spring/Spring Boot, Python(Machine Learning + Deep Learning), Android
 - [Database] Oracle, MariaDB, ANSI SQL
-- [Solution] UiPath
+- [Solution] UiPath(RPA)
 
-### 과목 상세(시간 포함)
+### `과목 상세(시간 포함)`
 
 ### 자기 소개
-- 강사 그리고 교육생(이름, 희망 분야-조직도 참고), 취미, 하고 싶은 말 등
+- 강사 그리고 교육생의 이름, 사는 곳, 주력 또는 희망 분야(조직도 참고), 취미, 하고 싶은 말 등
 
 ### 요청 및 문의 사항
 - 교육 수준(특급 vs. 고급 vs. 중급 vs. 초급 vs. 입문)
