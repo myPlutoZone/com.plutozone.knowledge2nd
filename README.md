@@ -77,6 +77,9 @@ plutozone.com의 지적재산권 침해에 해당된다.
 ```cmd
 C:\>netstat -ano | find "80"		# "80" 확인 vs. "LISTEN" 등
 ```
+- AI 코딩 도구: Cursor AI, Windsurf 등
+- 전통적 코딩 vs. 바이브 코딩 and Low Code vs. No Code
+- 신속한 개발과 분석 및 보고를 원하는 대표와 팀장 vs. 담당자
 
 
 # Markdown
