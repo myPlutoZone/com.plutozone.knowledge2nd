@@ -24,39 +24,39 @@
 10. 로컬(local) 및 서버 시스템 환경 설정 등 그리고 과목 교육 시작
 
 
-## 과정 및 자기 소개 등
-### 훈련(Training) 과정명
+## 1. 과정 및 자기 소개 등
+### 1-1. 훈련(Training) 과정명
 - JAVA와 AI/RPA/빅데이터를 활용한 E-커머스 개발자 양성 취업과정
 - 개발 관점의 개선된 훈련 과정명은 `Java와 AI 및 Big Data를 활용한 e-Commerce 웹 개발자 양성 과정`
 
-### 훈련(Training) 기간
+### 1-2. 훈련(Training) 기간
 - 80시간(2주/선행 학습) + 960시간(24주/과정 학습:약 6개월) = 1040시간
 
-### 정보 기술(Information Technology) 분야
+### 1-3. 정보 기술(Information Technology) 분야
 - *[NOS] Windows, Ubuntu*
 - [Programming] HTML, CSS, JavaScript/jQuery
 - [Programming] Java, JSP, Spring/Spring Boot, Python(Machine Learning + Deep Learning), Android
 - [Database] Oracle, MariaDB, ANSI SQL
 - [Solution] UiPath(RPA)
 
-### *과목 상세(시간 포함)*
+### *1-4. 과목 상세(시간 포함)*
 
-### 자기 소개
+### 1-5. 자기 소개
 - 강사 그리고 교육생의 이름, 사는 곳, 주력 또는 희망 분야(조직도 참고), 취미, 하고 싶은 말 등
 
-### 요청 및 문의 사항
+### 1-6. 요청 및 문의 사항
 - 교육 수준(특급 vs. 고급 vs. 중급 vs. 초급 vs. 입문)
 - 심화 및 보충 교육 방안
 
-### 확인 및 참고 사항
+### 1-7. 확인 및 참고 사항
 - 반장, 팀 구성(역할 포함)과 팀장
 - 정보처리기사 취득
 - 교육 수료 이전 취업
 - 키보드와 마우스
-- 포스트잇(요구 사항, 기능 등)과 배너(ERD 등)
+- 포스트잇(요구 사항, 기능 등)과 배너(Ground Rule, ERD 등)
 
 
-## 정보기술(IT, Information Technology) 조직도
+## 2. 정보기술(IT, Information Technology) 조직도
 - NCS(National Competency Standards, 국가직무능력표준-https://www.ncs.go.kr)
 - 정보 기술(IT, Information Technology) vs. 정보 통신(IT, Information Telecommunication)
 - Software Architect(SA, 소프트웨어 아키텍트)의 분류
