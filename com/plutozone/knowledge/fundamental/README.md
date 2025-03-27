@@ -65,10 +65,11 @@
 	- DA(Data Architect: 데이터 표준, 구조, 마이그레이션 등 설계자-DBA의 상위 개념)
 	- BA(Business Architect: 기술적 관점이 아닌 업무 관점의 프로세스 설계자-실제 고객의 요구에 따라 첫 개발 지표가 되는 부분)
 	- QA(Quality Assurance: 산출물과 소스코드에 대한 품질 담당자)
+
 ![정보기술 조직도](./image/it_org_chart.png)
 
 
-## 업무 프로세스와 개발 표준 가이드 for 웹 개발자
+## 3. 업무 프로세스와 개발 표준 가이드 for 웹 개발자
 ### 업무 프로세스
 ![표준 업무와 폴더](./image/bizProcess.png)
 
@@ -76,18 +77,19 @@
 ![개발 표준 가이드](./image/devStandardGuide.png)
 
 
-## 선택과 준비
-### 미래를 위한 선택
-- Science(과학) vs. Engineering(공학) and Pure(순수) IT vs. Application(응용) IT
-- APP(iOS, aOS) vs. Web
-- Frontend vs. Backend
-- [참고] 1) 자기 소개서 2) 프로젝트 산출물(프로젝트 팀에서 역할, 헌장 및 관리 포함)
+## 4. 선택과 준비 그리고 수행
+### 미래를 위한 선택과 준비
+- [선택] Science(과학) vs. Engineering(공학) and Pure(순수) IT vs. Application(응용) IT
+- [선택] APP(iOS, aOS) vs. Web
+- [선택] Front vs. Backend
+- [준비] 자기 소개서 + 프로젝트 산출물(프로젝트에서 역할, 헌장 및 관리 포함)
 
-### 현재를 위한 준비와 프로젝트 헌장 및 관리 그리고 개발
-- [필수] e-Commerce + [필수] Web(관리자 또는 판매자) + [필수] APP(구매자)
+### 현재를 위한 준비와 수행
 - [권장] 용어, 폰트, 로고 및 양식 등
-- [중요] 1) 목표 프로젝트(헌장)을 분석 및 설계하고 2) 과목과 솔루션을 진행하면서 모듈화하여 3) 구현 및 관리
-- [산출물] 요구 사항, 분석, 설계, 화면(프론트 vs. 백앤드 + 웹 vs. 앱 등)과 기능(화면 vs. 로직 vs. API 등) 그리고 검증
+- [필수] e-Commerce(전자 상거래) + [필수] Web(관리자 또는 판매자) + [필수] Web(구매자) + [필수] APP(구매자)
+- [준비] 1) 목표 서비스(=프로젝트 헌장)을 분석 및 설계하고 2) 과목과 솔루션을 진행하면서 모듈화하여 3) 구현 및 관리(=프로젝트 관리)
+- [수행] 요구 사항, 분석, 설계, 화면(프론트 vs. 백앤드 + 웹 vs. 앱 등)과 기능(화면 vs. 로직 vs. API 등) 그리고 검증 등
+
 ![프로젝트 헌장](./image/projectCharter.png)
 ![프로젝트 관리](./image/projectManage.png)
 
