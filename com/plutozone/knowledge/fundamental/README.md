@@ -186,25 +186,25 @@
 	- Multicast(멀티캐스트 그룹에 속한 모든 호스트에 Packet 전송 또는 Class D)
 	- Broadcast(Network IP 내의 모든 호스트에 Packet 전송)
 
-### Internet Service
+### 5-4. Internet Service
 - WWW
 - DNS
 - SMTP/POP3
 - SSH
 - SFTP, FTP 등
 
-### Network Tool for Diagnosis and Management
+### 5-5. Network Tool for Diagnosis and Management
 - ipconfig/ifconfig
 - ping
 - netstat
 - traceroute/tracert
 
-### NOS
+### 5-6. NOS
 - Microsoft Windows Network(Protocol, File/Print Sharing 등) 설치와 대표적인 Service(Active Directory, DNS, DHCP, IIS 등)
 - Linux Network 설치와 대표적인 Service
 - Docker, VM 및 Cloud
 
-### Server
+### 5-7. Server
 - Web Server는 다음과 같은 요청된 정적 리소스에 대한 응답을 위한 시스템을 말하며 대표적으로 Nginx, Apache Web 등
 	- HTML
 	- CSS
@@ -219,142 +219,143 @@
 - 부하 분산과 확장성을 위한 Server(WEB + WAS + Database) 설계
 - Web Server, WAS의 설치, 운영 그리고 연동
 - WAS vs. CGI(WAS와 CGI의 기본적인 구조는 같으나 Web Server가 Application을 사용하는 방식에 차이가 있다. 또한 Application은 구현 방식에 따라 실행 코드 방식과 Script Code(JSP, ASP, PHP 등) 방식으로 구분)
+
 ![WAS vs. CGI](./image/cgi.png)
 
-### Client
+### 5-8. Client
 - Web Browser에는 Chrome, Edge 등이 있다.
 - Web Browser를 통하여 HTML, CSS, JavaScript가 어떻게 Client로 Download되는지 확인
 
 
-## Programming Language 종류와 특성
-### Programming Language 선택 = 핵심 기능 + 형태 또는 방식 + 운영 환경
+## 6. Programming Language 종류와 특성
+### 6-1. Programming Language 선택 = 핵심 기능 + 형태 또는 방식 + 운영 환경
 - 주식 매매(속도) vs. 계좌 이체(트랜잭션) vs. 홈페이지(정보) 등
 - Web Page vs. GUI vs. TCP/IP를 기반으로 한 데이터 통신 등
 - HP-UX vs. Linux vs. Windows 등
 
-### Programming Language 종류와 특성
+### 6-2. Programming Language 종류와 특성
 - Interpret(Source Code + Small Size + Run Slowly) 예) Basic, ...
 - Runtime or Script(Pseudo Code + Middle Size + Run Quirky) 예) Visual Basic 1.0 ~ 4.0, Java, JSP/ASP/PHP, Python, ...
 - Compile(Native Code + Big Size + Run Fast) 예) C/C++, Visual C++, Delphi, Visual Basic 5.0 Over, ...
 
-### OOP(Object Oriented Programming)
+### 6-3. OOP(Object Oriented Programming)
 - C++, Delphi, Smalltalk, Ada, Java, ...
 - Object(Class) = Method + Property + Event
 
-### RAD(Rapid Application Development) Tool
+### 6-4. RAD(Rapid Application Development) Tool
 - Eclipse, IntelliJ, STS 등
 
 
-## Data와 Database, DB 종류와 특성 그리고 DBMS
-### Data vs. Database vs. DBMS vs. RDBMS
+## 7. Data와 Database, DB 종류와 특성 그리고 DBMS
+### 7-1. Data vs. Database vs. DBMS vs. RDBMS
 - 자료(Data) vs. 정보(Information) vs. 데이터베이스(Database)
 - TXT(ANSI vs. UTF-8/16) vs. CSV vs. XLSX 그리고 Database vs. RDMBS/ODBMS
 - 대용량 Low Data(원본: GB 단위의 txt)를 DB화(결과: 수 GB 단위의 csv 또는 수십 GB 단위의 DB) 
 
-### 종류와 특성
+### 7-2. 종류와 특성
 - MSSQL, Oracle, MariaDB 등
 
-### SQL(Structured Query Language)
+### 7-3. SQL(Structured Query Language)
 - ANSI vs. PL/SQL vs. T-SQL 등
 
-### Client Tool
+### 7-4. Client Tool
 - Toad, SQL Developer, HeidiSQL 등
 
-### ERD(Entity Relationship Diagram) Tool
+### 7-5. ERD(Entity Relationship Diagram) Tool
 - https://www.erdcloud.com/, draw.io
 - eXERD, MySQL WorkBench, ERWin 등
 
 
-## Tools
-### Presentation
+## 8. Tools
+### 8-1. Presentation
 - Zoomit, Epic Pen
 - https://codeshare.io
 - https://www.shorturl.at
 
-### Requirement
+### 8-2. Requirement
 - XMind or 알Mind
 
-### UI 또는 SB(Story Board)
+### 8-3. UI 또는 SB(Story Board)
 - https://ovenapp.io/, https://www.canva.com/
 - Pencil
 
-### Domain
+### 8-4. Domain
 - https://whois.co.kr/, https://후이즈검색.한국 또는 https://xn--c79as89aj0e29b77z.xn--3e0b707e/
 
-### Network
+### 8-5. Network
 - Visual Route, Advanced IP Scanner, WinShark
 
-### SSH + SFTP
+### 8-6. SSH + SFTP
 - MobaXterm vs. Putty + FileZilla
 
-### ER 또는 UML 등
+### 8-7. ER 또는 UML 등
 - https://app.diagrams.net/ 또는 https://draw.io
 - StarUML, MarkDown(MD)
 	
-### 형상관리(CM, Configuration Management) 또는 소프트웨어 구성 관리(SCM: Software Configuration Management) 등
+### 8-8. 형상관리(CM, Configuration Management) 또는 소프트웨어 구성 관리(SCM: Software Configuration Management) 등
 - Git + GitHub + GitLab vs. Visual SVN 그리고 Client Tool(SourceTree, TortoiseSVN)
 - Redmine
 	
-### Code + Text
+### 8-9. Code + Text
 - Visual Code, Notepad++, mTail, vi, nano(atom)
 	
-### HTML + CSS
+### 8-10. HTML + CSS
 - https://caniuse.com/, https://csscompressor.com/
 
-### Java 등
+### 8-11. Java 등
 - Launch4j, Selenium
 - https://ideone.com/
 
-### JSON
+### 8-12. JSON
 - https://codebeautify.org/jsonviewer
 - Postman
 	
-### Graphic + Image 등
+### 8-13. Graphic + Image 등
 - https://pixlr.com/kr/editor/, https://pixabay.com/, https://thenounproject.com/
 - Inkscape, articons
 	
-### Virtual Machine
+### 8-14. Virtual Machine
 - Virtual Box
 - BlueStacks, Nox
 	
-### Stress Tool
+### 8-15. Stress Tool
 - Jmeter
 
 
-## 향후
-### 6개월 후
+## 9. 향후
+### 9-1. 6개월 후
 - 분야와 취업에 대한 고민
 
-### 1년 후
+### 9-2. 1년 후
 - 해야 할 일에 대한 고민
 
-### 3년 후
+### 9-3. 3년 후
 - 현재에 대한 고민
 
-### 6년 후
+### 9-4. 6년 후
 - 미래에 대한 고민
 
-### 10년 후
+### 9-5. 10년 후
 - 나의 길에 대한 고민
 
 
-## 로컬(local) 및 서버 시스템 환경 설정 등 그리고 과목 교육 시작
-### 로컬 확인
+## 10. 로컬(local) 및 서버 시스템 환경 설정 등 그리고 과목 교육 시작
+### 10-1. 로컬 확인
 - 예제 파일, 데모(Win Route 등) 프로그램 등 삭제
 - 레지스트리  최적화
 - 개인 최적화(classic-shell 등)
 
-### 로컬 환경(초기화 포함) 설정 및 핵심 툴 사용법
+### 10-2. 로컬 환경(초기화 포함) 설정 및 핵심 툴 사용법
 - Java(환경 변수 등 포함)와 Eclipse(GitHub 등 연동 포함)
 - …
 
-### 서버 환경(초기화 포함) 설정 및 관리
+### 10-3. 서버 환경(초기화 포함) 설정 및 관리
 - Windows, Ubuntu 등 NOS
 - GitLab 등
 - Nginx, Tomcat 등
 - MariaDB, Oracle 등
 
-### 과목 교육 및 프로젝트 시
+### 10-4. 과목 교육 및 프로젝트 시
 - [중요] 1) 개념과 목차 그리고 나를 위한 문서화와 용도에 따른 코드화 2) 자동 완성 그리고 3) 검색
 - 6개월간 16개 과목(Network, OS 포함) + Mini Project + Main Project
 - PBL(Project and Problem based Project)
