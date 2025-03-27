@@ -1,4 +1,4 @@
-# com.plutozone.knowledge.fundamental.Education(80H)
+# com.plutozone.knowledge.fundamental(80H)
 
 
 ## Keynote

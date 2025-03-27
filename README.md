@@ -85,28 +85,11 @@ C:\>netstat -ano | find "80"		# "80" 확인 vs. "LISTEN" 등
 
 # Markdown
 - ![Generic badge](https://img.shields.io/badge/IMPORTANT-comment_...-red.svg)
-
 - ![Generic badge](https://img.shields.io/badge/CONFIRM-comment_...-green.svg)
-
 - ![Generic badge](https://img.shields.io/badge/REFERENCE-comment_...-blue.svg)
-
-- *기울이기*
-
-- **볼드체**
-
-Header 1 | Header 2
---------- | ---------
-Content 1 | Content 3
-Content 2 | Content 4
-
-| Header 1 | Header 2 | Header 3 |
-| :-------- | :--------: | --------: |
-| Left | Center | Right |
 
 <details><summary>CLICK ME</summary>
 ```
 pythonprint("hello world!")
 ```
 </details>
-
-[Google](http://www.google.co.kr "구글")
