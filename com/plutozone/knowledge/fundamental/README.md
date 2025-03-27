@@ -70,21 +70,23 @@
 
 
 ## 3. 업무 프로세스와 개발 표준 가이드 for 웹 개발자
-### 업무 프로세스
+### 3-1. 업무 프로세스
+
 ![표준 업무와 폴더](./image/bizProcess.png)
 
-### 개발 표준 가이드 for 웹 개발자
+### 3-2. 개발 표준 가이드 for 웹 개발자
+
 ![개발 표준 가이드](./image/devStandardGuide.png)
 
 
 ## 4. 선택과 준비 그리고 수행
-### 미래를 위한 선택과 준비
+### 4-1. 미래를 위한 선택과 준비
 - [선택] Science(과학) vs. Engineering(공학) and Pure(순수) IT vs. Application(응용) IT
 - [선택] APP(iOS, aOS) vs. Web
 - [선택] Front vs. Backend
 - [준비] 자기 소개서 + 프로젝트 산출물(프로젝트에서 역할, 헌장 및 관리 포함)
 
-### 현재를 위한 준비와 수행
+### 4-2. 현재를 위한 준비와 수행
 - [권장] 용어, 폰트, 로고 및 양식 등
 - [필수] e-Commerce(전자 상거래) + [필수] Web(관리자 또는 판매자) + [필수] Web(구매자) + [필수] APP(구매자)
 - [준비] 1) 목표 서비스(=프로젝트 헌장)을 분석 및 설계하고 2) 과목과 솔루션을 진행하면서 모듈화하여 3) 구현 및 관리(=프로젝트 관리)
@@ -94,8 +96,8 @@
 ![프로젝트 관리](./image/projectManage.png)
 
 
-## Network와 NOS 그리고 Server와 Client
-### Network Fundamentals
+## 5. Network와 NOS 그리고 Server와 Client
+### 5-1. Network Fundamentals
 - 교육장 또는 홈 네트워크(공유기 또는 백본 포함) 정보 + DNS(hosts) 변경을 통한 변조 등을 확인하고 재구축 또는 재설정
 - What’s Network? Computer(PC, Main Frame) 또는 System(Any Device)이 서로 연결되어 정보를 공유(Share) 또는 통신(Communication)할 수 있게 만든 체계 예) Printer(NIC On Board) + PC, Embedding(PAD, Cellular) + PC
 - What’s Internet(Inter + Network)?
@@ -145,7 +147,7 @@
 	- 2 계층: 데이터 링크(Data Link) 예) MAC
 	- 1 계층: 물리(Physical) 예) Device and Cable
 
-### From LAN(Local Area Network) To WAN(Wide Area Network)
+### 5-2. From LAN(Local Area Network) To WAN(Wide Area Network)
 - ISP(Internet Service Provider: SKT, KT, LG U+ 등)의 서비스 종류, 속도, 가격, 인지도 고려하여 선택
 - Network 문제 발생 시 점검 순서
 	- Local
@@ -153,7 +155,7 @@
 	- Gateway
 	- Target System at WAN
 
-### TCP/IP(Transmission Control Protocol/Internet Protocol)
+### 5-3. TCP/IP(Transmission Control Protocol/Internet Protocol)
 - What’s protocol?
 	- (Network) 통신 상에서 두 장치간의 정보 교환 시 통신 방식을 정해 놓은 일종의 규칙
 	- 전달할 신호 절차, 종류, 순서, 정보를 정의
@@ -161,12 +163,16 @@
 - TCP/IP(Transmission Control Protocol/Internet Protocol) Protocol
 	- 인터넷 표준 Protocol
 	- OSI 7 Layer의 Transport Layer(TCP)와 Network Layer(IP)가 혼합된 형태로 응용 Protocol(HTTP, FTP, …)의 Base Protocol
+
 ![TCP/IP](./image/tcpip.png)
 - TCP/IP 데이터 전송 과정
+
 ![TCP/IP Flow](./image/tcpipFlow.png)
 - TCP/IP Handshake(가상 회선의 상태와 의미)
+
 ![TCP/IP Handshake](./image/tcpipHandshake.png)
 - IP(Internet Protocol) Address Class
+
 ![IP Class](./image/ipclass.png)
 - Subnet Mask
 - Gateway IP
