@@ -20,8 +20,10 @@
 - [Python](./language/python.md)
 
 
-## Development
+## [Development](./development)
 - [AWS](./development/cloud/aws.md)
+- [Eclipse](./development/eclipse.md)
+
 
 
 ## Middleware
