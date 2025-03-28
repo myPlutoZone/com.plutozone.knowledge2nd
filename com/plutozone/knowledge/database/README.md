@@ -3,7 +3,6 @@
 
 ## Contents
 - Database 주요 업무
-- Oracle
 - MariaDB
 - SQL Example
 
@@ -16,13 +15,6 @@
 - System 및 User Database
 - Database 저장 공간
 - Index
-
-
-## Oracle
-```cmd
-C:\>exp userid=ID/PASSWD file=D:\FILE_NAME.dmp		# Export
-C:\>imp userid=ID/PASSWD file=D:\FILE_NAME.dmp		# Import
-```
 
 
 ## MariaDB
