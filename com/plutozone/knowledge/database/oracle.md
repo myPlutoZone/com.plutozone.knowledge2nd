@@ -175,7 +175,6 @@ SQL> exit
 
 #### Application을 위한 Database 생성 및 설정
 단, XE 버전은 신규 SID를 생성할 수 없으므로 기존 SID(XE)를 이용하여 하기 작업을 진행한다.
-
 ##### [예제] Table Space 생성
 ```sql
 $ sqlplus system
