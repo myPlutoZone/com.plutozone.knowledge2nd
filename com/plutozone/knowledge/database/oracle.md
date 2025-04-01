@@ -20,7 +20,7 @@
 
 #### RPM 파일을 DEB로 변환(alien) 그리고 설치 및 설정
 ```bash
-# Oracle에서는 Redhat 계열에서 사용하는 RPM 파일만을 제공하므로 Debian 또는 Ubuntu 계열에서 사용하는 DEB 파일로 변환하여 설치 및 설정을 진행해야 한다.
+# Oracle에서는 Redhat 계열에서 사용하는 RPM 파일만을 제공하므로 Debian(Ubuntu 등) 계열에서 사용하는 DEB 파일로 변환하여 설치 및 설정을 진행해야 한다.
 # [권장] Database와 Oracle를 관리할 별도 그룹(예: dba) 및 계정(예: oracle, sudo 권한 포함)으로 진행한다.
 # 압축 파일 해제
 $ unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip
@@ -30,7 +30,7 @@ $ unzip oracle-xe-11.2.0-1.0.x86_64.rpm.zip
 $ sudo apt install -y alien
 $ sudo apt install -y alien libaio1 unixodbc
 
-# DEB로 변환
+# RPM 파일을 DEB 파일로 변환
 $ sudo alien --scripts -d oracle*
 
 # RPM 패키지가 설치 시 필요한 /sbin/chkconfig 파일을 생성한다.
@@ -66,12 +66,11 @@ kernel.shmmax=536870912
 # Kernal 파리미터 로드(Load)
 $ sudo service procps start
 
-# Oracle XE는 /bin/awk를 사용하지만 Ubuntu에서는 /usr/bin/awk에 설치되기 때문에 심볼릭 링크
- /bin/awk가 존재할 경우 제외한다.
+# [옵션] Oracle XE는 /bin/awk를 사용하지만 Ubuntu에서는 /usr/bin/awk에 설치되기 때문에 심볼릭 링크 /bin/awk가 존재할 경우 제외한다.
 $ sudo ln -s /usr/bin/awk /bin/awk
 
 # Oracle XE의 리스너(Listener)가 사용할 lock 파일 생성한다.
-# /var/lock/subsys가 존재할 경우 제외
+# /var/lock/subsys 폴더가 존재할 경우 listener 파일만 생성
 $ sudo mkdir /var/lock/subsys
 $ sudo touch /var/lock/subsys/listener
 
@@ -121,12 +120,59 @@ export PATH=$ORACLE_HOME/bin:$PATH
 $ source ~/.profile
 ```
 #### 설치 확인
+```bash
+# Oracle XE 리스너 상태(status) 확인
+$ lsnrctl status
+
+# Oracle XE 접속(ID=system)
+$ sqlplus system
+```
 
 #### 에러 발생 시
 ##### ORA-000845:MEMORY_TARGET 에러가 발생하게 되는 경우
+메모리의 설정이 잘못되거나 사이즈가 부족한 경우이며 이런 경우 메모리 설정을 위해서 다음 과정을 진행한다.
+```bash
+# Oracle XE를 중지하고 현재 설정된 shared memeory 삭제한다.
+$ sudo rm -rf /dev/shm
+
+# 새로운 SHM을 생성 후 mount
+$ sudo mkdir /dev/shm
+$ sudo mount -t tmpfs shmfs -o -size=4096m /dev/shm
+
+# SHM 설정을 데몬에 등록 및 로드하기 위해 아래 내용을 파일로 생성하고 오라클을 재시작한다.
+$ sudo vi /etc/rc2.d/S01shm_load
+#!/bin/sh
+case "$1" in
+start) mkdir /var/lock/subsys 2>/dev/null
+	touch /var/lock/subsys/listener
+	rm /dev/shm 2>/dev/null
+	mkdir /dev/shm 2>/dev/null
+	mount -t tmpfs shmfs -o size=4096m /dev/shm ;;
+*) echo error
+exit 1 ;;
+esac
+$ sudo chmod 755 /etc/rc2.d/S01shm_load
+
+```
 
 #### 설정
 ##### Oracle Application Express 원격 접속 허용 및 포트번호
+```bash
+# Oracle XE APEX 원격 접속 허용(FALSE) 시 하기와 같이 설정한다.
+$ sqlplus system
+…
+SQL> EXEC DBMS_XDB.SETLISTENERLOCALACCESS(FALSE);
+SQL> exit
+
+# Oracle XE APEX 포트번호 확인, 변경 또는 서비스 종료(포트번호=0)
+$ sqlplus system
+…
+SQL> SELECT DBMS_XDB.GETHTTPPORT() FROM DUAL;
+SQL> EXEC DBMS_XDB.SETHTTPPORT(포트번호);
+SQL> exit
+# Oracle XE APEX 접속 경로는 http://localhost:port/apex
+# Default Workspace 및 User는 INTERNAL, ADMIN이며 암호는 SYS/SYSTEM과 동일하다.
+```
 
 #### Application을 위한 Database 생성 및 설정
 ##### [예제] Table Space 생성
