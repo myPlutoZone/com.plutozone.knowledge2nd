@@ -152,7 +152,6 @@ start) mkdir /var/lock/subsys 2>/dev/null
 exit 1 ;;
 esac
 $ sudo chmod 755 /etc/rc2.d/S01shm_load
-
 ```
 
 #### 설정
@@ -175,12 +174,64 @@ SQL> exit
 ```
 
 #### Application을 위한 Database 생성 및 설정
+단, XE 버전은 신규 SID를 생성할 수 없으므로 기존 SID(XE)를 이용하여 하기 작업을 진행한다.
+
 ##### [예제] Table Space 생성
+```sql
+$ sqlplus system
+…
+-- Table Space 생성 전에 기존 Table Space 정보를 확인한다.
+SQL> SELECT * FROM DBA_DATA_FILES;
+…
+SQL> CREATE TABLESPACE "OpenMalls"  datafile '/u01/app/oracle/oradata/XE/OpenMalls.dbf'  SIZE 100M reuse autoextend ON;
+SQL> CREATE TABLESPACE "Backoffice" datafile '/u01/app/oracle/oradata/XE/Backoffice.dbf' SIZE 100M reuse autoextend ON;
+SQL> CREATE TABLESPACE "Membership" datafile '/u01/app/oracle/oradata/XE/Membership.dbf' SIZE 100M reuse autoextend ON;
+SQL> CREATE TABLESPACE "Message"    datafile '/u01/app/oracle/oradata/XE/Message.dbf'    SIZE 100M reuse autoextend ON;
+```
 ##### [예제] User 생성
+```sql
+SQL> CREATE USER openmalls  IDENTIFIED BY password DEFAULT TABLESPACE "OpenMalls"  TEMPORARY TABLESPACE temp;
+SQL> CREATE USER backoffice IDENTIFIED BY password DEFAULT TABLESPACE "Backoffice" TEMPORARY TABLESPACE temp;
+SQL> CREATE USER membership IDENTIFIED BY password DEFAULT TABLESPACE "Membership" TEMPORARY TABLESPACE temp;
+SQL> CREATE USER message    IDENTIFIED BY password DEFAULT TABLESPACE "Message"    TEMPORARY TABLESPACE temp;
+-- User(membership) 삭제
+SQL> DROP USER membership CASCADE;
+
+```
 ##### [예제] User에게 사용자 권한 부여
-##### [예제] User가 다른 User에게 테이블 권한 여부
+```sql
+-- 권한 부여는 GRANT, 취소는 REVOKE
+SQL> GRANT connect, resource, dba to plutozone;
+SQL> GRANT connect, resource to openmalls;
+SQL> GRANT connect, resource to backoffice;
+SQL> GRANT CREATE SESSION, SELECT ANY TABLE to membership;
+SQL> GRANT CREATE SESSION, SELECT ANY TABLE to message;
+```
 
 #### 설치 제거
+```bash
+# Oracle XE 서비스 정지
+$ sudo service oracle-xe stop
+
+# Oracle XE 패키지 삭제
+$ sudo dpkg --purge oracle-xe
+
+# Oracle XE 폴더 삭제
+$ sudo rm -rf /u01/app
+
+# Oracle XE 데몬 삭제 및 갱신
+$ sudo rm /etc/default/oracle-xe
+$ sudo update-rc.d oracle-xe remove
+
+# Oracle XE 설정 파일 삭제
+$ sudo rm /sbin/chkconfig
+$ sudo rm /etc/rc2.d/s01shm_load
+$ sudo rm /etc/sysctl.d/60-oracle.conf
+
+# 필요 시 Oracle XE 그룹 및 계정 삭제
+$ sudo userdel -r oracle
+$ sudo delgroup dba
+```
 
 
 ## Export and Import
