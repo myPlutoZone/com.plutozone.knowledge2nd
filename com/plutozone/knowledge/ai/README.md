@@ -9,12 +9,12 @@
 	- 노트북(Notebook) = 텍스트 셀(Text Cell) + 코드 셀(Code Cell)
 - AI(인공 지능, Artificial Intelligence)의 분류
 	- 일반 인공지능 or 강 인공지능=The Terminator
-	- 약 인공지능=Chat GPT
+	- 약 인공지능=Chat GPT(Generative Pre-trained Transformer): 오픈AI에서 개발한 자연어 처리 모델로 생성적 사전학습(Generative Pre-trained) 기법과 Transformer를 적용한 초거대 신경망 언어 모델
 - Generative AI(생성형 AI)란?
 	- 1) 대량의 데이터를 학습하여
 	- 2) 데이터 안에 있는 패턴이나 규칙을 이해하고
 	- 3) 학습된 패턴을 바탕으로 새로운 콘텐츠(Text, Image, Audio and Music, Video and Movie)를 생성하는 기술
-- Chat GPT(Chat Generative Pretrained Transformer)의 활용(안)
+- Chat GPT(Chat Generative Pre-trained Transformer)의 활용(안)
 	- 번역과 요약(문서, 회의, 영상 등)
 	- 아이디어
 	- 콘텐츠(텍스트, 이미지, 영상 등) 제작
