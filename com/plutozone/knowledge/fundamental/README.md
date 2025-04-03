@@ -99,7 +99,7 @@
 ## 5. Network와 NOS 그리고 Server와 Client
 ### 5-1. Network Fundamentals
 - 교육장 또는 홈 네트워크(공유기 또는 백본 포함) 정보 + DNS(hosts) 변경을 통한 변조 등을 확인하고 재구축 또는 재설정
-- What’s Network? Computer(PC, Main Frame) 또는 System(Any Device)이 서로 연결되어 정보를 공유(Share) 또는 통신(Communication)할 수 있게 만든 체계 예) Printer(NIC On Board) + PC, Embedding(PAD, Cellular) + PC
+- What’s Network(=Net + Work, 네트워크)? Computer(PC, Main Frame) 또는 System(Any Device)이 서로 연결되어 정보를 공유(Share) 또는 통신(Communication)할 수 있게 만든 체계 예) Printer(NIC On Board) + PC, Embedding(PAD, Cellular) + PC
 - What’s Internet(=Inter + Network, 인터넷)?
 - Internet Service
 	- WWW
@@ -138,14 +138,19 @@
 - Step for Building LAN
 	- Make UTP/STP Cabling(568B + Direct or Cross + RJ45 + Crimping Tool + Tester + ...) + Tagging + Line + Connect(LED Lamp 등)
 	- NIC Configuration(OS에 따른 Driver 및 Service + TCP/IP 등 Protocol)
-- OSI 7 Layer
-	- 7 계층: 응용(Application) 예) Web Browser
-	- 6 계층: 표현(Presentation) 예) HTTP
-	- 5 계층: 세션(Session) 	예) Connection Maintain
-	- 4 계층: 전송(Transport) 예) Port
-	- 3 계층: 네트워크(Network) 예) IP
+- OSI(Open Systems Interconnection, 역할 기반의 개방형 시스템 상호연결) 7 Layer vs. TCP/IP 4 Layer(=Internet Protocol Suite, OSI와 달리 프로토콜 기반의 실용적 계층만 정의)
+	- 7 계층: 응용(Application) 예) HTTP/S, SSH
+	- 6 계층: 표현(Presentation) 예) HTML, CSS
+	- 5 계층: 세션(Session) 	예) SSL/TLS 
+	- 4 계층: 전송(Transport) 예) TCP, UDP
+	- 3 계층: 네트워크(Network) 예) IP, ICMP
 	- 2 계층: 데이터 링크(Data Link) 예) MAC
 	- 1 계층: 물리(Physical) 예) Device and Cable
+ - TCP/IP 4 Layer
+   	- 4 계층: 응용(Application) = Application + Presentation + Session 예) HTTP/S, SSL/TLS
+   	- 3 계층: 전송(Transport) = Transport
+   	- 2 계층: 인터넷(Internet) = Network
+   	- 1 계층: 네트워크 액세스(Network Access) = Physical + Data Link
 
 ### 5-2. From LAN(Local Area Network) To WAN(Wide Area Network)
 - ISP(Internet Service Provider: SKT, KT, LG U+ 등)의 서비스 종류, 속도, 가격, 인지도 고려하여 선택
@@ -162,6 +167,7 @@
 	- TCP/IP, NetBEUI, IPX/SPX, AppleTalk 등
 - TCP/IP(Transmission Control Protocol/Internet Protocol) Protocol
 	- 인터넷 표준 Protocol
+   	- IP(목적지로 전송을 목적으로 한 비신뢰성, 비연결성) vs. TCP
 	- OSI 7 Layer의 Transport Layer(TCP)와 Network Layer(IP)가 혼합된 형태로 응용 Protocol(HTTP, FTP, …)의 Base Protocol
 
 ![TCP/IP](./image/tcpip.png)
@@ -174,9 +180,9 @@
 - IP(Internet Protocol) Address Class
 
 ![IP Class](./image/ipclass.png)
-- Subnet Mask
-- Gateway IP
-- Class 당 예약되어 사용할 수 없는 IP
+- Host(192.168.0.100), Subnet Mask(255.255.255.0), Network(192.168.0.0) IP
+- Gateway(192.168.0.1), Nework(192.168.0.0), Broadcast(192.168.0.255) IP
+- A(0 ~ 127.*.*.*), B(128 ~ 191.*.*.*), C(192 ~ 223.*.*.*), D, E Class
 - 사설 IP
 	- A 10.0.0.0
 	- B 172.16.0.0 ~ 172.31.0.0
@@ -225,6 +231,7 @@
 ### 5-8. Client
 - Web Browser에는 Chrome, Edge 등이 있다.
 - Web Browser를 통하여 HTML, CSS, JavaScript가 어떻게 Client로 Download되는지 확인
+- URI(Uniform Resource **Identifier**) = URL(Uniform Resource **Locator** = 프로토롤 + 호스트 주소 + 포트 번호 + 경로 + 파라미터) + URN(Uniform Resource **Name**)
 
 
 ## 6. Programming Language 종류와 특성
@@ -289,7 +296,7 @@
 - MobaXterm vs. Putty + FileZilla
 
 ### 8-7. ER 또는 UML 등
-- https://app.diagrams.net/ 또는 https://draw.io
+- http://erdcloud.com, https://app.diagrams.net/ 또는 https://draw.io
 - StarUML, MarkDown(MD)
 	
 ### 8-8. 형상관리(CM, Configuration Management) 또는 소프트웨어 구성 관리(SCM: Software Configuration Management) 등
