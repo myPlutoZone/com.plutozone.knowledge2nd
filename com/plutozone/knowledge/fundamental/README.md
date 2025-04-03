@@ -100,12 +100,12 @@
 ### 5-1. Network Fundamentals
 - 교육장 또는 홈 네트워크(공유기 또는 백본 포함) 정보 + DNS(hosts) 변경을 통한 변조 등을 확인하고 재구축 또는 재설정
 - What’s Network? Computer(PC, Main Frame) 또는 System(Any Device)이 서로 연결되어 정보를 공유(Share) 또는 통신(Communication)할 수 있게 만든 체계 예) Printer(NIC On Board) + PC, Embedding(PAD, Cellular) + PC
-- What’s Internet(Inter + Network)?
+- What’s Internet(=Inter + Network, 인터넷)?
 - Internet Service
 	- WWW
+	- Email
 	- FTP
-	- Telnet
-	- E-Mail 등
+	- Telnet 등
 - The Benefit of Network
 	- Share(Device, Database, Software, Internet Service) 예) Share Printer(Printer Server), Share Directory/Files, Microsoft Office, WinRoute/ICS/NAT
 	- Communication 예) Battle Net(Battle Net Server), Message, E-Mail(Mail Server)
